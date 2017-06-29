@@ -23,3 +23,13 @@ Git fetch : only tell you what is new but without pulling it to the Local.
 I think that git fetch + git merge = git pull.
 
 ____________
+
+This week we continued working on the documentation part beside testing 3 commands from the madmom library which are:
+
+spectral_flux()
+super_flux()
+RNNBeatProcessor()
+
+ directly into the Raspberry Pi using Github.
+
+Next week we will read more about Peak Picking algorithms and implement it on the Pi.
