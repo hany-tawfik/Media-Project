@@ -11,7 +11,7 @@ def callback_in_1(in_data, frame_count, time_info, status):
 
 if __name__ == '__main__':
 
-    CHUNK = 2048
+    CHUNK = 1024
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
     RATE = 8000
