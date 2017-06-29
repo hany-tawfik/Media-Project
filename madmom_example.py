@@ -8,8 +8,8 @@ np.set_printoptions(precision=4, linewidth=256,suppress=True,threshold=1500)
 
 
 # samples, rate = mm.audio.ffmpeg.load_ffmpeg_file('The_Wolf.m4a')
-# rate, samples = scipy.io.wavfile.read('output.wav')
-rate, samples = scipy.io.wavfile.read('SunStormWater.wav')
+rate, samples = scipy.io.wavfile.read('output.wav')
+# rate, samples = scipy.io.wavfile.read('SunStormWater.wav')
 
 print "Samples :\n", samples.shape
 
