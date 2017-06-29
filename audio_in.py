@@ -14,7 +14,7 @@ if __name__ == '__main__':
     CHUNK = 2048
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
-    RATE = 8000
+    RATE = 16000
     RECORD_SECONDS = 10
     WAVE_OUTPUT_FILENAME = "output.wav" 
 
