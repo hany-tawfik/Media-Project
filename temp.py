@@ -1,78 +1,64 @@
 import pyaudio
 import wave
 import numpy as np
-#import madmom as mm
-
-
-CHUNK = 1024
-FORMAT = pyaudio.paInt16
-CHANNELS = 1
-RATE = 44100
-RECORD_SECONDS = 5
-WAVE_OUTPUT_FILENAME = "output.wav"
-
-p = pyaudio.PyAudio()
-
-
-stream = p.open(format=FORMAT,
-                channels=CHANNELS,
-                rate=RATE,
-                input=True,
-                frames_per_buffer=CHUNK)
-
-print("* recording")
-
-frames = []
-
-for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
-    data = stream.read(CHUNK)
-    frames.append(data)
-    decoded = np.fromstring(data, 'Float32');
-    #mad = mm.audio.filters.FilterBank((decoded, 512))
-    #x =mad 
-    print "iterator :\n", i                            
-    print "decoded shape :\n", decoded.shape
-    print "decoded :\n", decoded
-    
-
-print("* done recording")
-
-stream.stop_stream()
-stream.close()
-p.terminate()
-
-wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
-wf.setnchannels(CHANNELS)
-wf.setsampwidth(p.get_sample_size(FORMAT))
-wf.setframerate(RATE)
-wf.writeframes(b''.join(frames))
-wf.close()
-
-
-
-'''
-
-import pyaudio
+import Queue
 import struct
-import matplotlib.pyplot as plt
-import numpy
 
-FORMAT = pyaudio.paFloat32
-SAMPLEFREQ = 44100
-FRAMESIZE = 1024
-NOFFRAMES = 220
-p = pyaudio.PyAudio()
-print('running')
 
-stream = p.open(format=FORMAT,channels=1,rate=SAMPLEFREQ,input=True,frames_per_buffer=FRAMESIZE)
-data = stream.read(NOFFRAMES*FRAMESIZE)
-decoded = numpy.fromstring(data, 'Float32');
+def callback_in_1(in_data, frame_count, time_info, status):
+    stream_queue_1.put(in_data)
+    return (in_data, pyaudio.paContinue)
 
-stream.stop_stream()
-stream.close()
-p.terminate()
-print('done')
-plt.plot(decoded)
-plt.show()
+if __name__ == '__main__':
 
-'''
+    CHUNK = 1024
+    FORMAT = pyaudio.paInt16
+    CHANNELS = 1
+    RATE = 8000
+    RECORD_SECONDS = 300
+    WAVE_OUTPUT_FILENAME = "output.wav" 
+
+    p_in_1 = pyaudio.PyAudio()
+
+    stream_queue_1 = Queue.Queue()
+
+    stream_1 = p_in_1.open(format=FORMAT,
+                           channels=CHANNELS,
+                           rate=RATE,
+                           input=True,
+                           frames_per_buffer=CHUNK,
+                           stream_callback=callback_in_1)
+
+    stream_1.start_stream()
+    frames = []
+
+    # Loop for the blocks:r
+    # for i in range(0, 100):
+    print("* recording")
+
+    for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
+        data_1 = stream_queue_1.get()
+
+        shorts_1 = (struct.unpack('h' * CHUNK, data_1))
+
+        samples_L = np.array(list(shorts_1), dtype=np.uint16)
+
+        frames.append(data_1)
+
+        # print "iterator : \n", i
+        # print "samples_L.shape : \n", samples_L.shape
+        # print "samples_L : \n", samples_L
+        # print "frames.shape : \n", frames.shape
+
+    print("* STOP recording")
+
+    stream_1.stop_stream()
+    stream_1.close()
+    p_in_1.terminate()
+
+    wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+    wf.setnchannels(CHANNELS)
+    wf.setsampwidth(p_in_1.get_sample_size(FORMAT))
+    wf.setframerate(RATE)
+    wf.writeframes(b''.join(frames))
+    wf.close()
