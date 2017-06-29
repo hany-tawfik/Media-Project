@@ -15,7 +15,7 @@ if __name__ == '__main__':
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
     RATE = 8000
-    RECORD_SECONDS = 300
+    RECORD_SECONDS = 10
     WAVE_OUTPUT_FILENAME = "output.wav" 
 
     p_in_1 = pyaudio.PyAudio()
