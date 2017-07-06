@@ -18,7 +18,7 @@ if __name__ == '__main__':
     # print p.get_device_info_by_index(0)['defaultSampleRate']
 
     ticks = time.time()
-    RNNbeat = mm.features.beats.RNNBeatProcessor()
+    RNNbeat = mm.features.beats.RNNBeatProcessor(online=True, nn_files=[BEATS_LSTM[0]])
     p = pyaudio.PyAudio()
     stream_queue = Queue.Queue()
 
