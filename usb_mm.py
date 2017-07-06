@@ -28,7 +28,7 @@ if __name__ == '__main__':
     CHANNELS = 1
     RATE = 8000
     RECORD_SECONDS = 5
-    WAVE_OUTPUT_FILENAME = "output_02.wav"
+    WAVE_OUTPUT_FILENAME = "output.wav"
 
     stream = p.open(format=FORMAT,
                            channels=CHANNELS,
