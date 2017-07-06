@@ -27,7 +27,6 @@ if __name__ == '__main__':
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
     RATE = 8000
-    RECORD_SECONDS = 5
     WAVE_OUTPUT_FILENAME = "output.wav"
 
     stream = p.open(format=FORMAT,
@@ -60,9 +59,8 @@ if __name__ == '__main__':
         # decoded = np.array(data, dtype=np.int16)
         # print "decoded.shape: ", decoded.shape
 
-        ticks = time.time()
-        print "Tick before Onset:", ticks
-
+        t0 = time.clock()
+        
         beats = RNNbeat(rawData)
         # print "beats.shape :\n", beats.shape
         # print "beats.dtype :\n", beats.dtype
@@ -75,10 +73,11 @@ if __name__ == '__main__':
         # sf = mm.features.onsets.superflux(spec)
         # print "superflux.shape :\n", sf.shape
         # print "superflux.dtype :\n", sf.dtype
+        
+        t1 = time.clock()
 
-        ticks = time.time()
-        print "Tick after Onset:", ticks
-
+        print "Time needed for Onset Calculation:", t1-t0
+        
         nchunks += 1
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
