@@ -23,7 +23,7 @@ if __name__ == '__main__':
     p = pyaudio.PyAudio()
     stream_queue = Queue.Queue()
 
-    CHUNK = 2048
+    CHUNK = 20480
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
     RATE = 8000
