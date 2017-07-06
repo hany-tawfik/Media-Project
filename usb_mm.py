@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import time
 import Queue
 import struct
+from madmom.models import BEATS_LSTM
 
 def callback_audio(in_data, frame_count, time_info, status):
     stream_queue.put(in_data)
