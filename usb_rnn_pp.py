@@ -129,8 +129,8 @@ if __name__ == '__main__':
     # plt.title("Super flux")
 
     plt.figure()
-    plt.plot(beats)
-    # plt.plot(beats / beats.max())
+    # plt.plot(beats)
+    plt.plot(beats / beats.max())
     plt.title("Beats by RNN")
 
     plt.show()
