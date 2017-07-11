@@ -1,3 +1,6 @@
+''' This code tries to calculate the peak picking using 
+tempoEstimation = mm.features.tempo.TempoEstimationProcessor(min_bpm=40, max_bpm=240, fps=100)'''
+
 import pyaudio
 import wave
 import array
