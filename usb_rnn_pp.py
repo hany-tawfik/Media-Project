@@ -86,7 +86,7 @@ if __name__ == '__main__':
         # print "superflux.shape :\n", sf.shape
         # print "superflux.dtype :\n", sf.dtype
 
-        tempo = tempoEstimation.process(beats) #beats / beats.max() to normalize it, threshold need to be changed too
+        tempo = tempoEstimation.process(beats / beats.max()) #beats / beats.max() to normalize it, threshold need to be changed too
 
         t1 = time.clock()
 
