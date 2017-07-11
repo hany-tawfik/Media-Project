@@ -24,8 +24,8 @@ if __name__ == '__main__':
 
 
     RNNbeat = mm.features.beats.RNNBeatProcessor(online=True, nn_files=[BEATS_LSTM[0]])
-    tempoEstimation = mm.features.tempo.TempoEstimationProcessor(min_bpm=40, max_bpm=240, fps=8000)
-    # tempoEstimation = mm.features.onsets.OnsetPeakPickingProcessor(threshold=.05, fps=1, pre_avg=0, post_avg=0, online=True)
+    # tempoEstimation = mm.features.tempo.TempoEstimationProcessor(min_bpm=40, max_bpm=240, fps=100)
+    tempoEstimation = mm.features.onsets.OnsetPeakPickingProcessor(threshold=.05, fps=1, pre_avg=0, post_avg=0, online=True)
 
     p = pyaudio.PyAudio()
     stream_queue = Queue.Queue()
@@ -86,7 +86,7 @@ if __name__ == '__main__':
         # print "superflux.shape :\n", sf.shape
         # print "superflux.dtype :\n", sf.dtype
 
-        tempo = tempoEstimation.process(beats / beats.max()) #beats / beats.max() to normalize it, threshold need to be changed too
+        tempo = tempoEstimation.process(beats) #beats / beats.max() to normalize it, threshold need to be changed too
 
         t1 = time.clock()
 
