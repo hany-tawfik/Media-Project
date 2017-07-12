@@ -33,3 +33,9 @@ RNNBeatProcessor()
  directly into the Raspberry Pi using Github.
 
 Next week we will read more about Peak Picking algorithms and implement it on the Pi.
+
+
+_______________________
+
+Midi in (try this)
+http://andrewdotni.ch/blog/2015/02/28/midi-synth-with-raspberry-p/
