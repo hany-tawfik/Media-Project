@@ -22,22 +22,26 @@ if __name__ == '__main__':
 
     # print p.get_device_info_by_index(0)['defaultSampleRate']
 
-
     RNNbeat = mm.features.beats.RNNBeatProcessor(online=True, nn_files=[BEATS_LSTM[0]])
-    # tempoEstimation = mm.features.tempo.TempoEstimationProcessor(min_bpm=40, max_bpm=240, fps=100)
-    tempoEstimation = mm.features.onsets.OnsetPeakPickingProcessor(threshold=.5, fps=1, pre_avg=0, post_avg=0, online=True)
+    tempoEstimation = mm.features.tempo.TempoEstimationProcessor(min_bpm=40, max_bpm=180, fps=100)
+    # tempoEstimation = mm.features.onsets.OnsetPeakPickingProcessor(threshold=.05, fps=1, pre_avg=0, post_avg=0, online=True)
 
     p = pyaudio.PyAudio()
     stream_queue = Queue.Queue()
 
-    # parse = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter)
-    # parse.add_argument('--version', action='version', version='TempoDetector.2016')
-    # tempoEstimation.add_arguments(parse)
-
-    CHUNK = 20000 #20480
+    '''
+    #Problems detecting the tempo with this setup, chunk to small to detect tempo
+    RATE = 8000
+    CHUNK = np.uint32(RATE*20) #20480
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
-    RATE = 8000
+    '''
+
+    RATE = 44100
+    CHUNK = np.uint32(RATE*2.5)
+    FORMAT = pyaudio.paInt16
+    CHANNELS = 1
+
     WAVE_OUTPUT_FILENAME = "output_02.wav"
 
     stream = p.open(format=FORMAT,
@@ -86,13 +90,13 @@ if __name__ == '__main__':
         # print "superflux.shape :\n", sf.shape
         # print "superflux.dtype :\n", sf.dtype
 
-        tempo = tempoEstimation.process(beats / beats.max()) #beats / beats.max() to normalize it, threshold need to be changed too
+        tempo = tempoEstimation.process(beats) #beats / beats.max() to normalize it, threshold need to be changed too
 
         t1 = time.clock()
 
         print "Time needed for Onset and PeakPeaking Calculation:", t1-t0
 
-        print "tempo: ", tempo
+        print "tempo: \n", tempo
 
         nchunks += 1
 
@@ -129,8 +133,8 @@ if __name__ == '__main__':
     # plt.title("Super flux")
 
     plt.figure()
-    # plt.plot(beats)
-    plt.plot(beats / beats.max())
+    plt.plot(beats)
+    # plt.plot(beats / beats.max())
     plt.title("Beats by RNN")
 
     plt.show()
