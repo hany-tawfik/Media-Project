@@ -41,3 +41,7 @@ Midi in (try this)
 http://andrewdotni.ch/blog/2015/02/28/midi-synth-with-raspberry-p/
 
 http://tedfelix.com/linux/linux-midi.html
+
+midi in midi out python library
+
+http://www.pygame.org/docs/ref/midi.html#pygame.midi.Output
