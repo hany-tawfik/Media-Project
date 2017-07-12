@@ -39,3 +39,5 @@ _______________________
 
 Midi in (try this)
 http://andrewdotni.ch/blog/2015/02/28/midi-synth-with-raspberry-p/
+
+http://tedfelix.com/linux/linux-midi.html
