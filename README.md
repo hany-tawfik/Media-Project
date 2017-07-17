@@ -45,3 +45,6 @@ http://tedfelix.com/linux/linux-midi.html
 midi in midi out python library
 
 http://www.pygame.org/docs/ref/midi.html#pygame.midi.Output
+
+The midi library
+https://github.com/vishnubob/python-midi#Installation
