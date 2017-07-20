@@ -1,3 +1,6 @@
+''' This code can read midi event from the midi controller with device_id =3 by trail and error because
+this command pm.get_default_input_id() is not giving the right value '''
+
 import pygame
 import pygame.midi
 import time
@@ -11,7 +14,7 @@ def hany(num_events):
 
     pm.init() # initializing the class
 
-    device_id = 3 # we knew 3 by trail and errror  pygame.midi.Input(3)
+    device_id = 3 # we knew 3 by trail and error  pygame.midi.Input(3)
 
     '''
     ################ For Checking ######################
@@ -45,6 +48,6 @@ print z
 
 
 # close to start new instance
-#pm.close()
+#pm.Input.close
 
 # note(on/off) - note_name - velocity 
