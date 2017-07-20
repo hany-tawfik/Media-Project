@@ -1,0 +1,50 @@
+import pygame
+import pygame.midi
+import time
+
+
+
+def hany(num_events):
+
+    p = pygame
+    pm = pygame.midi
+
+    pm.init() # initializing the class
+
+    device_id = 3 # we knew 3 by trail and errror  pygame.midi.Input(3)
+
+    '''
+    ################ For Checking ######################
+    input_id = pm.get_default_input_id() # return input id
+    output_id = pm.get_default_output_id()# return output id
+
+    # return (interface, name, input"bool", output"bool", opened"bool") 
+    pm.get_device_info(device_id) #('ALSA', 'MIDISTART MUSIC 25 MIDI 1', 1, 0, 0)
+    pm.get_device_info(1) #('ALSA', 'Midi Through Port-0', 1, 0, 1)
+
+    pn.get_count() # return number of devices
+    #####################################################
+    '''
+    # "Input" to set an instance start point
+    inst1 = pm.Input(device_id)
+
+    print 'Playing...'
+    time.sleep(5) 
+
+    # play on the keyboard
+
+    # read what is played
+
+    x = pm.Input.read(inst1,num_events)
+    
+    return x
+
+num_events = 3
+z = hany(num_events)
+print z
+
+
+# close to start new instance
+#pm.close()
+
+# note(on/off) - note_name - velocity 
