@@ -52,3 +52,5 @@ https://github.com/vishnubob/python-midi#Installation
 
 This code might help us with midi CC
 https://stackoverflow.com/questions/4011498/how-do-i-send-midi-control-change-messages-ccs-using-pyportmidi-or-pygame
+
+Google "coding midi"
