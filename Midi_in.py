@@ -111,6 +111,23 @@ def Sus4_Chord(naghama):
         time.sleep(1e-3)
         mido.Message('note_off', note=naghama.note)
         return
+
+def Minor_6th(naghama):
+        #Tonic
+        outport.send(naghama)
+        time.sleep(1e-3)
+        #Minor third.
+        naghama.note += 3
+        time.sleep(1e-3)
+        outport.send(naghama)
+        #Sixth
+        naghama.note += 6
+        time.sleep(1e-3)
+        outport.send(naghama)
+        time.sleep(1e-3)
+        mido.Message('note_off', note=naghama.note)
+        return
+
 def Tonic_Fifth(naghama):
         #Tonic
         outport.send(naghama)
@@ -227,7 +244,7 @@ if __name__ == "__main__":
         elif naghama.note == Fifth_octaveUP : # This should be written OR with Csus4 
             Sus4_Chord(naghama)
         elif naghama.note == Fourth_octaveUP:
-            Minor_Chord(naghama) # change it to minor 6th
+            Minor_6th(naghama)
         elif naghama.note == Second_octaveUP or Third_major_octaveUP or Sixth_major_octaveUP or Seventh_major_octaveUP:
             Major_Dominant_7th_Chord(naghama)
         else:
