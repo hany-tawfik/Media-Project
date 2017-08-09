@@ -111,7 +111,7 @@ def Sus4_Chord(naghama):
         time.sleep(1e-3)
         mido.Message('note_off', note=naghama.note)
         return
-
+    
 def Minor_6th(naghama):
         #Tonic
         outport.send(naghama)
@@ -127,7 +127,6 @@ def Minor_6th(naghama):
         time.sleep(1e-3)
         mido.Message('note_off', note=naghama.note)
         return
-
 def Tonic_Fifth(naghama):
         #Tonic
         outport.send(naghama)
@@ -148,12 +147,12 @@ if __name__ == "__main__":
     
     outputs = mido.get_input_names()
     
-    inport = mido.open_input('MIDISTART MUSIC 25:MIDISTART MUSIC 25 MIDI 1 24:0')
-    inport2 = mido.open_input('CH345:CH345 MIDI 1 20:0')
-    outport = mido.open_output('CH345:CH345 MIDI 1 20:0')
+    inport = mido.open_input('MIDISTART MUSIC 25')
+    inport2 = mido.open_input('USB2.0-MIDI Port 1')
+    outport = mido.open_output('USB2.0-MIDI Port 1')
     
     #delete later
-    outport2 = mido.open_output('CH345:CH345 MIDI 1 20:0')
+    outport2 = mido.open_output('USB2.0-MIDI Port 1')
     
     #just for testing
     #outport.send(mido.Message('note_on', note=72))
