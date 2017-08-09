@@ -206,12 +206,18 @@ if __name__ == "__main__":
     Sixth_major_octaveUP = Sixth_major + 12
     Seventh_major_octaveUP = Seventh_major + 12
     
+    print "Tonic.note: ", Tonic.note
+    print "start receiving notes"
      
     for naghama in inport:
         
-        
+        print "naghama.note: ", naghama.note
+        print "Tonic.note: ", Tonic.note
         
         if naghama.note == Stop_loop.note: # Note C6 (72) closes the code.
+            inport.close()
+            inport2.close()
+            outport.close()
             break
         #Main octave
         elif naghama.note == Tonic.note:
