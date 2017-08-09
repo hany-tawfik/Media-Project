@@ -191,16 +191,13 @@ if __name__ == "__main__":
     Tonic = naghama.copy()
 
     print "Tonic.note: ", Tonic.note
-    print "please press a key for scale" 
-
-    
+    print "please press a key for scale"     
     
     while True:
       if setup_chords(Tonic.note):
         break
       naghama = inport.receive()
-      Tonic = naghama.copy()
-        
+      Tonic = naghama.copy()        
     
     Second = Tonic.note + 2
     Third_major = Tonic.note + 4
@@ -229,16 +226,21 @@ if __name__ == "__main__":
     
     print "Tonic.note: ", Tonic.note
     print "start receiving notes"
+        
+    tempoMessage = mido.Message('clock', time=120)
+    print tempoMessage
      
     for naghama in inport:
         
         print "naghama.note: ", naghama.note
         print "Tonic.note: ", Tonic.note
+        outport.send(tempoMessage)
         
         if naghama.note == Stop_loop.note: # Note C6 (72) closes the code.
             inport.close()
             inport2.close()
             outport.close()
+            print "closing program"    
             break
         #Main octave
         elif naghama.note == Tonic.note:
