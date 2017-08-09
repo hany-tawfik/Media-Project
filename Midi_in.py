@@ -191,11 +191,12 @@ if __name__ == "__main__":
         
     print "please press a key for scale" 
 
-    while True: 
-        Tonic = naghama.copy()
-        if setup_chords(Tonic):
-            break
+    #while True: 
+     #   Tonic = naghama.copy()
+      #  if setup_chords(Tonic):
+       #     break
         
+    Tonic = naghama.copy()
     Second = Tonic.note + 2
     Third_major = Tonic.note + 4
     Fourth = Tonic.note + 5
