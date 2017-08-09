@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Spyder Editor
-
 This is a temporary script file.
 """
 
@@ -9,7 +8,6 @@ This is a temporary script file.
 # -*- coding: utf-8 -*-
 """
 Created on Tue Jul 25 13:44:09 2017
-
 @author: HanyTawfik
 """
 
@@ -111,7 +109,7 @@ def Sus4_Chord(naghama):
         time.sleep(1e-3)
         mido.Message('note_off', note=naghama.note)
         return
-
+    
 def Minor_6th(naghama):
         #Tonic
         outport.send(naghama)
@@ -127,7 +125,6 @@ def Minor_6th(naghama):
         time.sleep(1e-3)
         mido.Message('note_off', note=naghama.note)
         return
-
 def Tonic_Fifth(naghama):
         #Tonic
         outport.send(naghama)
@@ -153,7 +150,7 @@ if __name__ == "__main__":
     outport = mido.open_output('CH345:CH345 MIDI 1 20:0')
     
     #delete later
-    outport2 = mido.open_output('CH345:CH345 MIDI 1 20:0')
+    #outport2 = mido.open_output('USB2.0-MIDI Port 1')
     
     #just for testing
     #outport.send(mido.Message('note_on', note=72))
@@ -209,12 +206,10 @@ if __name__ == "__main__":
     Sixth_major_octaveUP = Sixth_major + 12
     Seventh_major_octaveUP = Seventh_major + 12
     
-    print "start receiving notes"
      
     for naghama in inport:
         
-        print "naghama.note: ", naghama.note
-        print "Tonic.note: ", Tonic.note
+        
         
         if naghama.note == Stop_loop.note: # Note C6 (72) closes the code.
             break
