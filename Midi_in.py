@@ -14,9 +14,9 @@ Created on Tue Jul 25 13:44:09 2017
 import mido
 import time
 
-def setup_chords(Tonic):
+def setup_chords(tone):
         
-    if 72 != Tonic:    
+    if 72 != tone.note:    
         return True
     else:
         return False
@@ -187,11 +187,12 @@ if __name__ == "__main__":
     
     
     #Main octave.
-    Tonic = naghama.copy()
+    
         
     print "please press a key for scale" 
 
     while True: 
+        Tonic = naghama.copy()
         if setup_chords(Tonic):
             break
         
