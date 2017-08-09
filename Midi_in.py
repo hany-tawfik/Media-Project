@@ -198,6 +198,7 @@ if __name__ == "__main__":
     while True:
       if setup_chords(Tonic.note):
         break
+      naghama = inport.receive()
       Tonic = naghama.copy()
         
     
