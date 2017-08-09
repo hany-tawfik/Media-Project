@@ -14,6 +14,13 @@ Created on Tue Jul 25 13:44:09 2017
 import mido
 import time
 
+def setup_chords(Tonic):
+        
+    if 72 != Tonic:    
+        return True
+    else:
+        return False
+
 def Major_Chord(naghama):
         #Tonic
         outport.send(naghama)
@@ -181,7 +188,13 @@ if __name__ == "__main__":
     
     #Main octave.
     Tonic = naghama.copy()
-    Tonic.note = 48
+        
+    print "please press a key for scale" 
+
+    while True: 
+        if setup_chords(Tonic):
+            break
+        
     Second = Tonic.note + 2
     Third_major = Tonic.note + 4
     Fourth = Tonic.note + 5
