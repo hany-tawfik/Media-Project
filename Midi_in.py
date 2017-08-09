@@ -180,7 +180,7 @@ if __name__ == "__main__":
     
     
     #Main octave.
-    Tonic = 48
+    Tonic.note = 48
     Second = Tonic.note + 2
     Third_major = Tonic.note + 4
     Fourth = Tonic.note + 5
