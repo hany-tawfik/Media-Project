@@ -209,12 +209,12 @@ if __name__ == "__main__":
     Sixth_major_octaveUP = Sixth_major + 12
     Seventh_major_octaveUP = Seventh_major + 12
     
-    #tempoMessage = mido.Message('clock', time=120)
-    #print tempoMessage
+    print "start receiving notes"
      
     for naghama in inport:
         
-        #outport.send(tempoMessage)
+        print "naghama.note: ", naghama.note
+        print "Tonic.note: ", Tonic.note
         
         if naghama.note == Stop_loop.note: # Note C6 (72) closes the code.
             break
