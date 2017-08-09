@@ -152,7 +152,7 @@ if __name__ == "__main__":
     outport = mido.open_output('CH345:CH345 MIDI 1 20:0')
     
     #delete later
-    outport2 = mido.open_output('USB2.0-MIDI Port 1')
+    #outport2 = mido.open_output('USB2.0-MIDI Port 1')
     
     #just for testing
     #outport.send(mido.Message('note_on', note=72))
