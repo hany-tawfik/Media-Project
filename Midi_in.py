@@ -227,7 +227,7 @@ if __name__ == "__main__":
     print "Tonic.note: ", Tonic.note
     print "start receiving notes"
         
-    tempoMessage = mido.Message('clock', time=mido.bpm2tempo(150))
+    tempoMessage = mido.Message('clock', time=120*4)
     print tempoMessage
      
     for naghama in inport:
