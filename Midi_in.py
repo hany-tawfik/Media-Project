@@ -250,9 +250,10 @@ if __name__ == "__main__":
     outport.send(tempoMessage)
     time.sleep(.5)
         
-    #while True:
-     #   outport.send(tempoMessage)
-      #  time.sleep(clock_interval)
+    print "Send further messages"    
+    while True:
+        outport.send(tempoMessage)
+        time.sleep(.5)
         
      
     for naghama in inport:
