@@ -228,7 +228,7 @@ if __name__ == "__main__":
     print "start receiving notes"
         
     clock_interval = 60 / (150 * 24)
-    print "clock_interval: ", clock interval
+    print "clock_interval: ", clock_interval
     print "bpm2tempo: ", mido.bpm2tempo(120)
         
     tempoMessage = mido.Message([248], time=clock_interval)        
