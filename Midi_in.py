@@ -227,7 +227,7 @@ if __name__ == "__main__":
     print "Tonic.note: ", Tonic.note
     print "start receiving notes"
         
-    clock_interval = 60000000000 / (150 * 24)
+    clock_interval = 60 / (150 * 24)
     tempoMessage = mido.Message('clock')#, time=clock_interval)
     print tempoMessage
     print "Send message 1"
