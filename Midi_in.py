@@ -236,15 +236,15 @@ if __name__ == "__main__":
     print "Send message 1"
     outport.send(tempoMessage)
     time.sleep(clock_interval)
-    #print "Send message 2"
-    #outport.send(tempoMessage)
-    #time.sleep(clock_interval)
-    #print "Send message 3"
-    #outport.send(tempoMessage)
-    #time.sleep(clock_interval)
-    #print "Send message 4"
-    #outport.send(tempoMessage)
-    #time.sleep(clock_interval)
+    print "Send message 2"
+    outport.send(tempoMessage)
+    time.sleep(clock_interval)
+    print "Send message 3"
+    outport.send(tempoMessage)
+    time.sleep(clock_interval)
+    print "Send message 4"
+    outport.send(tempoMessage)
+    time.sleep(clock_interval)
         
     #while True:
      #   print "Send now further messages"
