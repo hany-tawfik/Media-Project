@@ -228,20 +228,27 @@ if __name__ == "__main__":
     print "start receiving notes"
         
     clock_interval = 60 / (150 * 24)
-    tempoMessage = mido.Message('clock')#, time=clock_interval)
+    print "clock_interval: ", clock interval
+    print "bpm2tempo: ", mido.bpm2tempo(120)
+        
+    tempoMessage = mido.Message([248], time=clock_interval)        
     print tempoMessage
+
     print "Send message 1"
     outport.send(tempoMessage)
-    time.sleep(clock_interval)
+    time.sleep(.5)
+        
     print "Send message 2"
     outport.send(tempoMessage)
-    time.sleep(clock_interval)
+    time.sleep(.5)
+
     print "Send message 3"
     outport.send(tempoMessage)
-    time.sleep(clock_interval)
+    time.sleep(.5)
+        
     print "Send message 4"
     outport.send(tempoMessage)
-    time.sleep(clock_interval)
+    time.sleep(.5)
         
     #while True:
      #   outport.send(tempoMessage)
