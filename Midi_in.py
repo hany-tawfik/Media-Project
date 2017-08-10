@@ -13,6 +13,7 @@ Created on Tue Jul 25 13:44:09 2017
 
 import mido
 import time
+import threading 
 
 def setup_chords(note):
         
@@ -145,6 +146,10 @@ def Tonic_Fifth(naghama):
         mido.Message('note_off', note=naghama.note)
         return
 
+def sendTempo():
+    outport.send(tempoMessage)
+    print "sending tempo timer"
+
     
 if __name__ == "__main__":
 
@@ -230,29 +235,29 @@ if __name__ == "__main__":
         
     clock_interval = 60. / ((150 + 2) * 24)
     tempoMessage = mido.Message('clock')#, time=clock_interval)
-    #mido.bpm2tempo(120)
     print tempoMessage
-    print clock_interval    
-    print "Send message 1"
-    outport.send(tempoMessage)
-    time.sleep(clock_interval)
-    print "Send message 2"
-    outport.send(tempoMessage)
-    time.sleep(clock_interval)
-    print "Send message 3"
-    outport.send(tempoMessage)
-    time.sleep(clock_interval)
-    print "Send message 4"
-    outport.send(tempoMessage)
-    time.sleep(clock_interval)
-
-    print "Send now further messages"
+    print clock_interval
+    t = threading.Timer(clock_interval)
+    t.start()
+    
+    #print "Send message 1"
+    #outport.send(tempoMessage)
+    #time.sleep(clock_interval)
+    #print "Send message 2"
+    #outport.send(tempoMessage)
+    #time.sleep(clock_interval)
+    #print "Send message 3"
+    #outport.send(tempoMessage)
+    #time.sleep(clock_interval)
+    #print "Send message 4"
+    #outport.send(tempoMessage)
+    #time.sleep(clock_interval)
+    #print "Send now further messages"
         
-    while True:
+    #while True:
         
-        outport.send(tempoMessage)
-        time.sleep(clock_interval)
-        
+        #outport.send(tempoMessage)
+        #time.sleep(clock_interval)
      
     for naghama in inport:
         
