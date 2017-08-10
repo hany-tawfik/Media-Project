@@ -148,7 +148,6 @@ def Tonic_Fifth(naghama):
 
 def sendTempo():
     outport.send(tempoMessage)
-    print "sending tempo timer"
     t = threading.Timer(clock_interval, sendTempo)
     t.start()
 
