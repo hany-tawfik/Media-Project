@@ -231,7 +231,7 @@ if __name__ == "__main__":
     print "clock_interval: ", clock_interval
     print "bpm2tempo: ", mido.bpm2tempo(120)
         
-    tempoMessage = mido.Message([248], time=clock_interval)        
+    tempoMessage = mido.Message('clock')#, time=clock_interval)        
     print tempoMessage
 
     print "Send message 1"
