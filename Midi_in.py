@@ -237,7 +237,7 @@ if __name__ == "__main__":
     tempoMessage = mido.Message('clock')#, time=clock_interval)
     print tempoMessage
     print clock_interval
-    t = threading.Timer(clock_interval)
+    t = threading.Timer(clock_interval, sendTempo)
     t.start()
     
     #print "Send message 1"
