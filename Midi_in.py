@@ -237,21 +237,21 @@ if __name__ == "__main__":
     print tempoMessage
     print "Send message 1"
     outport.send(tempoMessage)
-    time.sleep(.017)
+    time.sleep(.01)
     print "Send message 2"
     outport.send(tempoMessage)
-    time.sleep(.017)
+    time.sleep(.01)
     print "Send message 3"
     outport.send(tempoMessage)
-    time.sleep(.017)
+    time.sleep(.01)
     print "Send message 4"
     outport.send(tempoMessage)
-    time.sleep(.017)
+    time.sleep(.01)
         
     while True:
         print "Send now further messages"
         outport.send(tempoMessage)
-        time.sleep(clock_interval)
+        time.sleep(.01)
         
      
     for naghama in inport:
