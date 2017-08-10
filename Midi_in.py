@@ -227,8 +227,15 @@ if __name__ == "__main__":
     print "Tonic.note: ", Tonic.note
     print "start receiving notes"
         
-    tempoMessage = mido.Message('clock', time=120*4)
+    tempoMessage = mido.Message('clock')
     print tempoMessage
+    
+    clock_interval = 60 / (150 * 24)
+    
+    while True:
+        outport.send(tempoMessage)
+        time.sleep(clock_interval)
+        
      
     for naghama in inport:
         
