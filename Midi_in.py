@@ -227,31 +227,29 @@ if __name__ == "__main__":
     print "Tonic.note: ", Tonic.note
     print "start receiving notes"
         
-    clock_interval = 60 / (150 * 24)
-    print "clock_interval: ", clock_interval
-    print "bpm2tempo: ", mido.bpm2tempo(120)
         
-    clock_interval = 60 / (150 * 24)
+    clock_interval = 60. / (150 * 24)
     tempoMessage = mido.Message('clock')#, time=clock_interval)
     #mido.bpm2tempo(120)
     print tempoMessage
+    print clock_interval    
     print "Send message 1"
     outport.send(tempoMessage)
-    time.sleep(.025)
+    time.sleep(clock_interval)
     print "Send message 2"
     outport.send(tempoMessage)
-    time.sleep(.025)
+    time.sleep(clock_interval)
     print "Send message 3"
     outport.send(tempoMessage)
-    time.sleep(.025)
+    time.sleep(clock_interval)
     print "Send message 4"
     outport.send(tempoMessage)
-    time.sleep(.025)
+    time.sleep(clock_interval)
         
     while True:
         print "Send now further messages"
         outport.send(tempoMessage)
-        time.sleep(.025)
+        time.sleep(clock_interval)
         
      
     for naghama in inport:
