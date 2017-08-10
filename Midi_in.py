@@ -146,8 +146,8 @@ def Tonic_Fifth(naghama):
         mido.Message('note_off', note=naghama.note)
         return
 
-def sendTempo():
-    outport.send(tempoMessage)
+def sendTempo(tempo):
+    outport.send(tempo)
     print "sending tempo timer"
 
     
@@ -237,7 +237,7 @@ if __name__ == "__main__":
     tempoMessage = mido.Message('clock')#, time=clock_interval)
     print tempoMessage
     print clock_interval
-    t = threading.Timer(clock_interval, sendTempo)
+    t = threading.Timer(clock_interval, sendTempo, [tempoMessage])
     t.start()
     
     #print "Send message 1"
