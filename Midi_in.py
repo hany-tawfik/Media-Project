@@ -263,7 +263,6 @@ if __name__ == "__main__":
         
         print "naghama.note: ", naghama.note
         print "Tonic.note: ", Tonic.note
-        outport.send(tempoMessage)
         
         if naghama.note == Stop_loop.note: # Note C6 (72) closes the code.
             inport.close()
@@ -271,6 +270,7 @@ if __name__ == "__main__":
             outport.close()
             print "closing program"    
             break
+        
         #Main octave
         elif naghama.note == Tonic.note:
             Major_Chord(naghama)
