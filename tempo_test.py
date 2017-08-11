@@ -153,7 +153,7 @@ def sendTempo():
     outport.send(tempoMessage)
     t = threading.Timer(clock_interval, sendTempo)
     t.start()
-    if counter == 2400:
+    if counter == 1200:
         global bpm_tempo
         bpm_tempo += 10
         global clock_interval
@@ -243,7 +243,7 @@ if __name__ == "__main__":
     print "start receiving notes"
         
     counter = 0    
-    bpm_tempo = 100
+    bpm_tempo = 70
     offset = 10
     clock_interval = 60. / ((bpm_tempo + offset) * 24)
     tempoMessage = mido.Message('clock')#, time=clock_interval)
