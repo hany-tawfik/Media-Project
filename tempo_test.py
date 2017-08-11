@@ -159,7 +159,7 @@ def sendTempo():
         global clock_interval
         bpm_tempo += 10        
         clock_interval = 60. / ((bpm_tempo + offset) * 24)
-        clock_interval = np.float16(clock_interval)
+        #clock_interval = np.float16(clock_interval)
         counter = 0   
 
     
@@ -248,7 +248,7 @@ if __name__ == "__main__":
     bpm_tempo = 50
     offset = 0
     clock_interval = 60. / ((bpm_tempo + offset) * 24)
-    clock_interval = np.float16(clock_interval)
+    #clock_interval = np.float16(clock_interval)
     tempoMessage = mido.Message('clock')#, time=clock_interval)
     print tempoMessage
     print clock_interval
