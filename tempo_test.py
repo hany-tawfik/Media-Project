@@ -245,7 +245,7 @@ if __name__ == "__main__":
     print "start receiving notes"
         
     counter = 0    
-    bpm_tempo = 50
+    bpm_tempo = 150
     offset = 0
     clock_interval = 60. / ((bpm_tempo + offset) * 24)
     #clock_interval = np.float16(clock_interval)
