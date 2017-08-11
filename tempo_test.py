@@ -244,7 +244,7 @@ if __name__ == "__main__":
         
     counter = 0    
     bpm_tempo = 70
-    offset = 10
+    offset = 0
     clock_interval = 60. / ((bpm_tempo + offset) * 24)
     tempoMessage = mido.Message('clock')#, time=clock_interval)
     print tempoMessage
