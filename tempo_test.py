@@ -14,7 +14,8 @@ Created on Tue Jul 25 13:44:09 2017
 
 import mido
 import time
-import threading 
+import threading
+import numpy as np
 
 def setup_chords(note):
         
@@ -155,9 +156,10 @@ def sendTempo():
     t.start()
     if counter == 1200:
         global bpm_tempo
-        bpm_tempo += 10
         global clock_interval
+        bpm_tempo += 10        
         clock_interval = 60. / ((bpm_tempo + offset) * 24)
+        clock_interval = np.float16(clock_interval)
         counter = 0   
 
     
@@ -246,6 +248,7 @@ if __name__ == "__main__":
     bpm_tempo = 50
     offset = 0
     clock_interval = 60. / ((bpm_tempo + offset) * 24)
+    clock_interval = np.float16(clock_interval)
     tempoMessage = mido.Message('clock')#, time=clock_interval)
     print tempoMessage
     print clock_interval
