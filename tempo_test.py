@@ -148,15 +148,17 @@ def Tonic_Fifth(naghama):
         return
 
 def sendTempo():
+    global counter
     counter += 1
     outport.send(tempoMessage)
     t = threading.Timer(clock_interval, sendTempo)
     t.start()
     if counter == 2400:
+        global bpm_tempo
         bpm_tempo += 10
+        global clock_interval
         clock_interval = 60. / ((bpm_tempo + offset) * 24)
-        counter = 0
-    
+        counter = 0   
 
     
 if __name__ == "__main__":
