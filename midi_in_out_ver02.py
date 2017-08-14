@@ -72,7 +72,7 @@ if __name__ == "__main__":
             print "closing program"
             break
         else:
-            miChords.Set_Current_Chord(tone)
+            # miChords.Set_Current_Chord(tone)
             miChords.Send_Chord(tone)
             # mido.Message('note_on', note=tone.note)
 
