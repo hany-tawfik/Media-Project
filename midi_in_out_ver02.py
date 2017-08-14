@@ -5,7 +5,7 @@ import midi_chords as miChords
 
 def setup_chords(note_set):
 
-    if STOP_NOTE != note_set:
+    if Stop_loop.note != note_set:
         return True
     else:
         return False
