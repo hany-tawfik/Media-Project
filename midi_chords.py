@@ -60,9 +60,7 @@ Seventh_major_octaveUP = Seventh_major + 12
 def Set_Tonic_Scale(chord):
 
     global Tonic_Scale
-    global Temp_scale
     Tonic_Scale = chord.copy()
-    Temp_scale = Tonic_Scale.copy()
 
 def Set_Current_Chord(current_chord):
     global Play_Chord
@@ -209,6 +207,7 @@ def Send_Chord(output_chord):
     temp = temp.note
 
     print "temp: ", temp
+    print "Tonic Scale : ", Tonic_Scale
 
     switcher = {
 
@@ -231,10 +230,10 @@ def Send_Chord(output_chord):
     # Get the function from switcher dictionary
     func = switcher.get(temp, Tonic_Fifth)
     print "output_chord.note: ", output_chord.note
-
+    print "Output Chord: ", output_chord
     # Execute the function
     func(output_chord)
-    print "Output Chord: ", output_chord
-    print "Tonic: ", Tonic_Scale
+
+
 
 
