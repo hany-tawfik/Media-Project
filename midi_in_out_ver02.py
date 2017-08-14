@@ -63,6 +63,8 @@ if __name__ == "__main__":
 
     print "Tonic.note: ", Tonic.note
     print "start receiving notes"
+    
+    stop_timer = False
 
     STOP_NOTE = 72
     BPM = 120
