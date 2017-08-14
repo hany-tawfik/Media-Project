@@ -60,7 +60,7 @@ Seventh_major_octaveUP = Seventh_major + 12
 def Set_Tonic_Scale(chord):
 
     global Tonic_Scale
-    Tonic_Scale = chord.copy()
+    Tonic_Scale = chord
 
 def Set_Current_Chord(current_chord):
     global Play_Chord
