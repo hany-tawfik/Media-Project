@@ -1,6 +1,7 @@
 import mido
 import threading
 import midi_chords as miChords
+import numpy as np
 
 
 def setup_chords(note_set):
@@ -52,6 +53,7 @@ if __name__ == "__main__":
     BPM = 120
     OFFSET = 7
     clock_interval = 60. / ((BPM + OFFSET) * 24) #verify without multiplying by 24
+    clock_interval = np.float16(clock_interval)
     tempoMessage = mido.Message('clock')  # , time=clock_interval)
 
     print "Tempo Message", tempoMessage
