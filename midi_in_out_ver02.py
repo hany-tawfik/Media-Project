@@ -66,14 +66,19 @@ if __name__ == "__main__":
         # print "Tonic.note: ", Tonic.note
 
         if tone.note == Stop_loop.note: #Note C6 (72) closes the code.
-            inport.close()
-            inport2.close()
-            outport.close()
-            t.cancel()
+            #inport.close()
+            #inport2.close()
+            #outport.close()
+            #t.cancel()
             print "closing program"
             break
         else:
             # miChords.Set_Current_Chord(tone)
             miChords.Send_Chord(tone)
             # mido.Message('note_on', note=tone.note)
+            
+t.cancel()
+inport.close()
+inport2.close()
+outport.close()
 
