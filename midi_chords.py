@@ -72,15 +72,18 @@ def Set_Current_Chord(current_chord):
 def Major_Chord(output_chord):
 
     # Tonic
+    print "Major chord 1: ", output_chord.note
     outport.send(output_chord)
     time.sleep(1e-3)
     # Major third.
     output_chord.note += 4
     time.sleep(1e-3)
+    print "Major chord 3: ", output_chord.note
     outport.send(output_chord)
     # Fifth
     output_chord.note += 3
     time.sleep(1e-3)
+    print "Major chord 5: ", output_chord.note
     outport.send(output_chord)
     time.sleep(1e-3)
     mido.Message('note_off', note=output_chord.note)
