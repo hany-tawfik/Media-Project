@@ -15,9 +15,11 @@ def setup_chords(note_set):
 def sendTempo():
 
     outport.send(tempoMessage)
-    if stop_timer == False:
+    if stop_timer == False or timer_counter < 30:
         t = threading.Timer(clock_interval, sendTempo)
         t.start()
+        global timer_counter
+        timer_counter += 1
     else:        
         print "stop timer"
     
@@ -60,6 +62,7 @@ if __name__ == "__main__":
     print "Tonic.note: ", Tonic.note
     print "start receiving notes"
     
+    timer_counter = 0
     stop_timer = False
 
     STOP_NOTE = 72
