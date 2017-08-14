@@ -13,12 +13,12 @@ def setup_chords(note_set):
 
 
 def sendTempo():
-
+    global timer_counter
     outport.send(tempoMessage)
-    if stop_timer == False or timer_counter < 30:
+    if (stop_timer == False) or (timer_counter < 30):
         t = threading.Timer(clock_interval, sendTempo)
         t.start()
-        global timer_counter
+        
         timer_counter += 1
         print "timer_counter: ", timer_counter
     else:        
@@ -44,9 +44,6 @@ if __name__ == "__main__":
 
     Stop_loop = mido.Message('note_on', note=72) # Maybe this is the reason why always it receives 72 when booting
     
-    timer_counter = 0
-    stop_timer = False
-
     note = inport.receive()
 
     Tonic = note.copy()
@@ -66,6 +63,8 @@ if __name__ == "__main__":
     print "Tonic.note: ", Tonic.note
     print "start receiving notes"
     
+    timer_counter = 0
+    stop_timer = False
     STOP_NOTE = 72
     BPM = 120
     OFFSET = 7
