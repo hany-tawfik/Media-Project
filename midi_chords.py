@@ -61,7 +61,7 @@ def Set_Tonic_Scale(chord):
 
     global Tonic_Scale
     global Temp_scale
-    Tonic_Scale = chord
+    Tonic_Scale = chord.copy()
     Temp_scale = Tonic_Scale.copy()
 
 def Set_Current_Chord(current_chord):
@@ -187,6 +187,8 @@ def Major_Dominant_7th_Chord(output_chord):
 
 def Tonic_Fifth(output_chord):
 
+    print "Tonic Fifth"
+
     # Tonic
     outport.send(output_chord)
     time.sleep(1e-3)
@@ -202,6 +204,10 @@ def Tonic_Fifth(output_chord):
 def Send_Chord(output_chord):
 
     # Mapping a dictionary
+
+    temp = output_chord.note.copy()
+
+    print "temp: ", temp
 
     switcher = {
 
@@ -222,8 +228,9 @@ def Send_Chord(output_chord):
     }
 
     # Get the function from switcher dictionary
-    func = switcher.get(output_chord, Tonic_Fifth)
+    func = switcher.get(temp, Tonic_Fifth)
     print "output_chord.note: ", output_chord.note
+
     # Execute the function
     func(output_chord)
     print "Output Chord: ", output_chord
