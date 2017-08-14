@@ -205,7 +205,8 @@ def Send_Chord(output_chord):
 
     # Mapping a dictionary
 
-    temp = output_chord.note.copy()
+    temp = output_chord.copy()
+    temp = temp.note
 
     print "temp: ", temp
 
