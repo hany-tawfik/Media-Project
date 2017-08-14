@@ -13,24 +13,36 @@ def setup_chords(note_set):
 
 
 def sendTempo():
-    
+
+    outport.send(tempoMessage)
+
+    if stop_timer == False:
+
+        t = threading.Timer(clock_interval, sendTempo)
+        t.start()
+
+    else:
+
+        print "stop timer"
+        
+'''        
+def sendTempo():
+
     global timer_counter
     outport.send(tempoMessage)
-    
+
     if stop_timer == False:
-            
-        t = threading.Timer(clock_interval, sendTempo)
-        t.start()        
-        '''
-        if timer_counter <= 30:       
-            
+
+        if timer_counter <= 30:
+
             t = threading.Timer(clock_interval, sendTempo)
             t.start()
             timer_counter += 1
             print "timer_counter: ", timer_counter
-        '''
+
     else:
         print "stop timer"
+'''
     
 def stop_thread_timer():
 
