@@ -69,7 +69,7 @@ if __name__ == "__main__":
             inport.close()
             inport2.close()
             outport.close()
-            t.finished()
+            t.cancel()
             print "closing program"
             break
         else:
