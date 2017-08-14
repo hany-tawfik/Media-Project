@@ -15,9 +15,19 @@ def setup_chords(note_set):
 def sendTempo():
 
     outport.send(tempoMessage)
-    t = threading.Timer(clock_interval, sendTempo)
-    t.start()
-    print "sending tempo"
+    if stop_timer == False:
+        t = threading.Timer(clock_interval, sendTempo)
+        t.start()
+    else:        
+        print "stop timer"
+    
+def stop_thread_timer():
+
+    global stop_timer
+
+    stop_timer = True
+
+    return stop_timer
 
 
 if __name__ == "__main__":
@@ -73,6 +83,7 @@ if __name__ == "__main__":
             #inport2.close()
             #outport.close()
             #t.cancel()
+            stop_thread_timer()
             print "closing program"
             break
         else:
