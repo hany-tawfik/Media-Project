@@ -12,7 +12,8 @@ outport = mido.open_output('CH345:CH345 MIDI 1 20:0')
 
 '''SETTING NOTES/CHORDS'''
 
-Tonic_Chord = 0
+Tonic_Scale = 0
+Temp_scale = 0
 
 ''' 
 C = 48
@@ -29,15 +30,15 @@ C major scale :
  '''
 
 # Main octave.
-Second = Tonic_Chord + 2
-Third_major = Tonic_Chord + 4
-Fourth = Tonic_Chord + 5
-Fifth = Tonic_Chord + 7
-Sixth_major = Tonic_Chord + 9
-Seventh_major = Tonic_Chord + 11
+Second = Tonic_Scale + 2
+Third_major = Tonic_Scale + 4
+Fourth = Tonic_Scale + 5
+Fifth = Tonic_Scale + 7
+Sixth_major = Tonic_Scale + 9
+Seventh_major = Tonic_Scale + 11
 
 # Octave down.
-Tonic_octaveDOWN = Tonic_Chord - 12
+Tonic_octaveDOWN = Tonic_Scale - 12
 Second_octaveDOWN = Second - 12
 Third_major_octaveDOWN = Third_major - 12
 Fourth_octaveDOWN = Fourth - 12
@@ -46,7 +47,7 @@ Sixth_major_octaveDOWN = Sixth_major - 12
 Seventh_major_octaveDOWN = Seventh_major - 12
 
 # Octave up.
-Tonic_octaveUP = Tonic_Chord + 12
+Tonic_octaveUP = Tonic_Scale + 12
 Second_octaveUP = Second + 12
 Third_major_octaveUP = Third_major + 12
 Fourth_octaveUP = Fourth + 12
@@ -57,139 +58,143 @@ Seventh_major_octaveUP = Seventh_major + 12
 
 def Set_Tonic_Chord(chord):
 
-    global Tonic_Chord
-    Tonic_Chord = chord
+    global Tonic_Scale
+    global Temp_scale
+    Tonic_Scale = chord
+    Temp_scale = Tonic_Scale
 
 
 def Major_Chord():
     # Tonic
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     time.sleep(1e-3)
     # Major third.
-    Tonic_Chord.note += 4
+    Tonic_Scale.note += 4
     time.sleep(1e-3)
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     # Fifth
-    Tonic_Chord.note += 3
+    Tonic_Scale.note += 3
     time.sleep(1e-3)
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     time.sleep(1e-3)
-    mido.Message('note_off', note=Tonic_Chord.note)
+    mido.Message('note_off', note=Tonic_Scale.note)
 
 
 def Minor_Chord():
     # Tonic
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     time.sleep(1e-3)
     # Minor third.
-    Tonic_Chord.note += 3
+    Tonic_Scale.note += 3
     time.sleep(1e-3)
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     # Fifth
-    Tonic_Chord.note += 4
+    Tonic_Scale.note += 4
     time.sleep(1e-3)
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     time.sleep(1e-3)
-    mido.Message('note_off', note=Tonic_Chord.note)
+    mido.Message('note_off', note=Tonic_Scale.note)
 
 def Dim_Chord():
 
     # Tonic
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     time.sleep(1e-3)
 
     # Minor third.
-    Tonic_Chord.note += 3
+    Tonic_Scale.note += 3
     time.sleep(1e-3)
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
 
     # flat fifth
-    Tonic_Chord.note += 3
+    Tonic_Scale.note += 3
     time.sleep(1e-3)
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
 
     # flat Minor sixth
-    Tonic_Chord.note += 4
-    outport.send(Tonic_Chord)
+    Tonic_Scale.note += 4
+    outport.send(Tonic_Scale)
     time.sleep(1e-3)
-    mido.Message('note_off', note=Tonic_Chord.note)
+    mido.Message('note_off', note=Tonic_Scale.note)
 
 
 def Sus4_Chord():
     # Tonic
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     time.sleep(1e-3)
 
     # Fourth.
-    Tonic_Chord.note += 5
+    Tonic_Scale.note += 5
     time.sleep(1e-3)
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     # Fifth
-    Tonic_Chord.note += 2
+    Tonic_Scale.note += 2
     time.sleep(1e-3)
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     time.sleep(1e-3)
-    mido.Message('note_off', note=Tonic_Chord.note)
+    mido.Message('note_off', note=Tonic_Scale.note)
 
 
 def Minor_6th():
     # Tonic
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     time.sleep(1e-3)
     # Minor third.
-    Tonic_Chord.note += 3
+    Tonic_Scale.note += 3
     time.sleep(1e-3)
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     # Sixth
-    Tonic_Chord.note += 6
+    Tonic_Scale.note += 6
     time.sleep(1e-3)
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     time.sleep(1e-3)
-    mido.Message('note_off', note=Tonic_Chord.note)
+    mido.Message('note_off', note=Tonic_Scale.note)
 
 
 def Major_Dominant_7th_Chord():
     # Tonic
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     time.sleep(1e-3)
     # Major third.
-    Tonic_Chord.note += 4
+    Tonic_Scale.note += 4
     time.sleep(1e-3)
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
 
     # Fifth
-    Tonic_Chord.note += 6
+    Tonic_Scale.note += 6
     time.sleep(1e-3)
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     # Minor seventh
     # naghama.note += 10
     # time.sleep(1e-3)
     # outport.send(naghama)
 
     time.sleep(1e-3)
-    mido.Message('note_off', note=Tonic_Chord.note)
+    mido.Message('note_off', note=Tonic_Scale.note)
 
 
 def Tonic_Fifth():
     # Tonic
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     time.sleep(1e-3)
 
     # Fifth
-    Tonic_Chord.note += 7
+    Tonic_Scale.note += 7
     time.sleep(1e-3)
-    outport.send(Tonic_Chord)
+    outport.send(Tonic_Scale)
     time.sleep(1e-3)
-    mido.Message('note_off', note=Tonic_Chord.note)
+    mido.Message('note_off', note=Tonic_Scale.note)
 
 
 def Send_Chord(output_chord):
 
     # Mapping a dictionary
 
+    global Tonic_Scale
+
     switcher = {
 
-        Tonic_Chord or Fourth or Fifth: Major_Chord,
+        Tonic_Scale or Fourth or Fifth: Major_Chord,
         Second or Third_major or Sixth_major: Minor_Chord,
         Seventh_major: Dim_Chord,
         Tonic_octaveUP or Fifth_octaveUP: Sus4_Chord,
@@ -203,4 +208,5 @@ def Send_Chord(output_chord):
     # Execute the function
     func()
     print "Output Chord: ", output_chord
+    Tonic_Scale = Temp_scale
 
