@@ -77,20 +77,20 @@ if __name__ == '__main__':
 
         t0 = time.clock()
 
-        #beats = RNNbeat(rawData)
+        beats = RNNbeat(rawData)
         # print "beats.shape :\n", beats.shape
         # print "beats.dtype :\n", beats.dtype
 
-        spec = mm.audio.spectrogram.Spectrogram(rawData)
+        #spec = mm.audio.spectrogram.Spectrogram(rawData)
         # print spec
         # print "spec.dtype:", spec.dtype
         # print "spec.shape:", spec.shape
 
-        sf = mm.features.onsets.superflux(spec)
+        #sf = mm.features.onsets.superflux(spec)
         # print "superflux.shape :\n", sf.shape
         # print "superflux.dtype :\n", sf.dtype
 
-        tempo = tempoEstimation.process(sf) #beats / beats.max() to normalize it, threshold need to be changed too
+        tempo = tempoEstimation.process(beats) #beats / beats.max() to normalize it, threshold need to be changed too
 
         t1 = time.clock()
 
