@@ -1,3 +1,11 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Aug 14 14:48:43 2017
+
+@author: HanyTawfik
+"""
+
 '''The final edit is on the master branch.
  This code tries to calculate the peak picking using 
 tempoEstimation = mm.features.tempo.TempoEstimationProcessor(min_bpm=40, max_bpm=240, fps=100)'''
@@ -74,16 +82,17 @@ if __name__ == '__main__':
 
         t0 = time.clock()
 
-        beats = RNNbeat(rawData)
+        #beats = RNNbeat(rawData)
         # print "beats.shape :\n", beats.shape
         # print "beats.dtype :\n", beats.dtype
 
-        # spec = mm.audio.spectrogram.Spectrogram(rawData)
+        spec = mm.audio.spectrogram.Spectrogram(rawData)
         # print spec
         # print "spec.dtype:", spec.dtype
         # print "spec.shape:", spec.shape
 
-        # sf = mm.features.onsets.superflux(spec)
+        sf = mm.features.onsets.superflux(spec)
+        beats = sf
         # print "superflux.shape :\n", sf.shape
         # print "superflux.dtype :\n", sf.dtype
 
