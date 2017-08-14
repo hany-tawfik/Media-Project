@@ -61,8 +61,8 @@ if __name__ == "__main__":
 
     for tone in inport:
 
-        print "tone.note: ", tone.note
-        print "Tonic.note: ", Tonic.note
+        # print "tone.note: ", tone.note
+        # print "Tonic.note: ", Tonic.note
 
         if tone.note == Stop_loop.note: #Note C6 (72) closes the code.
             inport.close()
