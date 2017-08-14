@@ -29,7 +29,7 @@ C major scale :
     First octave main chords :      C      - Dm - Em - F   - G     - Am - Bdim
     Second octave secondary chords: Csus4  - D7 - E7 - Fm6 - Gsus4 - A7 - B7
  '''
-
+'''
 # Main octave.
 Second = Tonic_Scale + 2
 Third_major = Tonic_Scale + 4
@@ -55,7 +55,7 @@ Fourth_octaveUP = Fourth + 12
 Fifth_octaveUP = Fifth + 12
 Sixth_major_octaveUP = Sixth_major + 12
 Seventh_major_octaveUP = Seventh_major + 12
-
+'''
 
 def Set_Tonic_Scale(chord):
 
@@ -89,6 +89,7 @@ def Major_Chord(output_chord):
 
 def Minor_Chord(output_chord):
 
+    print "Minor_Chord"
     # Tonic
     outport.send(output_chord)
     time.sleep(1e-3)
@@ -105,6 +106,7 @@ def Minor_Chord(output_chord):
 
 def Dim_Chord(output_chord):
 
+    print "Dim_Chord"
     # Tonic
     outport.send(output_chord)
     time.sleep(1e-3)
@@ -128,7 +130,8 @@ def Dim_Chord(output_chord):
 
 def Sus4_Chord(output_chord):
 
-    # Tonic
+    print "Sus4_Chord"
+   # Tonic
     outport.send(output_chord)
     time.sleep(1e-3)
 
@@ -146,6 +149,7 @@ def Sus4_Chord(output_chord):
 
 def Minor_6th(output_chord):
 
+    print "Minor_6th"
     # Tonic
     outport.send(output_chord)
     time.sleep(1e-3)
@@ -163,6 +167,7 @@ def Minor_6th(output_chord):
 
 def Major_Dominant_7th_Chord(output_chord):
 
+    print "Major_Dominant_7th_Chord"
     # Tonic
     outport.send(output_chord)
     time.sleep(1e-3)
@@ -200,6 +205,32 @@ def Tonic_Fifth(output_chord):
 
 
 def Send_Chord(output_chord):
+    
+    # Main octave.
+    Second = Tonic_Scale + 2
+    Third_major = Tonic_Scale + 4
+    Fourth = Tonic_Scale + 5
+    Fifth = Tonic_Scale + 7
+    Sixth_major = Tonic_Scale + 9
+    Seventh_major = Tonic_Scale + 11
+
+    # Octave down.
+    Tonic_octaveDOWN = Tonic_Scale - 12
+    Second_octaveDOWN = Second - 12
+    Third_major_octaveDOWN = Third_major - 12
+    Fourth_octaveDOWN = Fourth - 12
+    Fifth_octaveDOWN = Fifth - 12
+    Sixth_major_octaveDOWN = Sixth_major - 12
+    Seventh_major_octaveDOWN = Seventh_major - 12
+
+    # Octave up.
+    Tonic_octaveUP = Tonic_Scale + 12
+    Second_octaveUP = Second + 12
+    Third_major_octaveUP = Third_major + 12
+    Fourth_octaveUP = Fourth + 12
+    Fifth_octaveUP = Fifth + 12
+    Sixth_major_octaveUP = Sixth_major + 12
+    Seventh_major_octaveUP = Seventh_major + 12
 
     # Mapping a dictionary
 
@@ -211,7 +242,7 @@ def Send_Chord(output_chord):
 
     switcher = {
 
-        Tonic_Scale: Major_Chord ,
+        Tonic_Scale: Major_Chord,
         Fourth: Major_Chord,
         Fifth: Major_Chord,
         Second: Minor_Chord,
