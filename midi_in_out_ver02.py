@@ -88,7 +88,7 @@ if __name__ == "__main__":
     STOP_NOTE = 72
     BPM = 120
     OFFSET = 7
-    clock_interval = 60. / ((BPM + OFFSET) * 24) #verify without multiplying by 24
+    clock_interval = 60. / ((BPM + OFFSET) * 1) #verify without multiplying by 24
     clock_interval = np.float16(clock_interval)
     tempoMessage = mido.Message('clock')  # , time=clock_interval)
 
