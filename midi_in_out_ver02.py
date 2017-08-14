@@ -27,7 +27,7 @@ if __name__ == "__main__":
     inport2 = mido.open_input('CH345:CH345 MIDI 1 20:0')
     outport = mido.open_output('CH345:CH345 MIDI 1 20:0')
 
-    #Stop_loop = mido.Message('note_on', note=72) Maybe this is the reason why always it receives 72 when booting
+    Stop_loop = mido.Message('note_on', note=72) # Maybe this is the reason why always it receives 72 when booting
 
     note = inport.receive()
 
@@ -64,7 +64,7 @@ if __name__ == "__main__":
         print "tone.note: ", tone.note
         print "Tonic.note: ", Tonic.note
 
-        if tone.note == STOP_NOTE: #Stop_loop.note: Note C6 (72) closes the code.
+        if tone.note == Stop_loop.note: #Note C6 (72) closes the code.
             inport.close()
             inport2.close()
             outport.close()
