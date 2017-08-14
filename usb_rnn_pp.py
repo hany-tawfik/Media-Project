@@ -38,7 +38,7 @@ if __name__ == '__main__':
     '''
 
     RATE = 44100
-    CHUNK = np.uint32(RATE*3)
+    CHUNK = np.uint32(RATE*4)
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
 
