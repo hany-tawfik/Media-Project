@@ -38,7 +38,7 @@ if __name__ == '__main__':
     '''
 
     RATE = 44100
-    CHUNK = np.uint32(RATE*3.5)
+    CHUNK = np.uint32(RATE*4)
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
 
@@ -120,9 +120,9 @@ if __name__ == '__main__':
 
     cv2.destroyAllWindows()
 
-    plt.figure()
-    plt.plot(rawData)
-    plt.title("rawData")
+    #plt.figure()
+    #plt.plot(rawData)
+    #plt.title("rawData")
 
     # plt.figure()
     # plt.imshow(spec[:, :200].T, origin='lower', aspect='auto')
@@ -132,9 +132,9 @@ if __name__ == '__main__':
     # plt.plot(sf / sf.max())
     # plt.title("Super flux")
 
-    plt.figure()
-    plt.plot(beats)
+    #plt.figure()
+    #plt.plot(beats)
     # plt.plot(beats / beats.max())
-    plt.title("Beats by RNN")
+    #plt.title("Beats by RNN")
 
-    plt.show()
+    #plt.show()
