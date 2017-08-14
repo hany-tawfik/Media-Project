@@ -43,6 +43,7 @@ if __name__ == "__main__":
         Tonic = note.copy()
 
     miChords.Set_Tonic_Scale(Tonic.note)
+    miChords.update_chords()
 
     print "Tonic.note: ", Tonic.note
     print "start receiving notes"
