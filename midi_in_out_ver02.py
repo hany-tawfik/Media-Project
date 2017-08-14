@@ -42,7 +42,7 @@ if __name__ == "__main__":
         note = inport.receive()
         Tonic = note.copy()
 
-    miChords.Set_Tonic_Chord(Tonic)
+    miChords.Set_Tonic_Scale(Tonic)
 
     print "Tonic.note: ", Tonic.note
     print "start receiving notes"
@@ -72,5 +72,7 @@ if __name__ == "__main__":
             print "closing program"
             break
         else:
+            miChords.Set_Current_Chord(tone)
             miChords.Send_Chord(tone)
             # mido.Message('note_on', note=tone.note)
+
