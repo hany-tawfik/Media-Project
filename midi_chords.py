@@ -29,7 +29,7 @@ C major scale :
     First octave main chords :      C      - Dm - Em - F   - G     - Am - Bdim
     Second octave secondary chords: Csus4  - D7 - E7 - Fm6 - Gsus4 - A7 - B7
  '''
-'''
+
 # Main octave.
 Second = Tonic_Scale + 2
 Third_major = Tonic_Scale + 4
@@ -55,12 +55,48 @@ Fourth_octaveUP = Fourth + 12
 Fifth_octaveUP = Fifth + 12
 Sixth_major_octaveUP = Sixth_major + 12
 Seventh_major_octaveUP = Seventh_major + 12
-'''
+
 
 def Set_Tonic_Scale(chord):
 
     global Tonic_Scale
     Tonic_Scale = chord
+
+def update_chords():
+
+    global Second, Third_major, Fourth, Fifth, Sixth_major, Seventh_major
+    global Tonic_octaveDOWN, Second_octaveDOWN, Third_major_octaveDOWN, Fourth_octaveDOWN, Fifth_octaveDOWN, \
+        Sixth_major_octaveDOWN, Seventh_major_octaveDOWN
+    global Tonic_octaveUP, Second_octaveUP, Third_major_octaveUP, Fourth_octaveUP, Fifth_octaveUP, \
+        Sixth_major_octaveUP, Seventh_major_octaveUP
+
+    # Main octave.
+    Second = Tonic_Scale + 2
+    Third_major = Tonic_Scale + 4
+    Fourth = Tonic_Scale + 5
+    Fifth = Tonic_Scale + 7
+    Sixth_major = Tonic_Scale + 9
+    Seventh_major = Tonic_Scale + 11
+
+    # Octave down.
+    Tonic_octaveDOWN = Tonic_Scale - 12
+    Second_octaveDOWN = Second - 12
+    Third_major_octaveDOWN = Third_major - 12
+    Fourth_octaveDOWN = Fourth - 12
+    Fifth_octaveDOWN = Fifth - 12
+    Sixth_major_octaveDOWN = Sixth_major - 12
+    Seventh_major_octaveDOWN = Seventh_major - 12
+
+    # Octave up.
+
+    Tonic_octaveUP = Tonic_Scale + 12
+    Second_octaveUP = Second + 12
+    Third_major_octaveUP = Third_major + 12
+    Fourth_octaveUP = Fourth + 12
+    Fifth_octaveUP = Fifth + 12
+    Sixth_major_octaveUP = Sixth_major + 12
+    Seventh_major_octaveUP = Seventh_major + 12
+
 
 def Set_Current_Chord(current_chord):
     global Play_Chord
@@ -205,32 +241,6 @@ def Tonic_Fifth(output_chord):
 
 
 def Send_Chord(output_chord):
-    
-    # Main octave.
-    Second = Tonic_Scale + 2
-    Third_major = Tonic_Scale + 4
-    Fourth = Tonic_Scale + 5
-    Fifth = Tonic_Scale + 7
-    Sixth_major = Tonic_Scale + 9
-    Seventh_major = Tonic_Scale + 11
-
-    # Octave down.
-    Tonic_octaveDOWN = Tonic_Scale - 12
-    Second_octaveDOWN = Second - 12
-    Third_major_octaveDOWN = Third_major - 12
-    Fourth_octaveDOWN = Fourth - 12
-    Fifth_octaveDOWN = Fifth - 12
-    Sixth_major_octaveDOWN = Sixth_major - 12
-    Seventh_major_octaveDOWN = Seventh_major - 12
-
-    # Octave up.
-    Tonic_octaveUP = Tonic_Scale + 12
-    Second_octaveUP = Second + 12
-    Third_major_octaveUP = Third_major + 12
-    Fourth_octaveUP = Fourth + 12
-    Fifth_octaveUP = Fifth + 12
-    Sixth_major_octaveUP = Sixth_major + 12
-    Seventh_major_octaveUP = Seventh_major + 12
 
     # Mapping a dictionary
 
