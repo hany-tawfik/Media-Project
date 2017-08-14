@@ -42,7 +42,7 @@ if __name__ == "__main__":
         note = inport.receive()
         Tonic = note.copy()
 
-    miChords.Set_Tonic_Scale(Tonic)
+    miChords.Set_Tonic_Scale(Tonic.note)
 
     print "Tonic.note: ", Tonic.note
     print "start receiving notes"
