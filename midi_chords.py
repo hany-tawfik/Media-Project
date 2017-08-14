@@ -272,7 +272,7 @@ def Send_Chord(output_chord):
 
     switcher = {
 
-        Tonic_Scale or Fourth or Fifth: Major_Chord,
+        (Tonic_Scale, Fourth, Fifth): Major_Chord,
         Second: Minor_Chord,
         Third_major: Minor_Chord,
         Sixth_major: Minor_Chord,
