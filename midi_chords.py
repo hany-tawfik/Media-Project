@@ -226,6 +226,6 @@ def Send_Chord(output_chord):
     # Execute the function
     func()
     print "Output Chord: ", output_chord
-    print "Tonic: ", Tonic_Scale.tone
+    print "Tonic_Scale: ", Tonic_Scale
     
 
