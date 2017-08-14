@@ -229,6 +229,7 @@ def Send_Chord(output_chord):
 
     # Get the function from switcher dictionary
     func = switcher.get(temp, Tonic_Fifth)
+    print "second: ", Second
     print "output_chord.note: ", output_chord.note
     print "Output Chord: ", output_chord
     # Execute the function
