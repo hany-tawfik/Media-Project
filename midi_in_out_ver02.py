@@ -24,10 +24,7 @@ def sendTempo():
             t = threading.Timer(clock_interval, sendTempo)
             t.start()
             timer_counter += 1
-            print "timer_counter: ", timer_counter
-            
-        else:
-            stop_thread_timer()         
+            print "timer_counter: ", timer_counter                   
     else:
         print "stop timer"
     
