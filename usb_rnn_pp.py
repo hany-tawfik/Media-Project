@@ -82,17 +82,17 @@ if __name__ == '__main__':
 
         t0 = time.clock()
 
-        #beats = RNNbeat(rawData)
+        beats = RNNbeat(rawData)
         # print "beats.shape :\n", beats.shape
         # print "beats.dtype :\n", beats.dtype
 
-        spec = mm.audio.spectrogram.Spectrogram(rawData)
+        #spec = mm.audio.spectrogram.Spectrogram(rawData)
         # print spec
         # print "spec.dtype:", spec.dtype
         # print "spec.shape:", spec.shape
 
-        sf = mm.features.onsets.superflux(spec)
-        beats = sf
+        #sf = mm.features.onsets.superflux(spec)
+        #beats = sf
         # print "superflux.shape :\n", sf.shape
         # print "superflux.dtype :\n", sf.dtype
 
@@ -126,9 +126,9 @@ if __name__ == '__main__':
 
     cv2.destroyAllWindows()
 
-    plt.figure()
-    plt.plot(rawData)
-    plt.title("rawData")
+    #plt.figure()
+    #plt.plot(rawData)
+    #plt.title("rawData")
 
     # plt.figure()
     # plt.imshow(spec[:, :200].T, origin='lower', aspect='auto')
@@ -138,9 +138,9 @@ if __name__ == '__main__':
     # plt.plot(sf / sf.max())
     # plt.title("Super flux")
 
-    plt.figure()
+    #plt.figure()
     # plt.plot(beats)
-    plt.plot(beats / beats.max())
-    plt.title("Beats by RNN")
+    #plt.plot(beats / beats.max())
+    #plt.title("Beats by RNN")
 
-    plt.show()
+    #plt.show()
