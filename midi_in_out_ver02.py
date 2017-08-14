@@ -17,6 +17,7 @@ def sendTempo():
     outport.send(tempoMessage)
     t = threading.Timer(clock_interval, sendTempo)
     t.start()
+    print "sending tempo"
 
 
 if __name__ == "__main__":
