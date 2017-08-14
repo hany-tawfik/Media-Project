@@ -15,13 +15,9 @@ def setup_chords(note_set):
 def sendTempo():
 
     outport.send(tempoMessage)
-    print "Sending tempo 01"
-    print stop_timer
     if stop_timer == False:
         t = threading.Timer(clock_interval, sendTempo)
         t.start()
-        print "Sending tempo 02"
-        print stop_timer
     else:        
         print "stop timer"
     
