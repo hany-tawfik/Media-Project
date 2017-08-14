@@ -78,6 +78,7 @@ if __name__ == "__main__":
             # mido.Message('note_on', note=tone.note)
             
 t.cancel()
+t.finished
 inport.close()
 inport2.close()
 outport.close()
