@@ -48,8 +48,8 @@ if __name__ == "__main__":
     print "start receiving notes"
 
     STOP_NOTE = 72
-    BPM = 150
-    OFFSET = 10
+    BPM = 120
+    OFFSET = 7
     clock_interval = 60. / ((BPM + OFFSET) * 24) #verify without multiplying by 24
     tempoMessage = mido.Message('clock')  # , time=clock_interval)
 
