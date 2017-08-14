@@ -65,6 +65,8 @@ def Set_Tonic_Chord(chord):
 
 
 def Major_Chord():
+    
+    global Tonic_Scale
     # Tonic
     outport.send(Tonic_Scale)
     time.sleep(1e-3)
@@ -78,9 +80,12 @@ def Major_Chord():
     outport.send(Tonic_Scale)
     time.sleep(1e-3)
     mido.Message('note_off', note=Tonic_Scale.note)
+    Tonic_Scale = Temp_scale
 
 
 def Minor_Chord():
+    
+    global Tonic_Scale
     # Tonic
     outport.send(Tonic_Scale)
     time.sleep(1e-3)
@@ -94,9 +99,11 @@ def Minor_Chord():
     outport.send(Tonic_Scale)
     time.sleep(1e-3)
     mido.Message('note_off', note=Tonic_Scale.note)
+    Tonic_Scale = Temp_scale
 
 def Dim_Chord():
 
+    global Tonic_Scale
     # Tonic
     outport.send(Tonic_Scale)
     time.sleep(1e-3)
@@ -116,9 +123,12 @@ def Dim_Chord():
     outport.send(Tonic_Scale)
     time.sleep(1e-3)
     mido.Message('note_off', note=Tonic_Scale.note)
+    Tonic_Scale = Temp_scale
 
 
 def Sus4_Chord():
+    
+    global Tonic_Scale
     # Tonic
     outport.send(Tonic_Scale)
     time.sleep(1e-3)
@@ -133,9 +143,12 @@ def Sus4_Chord():
     outport.send(Tonic_Scale)
     time.sleep(1e-3)
     mido.Message('note_off', note=Tonic_Scale.note)
+    Tonic_Scale = Temp_scale
 
 
 def Minor_6th():
+    
+    global Tonic_Scale
     # Tonic
     outport.send(Tonic_Scale)
     time.sleep(1e-3)
@@ -149,9 +162,12 @@ def Minor_6th():
     outport.send(Tonic_Scale)
     time.sleep(1e-3)
     mido.Message('note_off', note=Tonic_Scale.note)
+    Tonic_Scale = Temp_scale
 
 
 def Major_Dominant_7th_Chord():
+    
+    global Tonic_Scale
     # Tonic
     outport.send(Tonic_Scale)
     time.sleep(1e-3)
@@ -171,9 +187,12 @@ def Major_Dominant_7th_Chord():
 
     time.sleep(1e-3)
     mido.Message('note_off', note=Tonic_Scale.note)
+    Tonic_Scale = Temp_scale
 
 
 def Tonic_Fifth():
+
+    global Tonic_Scale
     # Tonic
     outport.send(Tonic_Scale)
     time.sleep(1e-3)
@@ -184,13 +203,12 @@ def Tonic_Fifth():
     outport.send(Tonic_Scale)
     time.sleep(1e-3)
     mido.Message('note_off', note=Tonic_Scale.note)
+    Tonic_Scale = Temp_scale
 
 
 def Send_Chord(output_chord):
 
     # Mapping a dictionary
-
-    global Tonic_Scale
 
     switcher = {
 
@@ -208,5 +226,6 @@ def Send_Chord(output_chord):
     # Execute the function
     func()
     print "Output Chord: ", output_chord
-    Tonic_Scale = Temp_scale
+    print "Tonic: ", Tonic_Scale.tone
+    
 
