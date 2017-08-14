@@ -20,6 +20,7 @@ def sendTempo():
         t.start()
         global timer_counter
         timer_counter += 1
+        print "timer_counter: ", timer_counter
     else:        
         print "stop timer"
     
@@ -42,6 +43,9 @@ if __name__ == "__main__":
     outport = mido.open_output('CH345:CH345 MIDI 1 20:0')
 
     Stop_loop = mido.Message('note_on', note=72) # Maybe this is the reason why always it receives 72 when booting
+    
+    timer_counter = 0
+    stop_timer = False
 
     note = inport.receive()
 
@@ -62,9 +66,6 @@ if __name__ == "__main__":
     print "Tonic.note: ", Tonic.note
     print "start receiving notes"
     
-    timer_counter = 0
-    stop_timer = False
-
     STOP_NOTE = 72
     BPM = 120
     OFFSET = 7
