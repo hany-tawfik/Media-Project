@@ -9,9 +9,9 @@ outputs = mido.get_output_names()
 #inport2 = mido.open_input('CH345:CH345 MIDI 1 20:0')
 #outport = mido.open_output('CH345:CH345 MIDI 1 20:0')
 
-inport = mido.open_ioport('MIDISTART MUSIC 25:MIDISTART MUSIC 25 MIDI 1 28:0')
+inport = mido.open_ioport(inputs[0])
 #inport2 = mido.open_input('CH345:CH345 MIDI 1 24:0')
-outport = mido.open_ioport('CH345:CH345 MIDI 1 24:0')
+outport = mido.open_ioport(inputs[1])
 
 
 '''SETTING NOTES/CHORDS'''
