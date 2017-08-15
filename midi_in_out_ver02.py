@@ -62,6 +62,9 @@ if __name__ == "__main__":
     #inport2 = mido.open_input('CH345:CH345 MIDI 1 20:0')
     #outport = mido.open_output('CH345:CH345 MIDI 1 20:0')
     
+    print 'inputs 0' , inputs[0].encode('ascii')
+    print 'inputs 1', inputs[1].encode('ascii')
+    
     inport = mido.open_ioport(inputs[0].encode('ascii'))
     #inport2 = mido.open_input('CH345:CH345 MIDI 1 24:0')
     outport = mido.open_ioport(inputs[1].encode('ascii'))
