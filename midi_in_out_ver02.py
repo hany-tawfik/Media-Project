@@ -58,9 +58,13 @@ if __name__ == "__main__":
     inputs = mido.get_input_names()
     outputs = mido.get_output_names()
 
-    inport = mido.open_input('MIDISTART MUSIC 25:MIDISTART MUSIC 25 MIDI 1 24:0')
-    inport2 = mido.open_input('CH345:CH345 MIDI 1 20:0')
-    outport = mido.open_output('CH345:CH345 MIDI 1 20:0')
+    #inport = mido.open_input('MIDISTART MUSIC 25:MIDISTART MUSIC 25 MIDI 1 24:0')
+    #inport2 = mido.open_input('CH345:CH345 MIDI 1 20:0')
+    #outport = mido.open_output('CH345:CH345 MIDI 1 20:0')
+    
+    inport = mido.open_ioport('MIDISTART MUSIC 25:MIDISTART MUSIC 25 MIDI 1 28:0')
+    #inport2 = mido.open_input('CH345:CH345 MIDI 1 24:0')
+    outport = mido.open_ioport('CH345:CH345 MIDI 1 24:0')
 
     Stop_loop = mido.Message('note_on', note=72) # Maybe this is the reason why always it receives 72 when booting
     
