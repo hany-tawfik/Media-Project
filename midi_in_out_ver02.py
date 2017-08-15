@@ -61,15 +61,12 @@ if __name__ == "__main__":
     #inport = mido.open_input('MIDISTART MUSIC 25:MIDISTART MUSIC 25 MIDI 1 24:0')
     #inport2 = mido.open_input('CH345:CH345 MIDI 1 20:0')
     #outport = mido.open_output('CH345:CH345 MIDI 1 20:0')
-    x = inputs[0].encode('ascii')
-    y = inputs[1].encode('ascii')
-    print x
-    print y
-
-    
-    inport = mido.open_input(y)
-    inport2 = mido.open_input(x)
-    outport = mido.open_output(x)
+    korg = inputs[0].encode('ascii')
+    midi_start25 = inputs[1].encode('ascii')
+ 
+    inport = mido.open_input(midi_start25)
+    inport2 = mido.open_input(korg)
+    outport = mido.open_output(korg)
 
     Stop_loop = mido.Message('note_on', note=72) # Maybe this is the reason why always it receives 72 when booting
     
