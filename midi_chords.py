@@ -9,12 +9,12 @@ outputs = mido.get_output_names()
 #inport2 = mido.open_input('CH345:CH345 MIDI 1 20:0')
 #outport = mido.open_output('CH345:CH345 MIDI 1 20:0')
 
-x = inputs[0].encode('ascii')
-y = inputs[1].encode('ascii')
+korg = inputs[0].encode('ascii')
+midi_start25 = inputs[1].encode('ascii')
  
-inport = mido.open_input(y)
-inport2 = mido.open_input(x)
-outport = mido.open_output(x)
+inport = mido.open_input(midi_start25)
+inport2 = mido.open_input(korg)
+outport = mido.open_output(korg)
 
 
 '''SETTING NOTES/CHORDS'''
