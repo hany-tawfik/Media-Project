@@ -13,8 +13,26 @@ def setup_chords(note_set):
 def sendTempo():
 
     outport.send(tempoMessage)
-    t = threading.Timer(clock_interval, sendTempo)
-    t.start()
+
+    if stop_timer == False:
+
+        t = threading.Timer(clock_interval, sendTempo)
+        t.start()
+
+    else:
+
+        print "stop timer"
+        
+        
+def stop_thread_timer():
+
+    global stop_timer
+
+    stop_timer = True
+
+    return stop_timer
+
+
 
 if __name__ == "__main__":
 
@@ -49,6 +67,7 @@ if __name__ == "__main__":
     miChords.Set_Tonic_Scale(Tonic.note)
     miChords.update_chords()
 
+    stop_timer = False
     STOP_NOTE = 72
     BPM = 120
     OFFSET = 7
