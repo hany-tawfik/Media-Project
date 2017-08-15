@@ -11,7 +11,7 @@ def setup_chords(note_set):
     else:
         return False
 
-'''
+
 def sendTempo():
 
     outport.send(tempoMessage)
@@ -25,7 +25,7 @@ def sendTempo():
 
         print "stop timer"
         
-'''        
+'''    Not working    
 def sendTempo():
 
     global timer_counter
@@ -42,6 +42,8 @@ def sendTempo():
 
     else:
         print "stop timer"
+        
+'''        
 
     
 def stop_thread_timer():
