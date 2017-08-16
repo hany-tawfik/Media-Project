@@ -23,6 +23,7 @@ class SendingNotes(threading.Thread):
             print msg.note
             
     def stop(self):
+        global inport, inport2, outport
         self._stop_event.set()
         inport.close()
         inport2.close()
@@ -35,7 +36,7 @@ while True:
     print "It is working :) "
     time.sleep(1)
     counter +=1
-    if counter >= 30:
+    if counter >= 10:
         x.stop()
         print "closing program"
         break
