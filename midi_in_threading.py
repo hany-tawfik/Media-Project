@@ -3,6 +3,11 @@ import mido
 import time
 
 class SendingNotes(threading.Thread):
+    
+    def __init__(self):
+        super(SendingNotes, self).__init__()
+        self._stop_event = threading.Event()
+        
     def run(self):
     
         inputs = mido.get_input_names()
