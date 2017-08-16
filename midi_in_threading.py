@@ -1,5 +1,6 @@
 import threading
 import mido
+import time
 
 class SendingNotes(threading.Thread):
     def run(self):
@@ -17,3 +18,7 @@ class SendingNotes(threading.Thread):
             
 x = SendingNotes()
 x.start()
+
+while True:
+    print "It is working :) "
+    time.sleep(1)
