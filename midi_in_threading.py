@@ -17,9 +17,24 @@ class SendingNotes(threading.Thread):
             outport.send(msg)
             print msg.note
             
+     def stop(self):
+        self._stop_event.set()
+        inport.close()
+        inport2.close()
+        outport.close()
+            
 x = SendingNotes()
 x.start()
 
 while True:
     print "It is working :) "
     time.sleep(1)
+    counter +=1
+    if counter >= 30:
+        x.stop()
+        print "closing program"
+        break
+       
+        
+        
+    
