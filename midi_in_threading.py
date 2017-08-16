@@ -2,7 +2,7 @@ import threading
 import mido
 import time
 
-class SendingNotes(threading.Thread(name='non-daemon')):
+class SendingNotes(threading.Thread(name='non-daemon', target=run)):
     
     def __init__(self):
         super(SendingNotes, self).__init__()
