@@ -56,8 +56,6 @@ def test_message(self):
 
     print "Its ALIVE..... its ALIVE"
 
-    msg = inport.receive()
-
     for msg in self.inport:
         print msg.note
 
@@ -128,7 +126,8 @@ if __name__ == "__main__":
     #         break
     #     else:
     #         miChords.Send_Chord(tone)
-
+    
+    msg = inport.receive()
     flag = False
 
     while True:
