@@ -2,7 +2,7 @@ import threading
 import mido
 import time
 
-class SendingNotes(threading.Thread):
+class SendingNotes(threading.Thread(name='non-daemon', target=non_daemon)):
     
     def __init__(self):
         super(SendingNotes, self).__init__()
@@ -17,6 +17,10 @@ class SendingNotes(threading.Thread):
         inport = mido.open_input(midi_start25)
         inport2 = mido.open_input(korg)
         outport = mido.open_output(korg)
+        
+    def non_daemon():
+        time.sleep(5)
+        print 'Test non-daemon'
         
     def run(self):
     
@@ -41,10 +45,10 @@ while True:
     counter +=1
     if counter >= 5:
         x.stop()
-        x.join()
+        
         print "closing program"
         break
-       
+x.join()
         
         
     
