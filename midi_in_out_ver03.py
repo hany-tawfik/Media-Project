@@ -55,6 +55,9 @@ def stop_thread_timer():
 def test_message(self):
 
     print "Its ALIVE..... its ALIVE"
+    
+    global inport
+    global msg
 
     for msg in self.inport.iter_pending():
         print msg.note
