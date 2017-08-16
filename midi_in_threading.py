@@ -17,7 +17,7 @@ class SendingNotes(threading.Thread):
             outport.send(msg)
             print msg.note
             
-     def stop(self):
+    def stop(self):
         self._stop_event.set()
         inport.close()
         inport2.close()
