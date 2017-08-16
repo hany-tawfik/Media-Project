@@ -71,7 +71,8 @@ if __name__ == "__main__":
     korg = inputs[0].encode('ascii')
     midi_start25 = inputs[1].encode('ascii')
  
-    inport = mido.open_input(midi_start25, callback= test_message)
+    #inport = mido.open_input(midi_start25, callback= test_message)
+    inport = mido.open_input(callback= test_message)
     inport2 = mido.open_input(korg)
     outport = mido.open_output(korg)
     
