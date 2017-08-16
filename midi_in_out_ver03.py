@@ -127,6 +127,10 @@ if __name__ == "__main__":
     #     else:
     #         miChords.Send_Chord(tone)
 
+    flag = False
+
     while True:
 
-        print "something"
+        if flag == False:
+            print "something"
+            flag = True
