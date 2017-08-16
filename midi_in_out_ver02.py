@@ -80,6 +80,7 @@ if __name__ == "__main__":
     port = mido.open_input(callback=test_message)
 
     port.callback = test_message
+    port.start()
 
     Stop_loop = mido.Message('note_on', note=72) # Maybe this is the reason why always it receives 72 when booting
     
