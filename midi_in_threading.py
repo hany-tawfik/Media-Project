@@ -7,10 +7,12 @@ class SendingNotes(threading.Thread):
     def __init__(self):
         super(SendingNotes, self).__init__()
         self._stop_event = threading.Event()
+       
         inputs = mido.get_input_names()
         
         korg = inputs[0].encode('ascii')
         midi_start25 = inputs[1].encode('ascii')
+        global inport, inport2, outport
 
         inport = mido.open_input(midi_start25)
         inport2 = mido.open_input(korg)
@@ -24,7 +26,7 @@ class SendingNotes(threading.Thread):
             print msg.note
             
     def stop(self):
-        global inport, inport2, outport
+        
         self._stop_event.set()
         inport.close()
         inport2.close()
