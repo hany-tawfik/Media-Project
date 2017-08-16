@@ -56,7 +56,7 @@ def test_message(self):
 
     print "Its ALIVE..... its ALIVE"
 
-    for msg in self.inport:
+    for msg in self.inport.iter_pending():
         print msg.note
 
 
