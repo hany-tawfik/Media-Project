@@ -1,3 +1,5 @@
+import threading
+
 def non_daemon():
     time.sleep(5)
     print 'Test non-daemon'
