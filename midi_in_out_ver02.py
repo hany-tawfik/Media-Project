@@ -74,13 +74,6 @@ if __name__ == "__main__":
     inport = mido.open_input(midi_start25)
     inport2 = mido.open_input(korg)
     outport = mido.open_output(korg)
-    
-    
-    
-    port = mido.open_input(callback=test_message)
-
-    port.callback = test_message
-    port.start()
 
     Stop_loop = mido.Message('note_on', note=72) # Maybe this is the reason why always it receives 72 when booting
     
@@ -142,5 +135,4 @@ t.finished
 inport.close()
 inport2.close()
 outport.close()
-#port.close()
 
