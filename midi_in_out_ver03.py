@@ -57,7 +57,7 @@ def test_message(self):
     print "Its ALIVE..... its ALIVE"
 
     for msg in self.inport:
-        print msg
+        print msg.note
 
 
 
