@@ -24,7 +24,7 @@ class SendingNotes(threading.Thread(name='non-daemon', target=run)):
     
         
         for msg in inport:
-            if msg.note == 72
+            if msg.note == 72:
                 break
             outport.send(msg)
             print msg.note
