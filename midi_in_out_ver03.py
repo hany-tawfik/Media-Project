@@ -59,7 +59,7 @@ def test_message(self):
     global inport
     global msg
 
-    for msg in self.inport.iter_pending():
+    for msg in inport.iter_pending():
         print msg.note
 
 
