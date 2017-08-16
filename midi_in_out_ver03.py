@@ -52,11 +52,11 @@ def stop_thread_timer():
     return stop_timer
 
 
-def test_message(self):
+def test_message():
 
     print "Its ALIVE..... its ALIVE"
 
-    for msg in self.inport:
+    for msg in inport:
         print msg.note
 
 
