@@ -55,6 +55,11 @@ def stop_thread_timer():
     return stop_timer
 
 
+def test_message():
+
+    print "Its ALIVE..... its ALIVE"
+
+ 
 if __name__ == "__main__":
 
     inputs = mido.get_input_names()
@@ -69,6 +74,10 @@ if __name__ == "__main__":
     inport = mido.open_input(midi_start25)
     inport2 = mido.open_input(korg)
     outport = mido.open_output(korg)
+    
+    port = mido.open_input(midi_start25, callback=test_message)
+
+    port.callback = test_message
 
     Stop_loop = mido.Message('note_on', note=72) # Maybe this is the reason why always it receives 72 when booting
     
@@ -96,7 +105,8 @@ if __name__ == "__main__":
     STOP_NOTE = 72
     BPM = 120
     OFFSET = 7
-    clock_interval = 60. / ((BPM + OFFSET) * 24) #verify without multiplying by 24
+    PPQ = 24 #Pulses Per Quarter Note or ticks per quarter note
+    clock_interval = 60. / ((BPM + OFFSET) * PPQ) #verify without multiplying by 24
     clock_interval = np.float16(clock_interval)
     tempoMessage = mido.Message('clock')  # , time=clock_interval)
 
@@ -129,4 +139,5 @@ t.finished
 inport.close()
 inport2.close()
 outport.close()
+port.close()
 
