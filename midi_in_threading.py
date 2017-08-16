@@ -34,7 +34,7 @@ class SendingNotes(threading.Thread):
             outport.send(msg)
             print msg.note
             
-    def stop_receiving()
+    def stop_receiving():
     
         global stop_now
         return stop
