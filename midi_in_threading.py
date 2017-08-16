@@ -20,11 +20,11 @@ class SendingNotes(threading.Thread):
         
     
         
-    def run(self):
-    
+    def run(self):   
         
         for msg in inport:
             if msg.note == 72:
+                print "closing program"
                 break
             outport.send(msg)
             print msg.note
@@ -42,13 +42,10 @@ counter = 0
 while True:
     print "It is working :) "
     time.sleep(1)
-    counter +=1
-    if counter >= 5:
-        x.stop()
-        x.msg = 72
-        
-        print "closing program"
+    if x.msg.note == 72:
         break
+
+x.stop()
 x.join()
         
         
