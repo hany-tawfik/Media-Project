@@ -25,7 +25,7 @@ class SendingNotes(threading.Thread):
             
 x = SendingNotes()
 x.start()
-
+counter = 0
 while True:
     print "It is working :) "
     time.sleep(1)
