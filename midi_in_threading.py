@@ -41,6 +41,7 @@ while True:
     counter +=1
     if counter >= 5:
         x.stop()
+        x.join()
         print "closing program"
         break
        
