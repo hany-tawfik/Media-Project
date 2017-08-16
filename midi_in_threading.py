@@ -15,6 +15,7 @@ class SendingNotes(threading.Thread):
         outport = mido.open_output(korg)
         for msg in inport:
             outport.send(msg)
+            print msg.note
             
 x = SendingNotes()
 x.start()
