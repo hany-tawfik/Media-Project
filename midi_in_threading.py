@@ -42,8 +42,7 @@ counter = 0
 while True:
     print "It is working :) "
     time.sleep(1)
-    if x.msg.note == 72:
-        break
+    
 
 x.stop()
 x.join()
