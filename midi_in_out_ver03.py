@@ -59,7 +59,7 @@ def test_message():
 
     for msg in inport.iter_pending():
 
-        print "tone.note inside of thread: ", msg.note
+        print "msg.note inside of thread: ", msg.note
 
         if msg.note == Stop_loop.note: #Note C6 (72) closes the code.
             stop_thread_timer()
@@ -119,10 +119,8 @@ if __name__ == "__main__":
     tempoMessage = mido.Message('clock')  # , time=clock_interval)
 
     t = threading.Timer(clock_interval, sendTempo)
-    t.start()
 
     midi_thread = threading.Thread(target=test_message)
-    midi_thread.start()
 
     # for tone in inport:
     #
@@ -147,6 +145,8 @@ if __name__ == "__main__":
 
         if flag == False:
             print "something"
+            midi_thread.start()
+            t.start()
             flag = True
 
         if stop_timer == True:
