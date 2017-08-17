@@ -67,9 +67,9 @@ if __name__ == "__main__":
 
     Stop_loop = mido.Message('note_on', note=72) # Maybe this is the reason why always it receives 72 when booting
 
-#     note = inport.receive()
+    note = inport.receive()
 
-#     Tonic = note.copy()
+    Tonic = note.copy()
 
     print "Please press a key for choosing a scale"
 
