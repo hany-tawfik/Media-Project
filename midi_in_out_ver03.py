@@ -13,16 +13,23 @@ def setup_chords(note_set):
 
 def sendTempo():
 
+    global lock 
+    lock.acquire()
+    
+    try:
 
-    outport.send(tempoMessage)
+        outport.send(tempoMessage)
 
-    if stop_timer == False:
+        if stop_timer == False:
 
-        t = threading.Timer(clock_interval, sendTempo)
-        t.start()
-        print "sending tempo"
-    else:
-        print "stop timer"
+            t = threading.Timer(clock_interval, sendTempo)
+            t.start()
+            print "sending tempo"
+        else:
+            print "stop timer"
+            
+    finally:
+        lock.release()
 
 def stop_thread_timer():
 
@@ -36,22 +43,30 @@ def stop_thread_timer():
 def test_message():
 
     print "Its ALIVE..... its ALIVE"
+    
+    global lock
+    
+    lock.acquire()
 
     for msg in inport:
 
-        print "msg.note inside of thread: ", msg.note
+        try:
+            print "msg.note inside of thread: ", msg.note
 
-        if msg.note == Stop_loop.note: #Note C6 (72) closes the code.
-            stop_thread_timer()
-            inport.close()
-            inport2.close()
-            outport.close()
-            t.cancel()
-            t.finished
-            print "closing thread"
-            break
-        else:
-            miChords.Send_Chord(msg)
+            if msg.note == Stop_loop.note: #Note C6 (72) closes the code.
+                stop_thread_timer()
+                inport.close()
+                inport2.close()
+                outport.close()
+                t.cancel()
+                t.finished
+                print "closing thread"
+                break
+            else:
+                miChords.Send_Chord(msg)
+                
+        finally:
+            lock.release()
 
 
 
@@ -97,7 +112,8 @@ if __name__ == "__main__":
     OFFSET = 7
     clock_interval = 60. / ((BPM + OFFSET) * 24) #verify without multiplying by 24
     tempoMessage = mido.Message('clock')  # , time=clock_interval)
-
+    
+    lock =  threading.Lock()
     t = threading.Timer(clock_interval, sendTempo)
 
     midi_thread = threading.Thread(target=test_message)
