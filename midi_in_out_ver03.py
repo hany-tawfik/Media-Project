@@ -38,7 +38,7 @@ def test_message():
     print "Its ALIVE..... its ALIVE"
     
     
-    for msg in robert:
+    for msg in inport:
 
         print "msg.note inside of thread: ", msg.note
 
