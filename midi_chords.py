@@ -111,20 +111,18 @@ def Set_Current_Chord(current_chord):
 
 
 def Major_Chord(output_chord):
-
+    
+    print "Major_Chord"
     # Tonic
-    print "Major chord 1: ", output_chord.note
     outport.send(output_chord)
     time.sleep(1e-3)
     # Major third.
     output_chord.note += 4
     time.sleep(1e-3)
-    print "Major chord 3: ", output_chord.note
     outport.send(output_chord)
     # Fifth
     output_chord.note += 3
     time.sleep(1e-3)
-    print "Major chord 5: ", output_chord.note
     outport.send(output_chord)
     time.sleep(1e-3)
     mido.Message('note_off', note=output_chord.note)
@@ -251,11 +249,8 @@ def Send_Chord(output_chord):
 
     # Mapping a dictionary
 
-    temp = output_chord.copy()
-    temp = temp.note
-
-    print "temp: ", temp
-    print "Tonic Scale : ", Tonic_Scale
+    note2send = output_chord.copy()
+    note2send = note2send.note
 
     switcher = {
 
@@ -276,10 +271,8 @@ def Send_Chord(output_chord):
     }
 
     # Get the function from switcher dictionary
-    func = switcher.get(temp, Tonic_Fifth)
-    print "second: ", Second
-    print "output_chord.note: ", output_chord.note
-    print "Output Chord: ", output_chord
+    func = switcher.get(note2send, Tonic_Fifth)
+    
     # Execute the function
     func(output_chord)
 
