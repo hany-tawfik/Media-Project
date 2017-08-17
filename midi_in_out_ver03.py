@@ -135,7 +135,7 @@ if __name__ == "__main__":
         if flag == False:
             print "something"
             midi_thread.start()
-            t.start()
+#             t.start()
             flag = True
 
         if stop_timer == True:
