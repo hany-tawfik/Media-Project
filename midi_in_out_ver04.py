@@ -35,11 +35,6 @@ def stop_thread_timer():
     return stop_timer
 
 
-def test_message():
-
-    print "Its ALIVE..... its ALIVE"
-
- 
 if __name__ == "__main__":
 
     inputs = mido.get_input_names()
