@@ -44,29 +44,22 @@ def test_message():
 
     print "Its ALIVE..... its ALIVE"
     
-    global lock
-    
-    lock.acquire()
-
     for msg in inport:
 
-        try:
-            print "msg.note inside of thread: ", msg.note
+        print "msg.note inside of thread: ", msg.note
 
-            if msg.note == Stop_loop.note: #Note C6 (72) closes the code.
-                stop_thread_timer()
-                inport.close()
-                inport2.close()
-                outport.close()
-                t.cancel()
-                t.finished
-                print "closing thread"
-                break
-            else:
-                miChords.Send_Chord(msg)
-                
-        finally:
-            lock.release()
+        if msg.note == Stop_loop.note: #Note C6 (72) closes the code.
+            stop_thread_timer()
+            inport.close()
+            inport2.close()
+            outport.close()
+            t.cancel()
+            t.finished
+            print "closing thread"
+            break
+        else:
+            miChords.Send_Chord(msg)
+
 
 
 
