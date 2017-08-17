@@ -133,7 +133,7 @@ def stop_thread_timer():
     return stop_timer
 
 
-def test_message():
+def midi_msg_handler():
 
     for msg in inport:
 
@@ -187,7 +187,7 @@ if __name__ == "__main__":
     clock_interval = 60. / ((BPM + OFFSET) * PPQ)  # verify without multiplying by 24
     tempoMessage = mido.Message('clock')  # , time=clock_interval)
 
-    midi_thread = threading.Thread(target=test_message)
+    midi_thread = threading.Thread(target=midi_msg_handler)
     t = threading.Timer(clock_interval, sendTempo)
 
     midi_thread.start()
