@@ -46,6 +46,7 @@ def midi_msg_handler():
             inport2.close()
             outport.close()
             outport.panic()
+            outport.reset()
             t.cancel()
             t.finished
             print "closing thread"
