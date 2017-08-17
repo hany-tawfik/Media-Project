@@ -88,7 +88,7 @@ if __name__ == "__main__":
     t.start()
 
     while True:
-      for tone in inport:
+      for tone in inport.iter_pending()::
 
           # print "tone.note: ", tone.note
           # print "Tonic.note: ", Tonic.note
