@@ -103,7 +103,7 @@ if __name__ == "__main__":
               # mido.Message('note_on', note=tone.note)
               
       #print "something"
-      if stop_thread_timer:
+      if stop_timer:
          
           break
 
