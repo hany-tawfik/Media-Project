@@ -22,7 +22,7 @@ def sendTempo():
         t.start()
 
     else:
-        print "stop timer"
+        print "stop timer thread"
 
 
 def stop_thread_timer():
@@ -44,12 +44,10 @@ def midi_msg_handler():
             stop_thread_timer()
             inport.close()
             inport2.close()
-            outport.panic()
-            outport.reset()
             outport.close()
             t.cancel()
             t.finished
-            print "closing thread"
+            print "closing midi_msg_handler thread"
             break
         else:
             miChords.Send_Chord(msg)
