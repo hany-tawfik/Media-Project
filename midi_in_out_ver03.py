@@ -126,7 +126,8 @@ if __name__ == "__main__":
 
     midi_thread.start()
     t.start()
- '''           
+    
+    '''           
     while True:
 
         #if flag == False:
@@ -140,4 +141,4 @@ if __name__ == "__main__":
             midi_thread.join()
             print "closing program"
             break
-'''
+    '''
