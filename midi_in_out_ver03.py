@@ -20,6 +20,7 @@ def sendTempo():
 
         t = threading.Timer(clock_interval, sendTempo)
         t.start()
+    else:
         print "stop timer"
 
 
