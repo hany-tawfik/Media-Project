@@ -37,6 +37,7 @@ def test_message():
 
     print "Its ALIVE..... its ALIVE"
     
+    global inport
     
     for msg in inport:
 
@@ -100,7 +101,6 @@ if __name__ == "__main__":
     clock_interval = 60. / ((BPM + OFFSET) * 24) #verify without multiplying by 24
     tempoMessage = mido.Message('clock')  # , time=clock_interval)
     
-    lock =  threading.Lock()
     t = threading.Timer(clock_interval, sendTempo)
 
     midi_thread = threading.Thread(target=test_message)
@@ -124,16 +124,20 @@ if __name__ == "__main__":
 
     flag = False
 
+    midi_thread.start()
+    t.start()
+ '''           
     while True:
 
-        if flag == False:
-            print "something"
-            midi_thread.start()
-            t.start()
-            flag = True
+        #if flag == False:
+         #   print "something"
+           # midi_thread.start()
+           # t.start()
+          #  flag = True
 
         if stop_timer == True:
             t.join()
             midi_thread.join()
             print "closing program"
             break
+'''
