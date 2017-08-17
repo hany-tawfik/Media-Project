@@ -11,25 +11,18 @@ def setup_chords(note_set):
         return False
 
 
-def sendTempo():
+def sendTempo(): 
 
-    global lock 
-    lock.acquire()
-    
-    try:
+    outport.send(tempoMessage)
 
-        outport.send(tempoMessage)
+    if stop_timer == False:
 
-        if stop_timer == False:
+        t = threading.Timer(clock_interval, sendTempo)
+        t.start()
+        print "sending tempo"
+    else:
+        print "stop timer"
 
-            t = threading.Timer(clock_interval, sendTempo)
-            t.start()
-            print "sending tempo"
-        else:
-            print "stop timer"
-            
-    finally:
-        lock.release()
 
 def stop_thread_timer():
 
