@@ -13,25 +13,15 @@ def setup_chords(note_set):
 
 def sendTempo():
 
-    global lock, t
 
-    lock.aquire()
+    outport.send(tempoMessage)
 
-    try:
-        outport.send(tempoMessage)
+    if stop_timer == False:
 
-    finally:
+        t = threading.Timer(clock_interval, sendTempo)
+        t.start()
+        print "stop timer"
 
-        if stop_timer == False:
-
-            t = threading.Timer(clock_interval, sendTempo)
-            t.start()
-
-        else:
-
-            print "stop timer"
-
-        lock.release()
 
 '''        
 def sendTempo():
@@ -133,8 +123,6 @@ if __name__ == "__main__":
 
     midi_thread = threading.Thread(target=test_message)
     midi_thread.start()
-
-    lock = threading.Lock()
 
     # for tone in inport:
     #
