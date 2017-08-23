@@ -144,7 +144,7 @@ if __name__ == "__main__":
     # stream_queue = Queue.Queue()
 
     '''AUDIO VARIABLES DEFINITION'''
-    SECONDS = 3
+    SECONDS = 4
     RATE = 44100
     CHUNK = np.uint32(RATE*SECONDS)
     FORMAT = pyaudio.paInt16
