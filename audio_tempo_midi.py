@@ -175,15 +175,15 @@ if __name__ == "__main__":
     miChords.update_chords()
 
     '''START OF THREADS'''
-    t.start()
+    # t.start()
     stream.start_stream()
     midi_thread.start()
 
-    # while True:
-    #     outport.send(tempoMessage)
-    #     time.sleep(clock_interval)
-    #     if stop_key:
-    #         break
+    while True:
+        outport.send(tempoMessage)
+        time.sleep(clock_interval)
+        if stop_key:
+            break
     #
     # '''Closing Audio threads and creating wav file'''
     # stream.stop_stream()
