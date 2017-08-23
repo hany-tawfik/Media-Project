@@ -45,19 +45,19 @@ def callback_audio(in_data, frame_count, time_info, status):
         #
         # print "tempo: ", tempo[0, 0]
 
-    else:
-
-        stream.stop_stream()
-        stream.close()
-        p.terminate()
-        wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
-        wf.setnchannels(CHANNELS)
-        wf.setsampwidth(p.get_sample_size(FORMAT))
-        wf.setframerate(RATE)
-        wf.writeframes(b''.join(frames))
-        wf.close()
-
-        print "Closed audio channels and created wav file"
+    # else:
+    # 
+    #     stream.stop_stream()
+    #     stream.close()
+    #     p.terminate()
+    #     wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+    #     wf.setnchannels(CHANNELS)
+    #     wf.setsampwidth(p.get_sample_size(FORMAT))
+    #     wf.setframerate(RATE)
+    #     wf.writeframes(b''.join(frames))
+    #     wf.close()
+    # 
+    #     print "Closed audio channels and created wav file"
 
     return in_data, pyaudio.paContinue
 
@@ -181,16 +181,16 @@ if __name__ == "__main__":
         time.sleep(clock_interval)
         if stop_key:
             break
-    #
-    # '''Closing Audio threads and creating wav file'''
-    # stream.stop_stream()
-    # stream.close()
-    # p.terminate()
-    # wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
-    # wf.setnchannels(CHANNELS)
-    # wf.setsampwidth(p.get_sample_size(FORMAT))
-    # wf.setframerate(RATE)
-    # wf.writeframes(b''.join(frames))
-    # wf.close()
-    #
-    # print "Closed audio channels and created wav file"
+
+    '''Closing Audio threads and creating wav file'''
+    stream.stop_stream()
+    stream.close()
+    p.terminate()
+    wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+    wf.setnchannels(CHANNELS)
+    wf.setsampwidth(p.get_sample_size(FORMAT))
+    wf.setframerate(RATE)
+    wf.writeframes(b''.join(frames))
+    wf.close()
+
+    print "Closed audio channels and created wav file"
