@@ -124,8 +124,15 @@ def Major_Chord(output_chord):
     output_chord.note += 4
     time.sleep(1e-3)
     outport.send(output_chord)
-    # Fifth
+    '''# Fifth
     output_chord.note += 3
+    time.sleep(1e-3)
+    outport.send(output_chord)
+    time.sleep(1e-3)
+    mido.Message('note_off', note=output_chord.note)
+    '''
+    # Major Seventh
+    output_chord.note += 7
     time.sleep(1e-3)
     outport.send(output_chord)
     time.sleep(1e-3)
@@ -142,8 +149,15 @@ def Minor_Chord(output_chord):
     output_chord.note += 3
     time.sleep(1e-3)
     outport.send(output_chord)
-    # Fifth
+    '''# Fifth
     output_chord.note += 4
+    time.sleep(1e-3)
+    outport.send(output_chord)
+    time.sleep(1e-3)
+    mido.Message('note_off', note=output_chord.note)
+    '''
+    # Minor Seventh
+    output_chord.note += 6
     time.sleep(1e-3)
     outport.send(output_chord)
     time.sleep(1e-3)
