@@ -172,7 +172,7 @@ if __name__ == "__main__":
     miChords.update_chords()
 
     '''START OF THREADS'''
-    # t.start()
+    t.start()
     stream.start_stream()
     midi_thread.start()
 
