@@ -68,10 +68,11 @@ def tempo_detection_thread():
     # t0 = time.clock()
     beats = RNNbeat(rawData)
     tempo = tempoEstimation.process(beats)
+    res = map(int, tempo[:, 0])
     # t1 = time.clock()
 
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
-    print "tempo: ", tempo[0:2, 0]
+    print "tempo: ", res[0:2, 0]
 
 
 def send_tempo_thread():
