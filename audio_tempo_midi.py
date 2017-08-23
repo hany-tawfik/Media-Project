@@ -29,23 +29,24 @@ def stop_all_threads():
 def callback_audio(in_data, frame_count, time_info, status):
 
     # stream_queue.put(in_data)
-    # tempo_detection = threading.Thread(target=tempo_detection_thread)
-    # tempo_detection.start()
-    # global rawData
-    # stream_queue.put(in_data)
-    
+
+    global rawData
+
     if stop_key == False:
-        
+
         rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
         frames.append(in_data)
-        t0 = time.clock()
-        beats = RNNbeat(rawData)
-        tempo = tempoEstimation.process(beats)
-        t1 = time.clock()
-    
-        print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
-        print "tempo: \n", tempo[:, 0]
-        
+        tempo_detection = threading.Thread(target=tempo_detection_thread)
+        tempo_detection.start()
+
+        # t0 = time.clock()
+        # beats = RNNbeat(rawData)
+        # tempo = tempoEstimation.process(beats)
+        # t1 = time.clock()
+        #
+        # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
+        # print "tempo: \n", tempo[:, 0]
+
     else:
 
         stream.stop_stream()
@@ -57,9 +58,9 @@ def callback_audio(in_data, frame_count, time_info, status):
         wf.setframerate(RATE)
         wf.writeframes(b''.join(frames))
         wf.close()
-    
+
         print "Closed audio channels and created wav file"
-        
+
     return in_data, pyaudio.paContinue
 
 
@@ -67,15 +68,14 @@ def tempo_detection_thread():
 
     # samples = stream_queue.get()
     # rawData = np.int16(struct.unpack('h' * CHUNK, samples))
-    # t0 = time.clock()
-    # beats = RNNbeat(rawData)
-    # tempo = tempoEstimation.process(beats)
-    # t1 = time.clock()
+    global rawData
+    t0 = time.clock()
+    beats = RNNbeat(rawData)
+    tempo = tempoEstimation.process(beats)
+    t1 = time.clock()
 
-    # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
-    # print "tempo: \n", tempo[:, 0]
-
-    pass
+    print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
+    print "tempo: \n", tempo[:, 0]
 
 
 def send_tempo_thread():
@@ -154,7 +154,7 @@ if __name__ == "__main__":
 
     WAVE_OUTPUT_FILENAME = "frames_recorded.wav"
     frames = []
-    # rawData = 0
+    rawData = 0
     # RNNbeat(np.zeros((100, )))
 
     '''MIDI DATA SETUP'''
@@ -184,7 +184,7 @@ if __name__ == "__main__":
     #     time.sleep(clock_interval)
     #     if stop_key:
     #         break
-    # 
+    #
     # '''Closing Audio threads and creating wav file'''
     # stream.stop_stream()
     # stream.close()
@@ -195,5 +195,5 @@ if __name__ == "__main__":
     # wf.setframerate(RATE)
     # wf.writeframes(b''.join(frames))
     # wf.close()
-    # 
+    #
     # print "Closed audio channels and created wav file"
