@@ -32,7 +32,7 @@ def callback_audio(in_data, frame_count, time_info, status):
     # tempo_detection = threading.Thread(target=tempo_detection_thread)
     # tempo_detection.start()
     global rawData
-    
+    stream_queue.put(in_data)
     rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
     frames.append(in_data)
     t0 = time.clock()
@@ -57,7 +57,7 @@ def tempo_detection_thread():
 
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
     # print "tempo: \n", tempo[:, 0]
-    
+
     pass
 
 
@@ -163,7 +163,7 @@ if __name__ == "__main__":
     stream.start_stream()
 
     while True:
-        # time.sleep(1)
+        time.sleep(1)
         if stop_key:
             break
 
