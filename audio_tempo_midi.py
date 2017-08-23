@@ -34,18 +34,17 @@ def callback_audio(in_data, frame_count, time_info, status):
 
     if stop_key == False:
 
+        # rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
+        # frames.append(in_data)
+        # tempo_detection = threading.Thread(target=tempo_detection_thread)
+        # tempo_detection.start()
+
         rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
         frames.append(in_data)
-        tempo_detection = threading.Thread(target=tempo_detection_thread)
-        tempo_detection.start()
+        beats = RNNbeat(rawData)
+        tempo = tempoEstimation.process(beats)
 
-        # t0 = time.clock()
-        # beats = RNNbeat(rawData)
-        # tempo = tempoEstimation.process(beats)
-        # t1 = time.clock()
-        #
-        # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
-        # print "tempo: \n", tempo[:, 0]
+        print "tempo: \n", tempo[0, 0]
 
     else:
 
@@ -66,8 +65,6 @@ def callback_audio(in_data, frame_count, time_info, status):
 
 def tempo_detection_thread():
 
-    # samples = stream_queue.get()
-    # rawData = np.int16(struct.unpack('h' * CHUNK, samples))
     global rawData
     # t0 = time.clock()
     beats = RNNbeat(rawData)
@@ -75,7 +72,7 @@ def tempo_detection_thread():
     # t1 = time.clock()
 
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
-    print "tempo: \n", tempo[0, 0]
+    print "tempo: ", tempo[0, 0]
 
 
 def send_tempo_thread():
