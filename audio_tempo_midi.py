@@ -158,12 +158,13 @@ if __name__ == "__main__":
     miChords.update_chords()
 
     '''START OF THREADS'''
-    t.start()
+    # t.start()
     midi_thread.start()
     stream.start_stream()
 
     while True:
-        time.sleep(1)
+        outport.send(tempoMessage)
+        time.sleep(clock_interval)
         if stop_key:
             break
 
