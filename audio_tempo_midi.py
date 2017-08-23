@@ -69,13 +69,13 @@ def tempo_detection_thread():
     # samples = stream_queue.get()
     # rawData = np.int16(struct.unpack('h' * CHUNK, samples))
     global rawData
-    t0 = time.clock()
+    # t0 = time.clock()
     beats = RNNbeat(rawData)
     tempo = tempoEstimation.process(beats)
-    t1 = time.clock()
+    # t1 = time.clock()
 
-    print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
-    print "tempo: \n", tempo[:, 0]
+    # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
+    print "tempo: \n", tempo[0, 0]
 
 
 def send_tempo_thread():
@@ -139,7 +139,7 @@ if __name__ == "__main__":
     stream_queue = Queue.Queue()
 
     '''AUDIO VARIABLES DEFINITION'''
-    SECONDS = 3
+    SECONDS = 4
     RATE = 44100
     CHUNK = np.uint32(RATE*SECONDS)
     FORMAT = pyaudio.paInt16
