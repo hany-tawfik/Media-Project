@@ -34,17 +34,17 @@ def callback_audio(in_data, frame_count, time_info, status):
 
     if stop_key == False:
 
-        # rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
-        # frames.append(in_data)
-        # tempo_detection = threading.Thread(target=tempo_detection_thread)
-        # tempo_detection.start()
-
         rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
         frames.append(in_data)
-        beats = RNNbeat(rawData)
-        tempo = tempoEstimation.process(beats)
+        tempo_detection = threading.Thread(target=tempo_detection_thread)
+        tempo_detection.start()
 
-        print "tempo: \n", tempo[0, 0]
+        # rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
+        # frames.append(in_data)
+        # beats = RNNbeat(rawData)
+        # tempo = tempoEstimation.process(beats)
+        #
+        # print "tempo: ", tempo[0, 0]
 
     else:
 
@@ -174,7 +174,7 @@ if __name__ == "__main__":
     '''START OF THREADS'''
     # t.start()
     stream.start_stream()
-    midi_thread.start()
+    # midi_thread.start()
 
     while True:
         outport.send(tempoMessage)
