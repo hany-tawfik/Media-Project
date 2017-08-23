@@ -151,7 +151,7 @@ if __name__ == "__main__":
     stream.start_stream()
 
     while True:
-        # time.sleep(1)
+        time.sleep(1)
         if stop_key:
             break
 
