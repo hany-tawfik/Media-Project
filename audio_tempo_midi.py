@@ -19,6 +19,13 @@ def setup_chords(note_set):
         return False
 
 
+def update_tempo(new_tempo):
+
+    new_clock = 60. / ((new_tempo + OFFSET) * PPQ)
+    new_clock = np.float16(new_clock)
+    return new_clock
+
+
 def stop_all_threads():
 
     global stop_key
@@ -46,7 +53,7 @@ def callback_audio(in_data, frame_count, time_info, status):
         # print "tempo: ", tempo[0, 0]
 
     # else:
-    # 
+    #
     #     stream.stop_stream()
     #     stream.close()
     #     p.terminate()
@@ -56,7 +63,7 @@ def callback_audio(in_data, frame_count, time_info, status):
     #     wf.setframerate(RATE)
     #     wf.writeframes(b''.join(frames))
     #     wf.close()
-    # 
+    #
     #     print "Closed audio channels and created wav file"
 
     return in_data, pyaudio.paContinue
@@ -64,15 +71,15 @@ def callback_audio(in_data, frame_count, time_info, status):
 
 def tempo_detection_thread():
 
-    global rawData
+    global rawData, clock_interval
     # t0 = time.clock()
     beats = RNNbeat(rawData)
     tempo = tempoEstimation.process(beats)
-    res = map(int, tempo[:, 0])
+    tempo_integer = map(int, tempo[:, 0])
+    clock_interval = update_tempo(tempo_integer[0])
+    print "tempo: ", tempo_integer
     # t1 = time.clock()
-
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
-    print "tempo: ", res
 
 
 def send_tempo_thread():
@@ -119,10 +126,10 @@ if __name__ == "__main__":
     outport = mido.open_output(korg)
 
     '''MIDI EXTERNAL CLOCK CALCULATION'''
-    BPM = 120
+    DEFAULT_BPM = 120
     OFFSET = 2
     PPQ = 24  # Pulse per quarter note
-    clock_interval = 60. / ((BPM + OFFSET) * PPQ)
+    clock_interval = 60. / ((DEFAULT_BPM + OFFSET) * PPQ)
     clock_interval = np.float16(clock_interval)
     tempoMessage = mido.Message('clock', time=clock_interval)
 
