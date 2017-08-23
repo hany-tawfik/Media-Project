@@ -49,6 +49,12 @@ Fourth = Tonic_Scale + 5
 Fifth = Tonic_Scale + 7
 Sixth_major = Tonic_Scale + 9
 Seventh_major = Tonic_Scale + 11
+'''
+Third_minor =  Tonic_Scale + 3
+Fifth_diminished = Tonic_Scale + 7
+Seventh_major = Tonic_Scale + 10
+Fifth_augmented = Tonic_Scale + 7
+'''
 
 # Octave down.
 Tonic_octaveDOWN = Tonic_Scale - 12
