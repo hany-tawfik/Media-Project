@@ -72,7 +72,7 @@ def tempo_detection_thread():
     # t1 = time.clock()
 
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
-    print "tempo: ", res[0:2, 0]
+    print "tempo: ", res
 
 
 def send_tempo_thread():
