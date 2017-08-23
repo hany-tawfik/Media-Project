@@ -123,7 +123,7 @@ if __name__ == "__main__":
 
     '''MIDI EXTERNAL CLOCK CALCULATION'''
     BPM = 120
-    OFFSET = 7
+    OFFSET = 2
     PPQ = 24  # Pulse per quarter note
     clock_interval = 60. / ((BPM + OFFSET) * PPQ)
     tempoMessage = mido.Message('clock')  # , time=clock_interval)
@@ -139,7 +139,7 @@ if __name__ == "__main__":
     stream_queue = Queue.Queue()
 
     '''AUDIO VARIABLES DEFINITION'''
-    SECONDS = 4
+    SECONDS = 3
     RATE = 44100
     CHUNK = np.uint32(RATE*SECONDS)
     FORMAT = pyaudio.paInt16
