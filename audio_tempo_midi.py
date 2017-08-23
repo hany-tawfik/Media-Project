@@ -42,6 +42,8 @@ def callback_audio(in_data, frame_count, time_info, status):
 
         rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
         frames.append(in_data)
+        
+        #Tempo detection thread
         tempo_detection = threading.Thread(target=tempo_detection_thread)
         tempo_detection.start()
 
@@ -170,8 +172,8 @@ if __name__ == "__main__":
 
     print "Please press a key for choosing a music scale"
 
-    while True:
-        if setup_chords(Tonic.note):
+    while True: #Why is here a while loop? is it to wait for an input note?
+        if setup_chords(Tonic.note): 
             break
         note = inport.receive()
         Tonic = note.copy()
@@ -183,7 +185,8 @@ if __name__ == "__main__":
     # t.start()
     stream.start_stream()
     midi_thread.start()
-
+    
+    # Sending clock message is in the main thread
     while True:
         outport.send(tempoMessage)
         time.sleep(clock_interval)
