@@ -69,12 +69,11 @@ Sixth_major_octaveUP = Sixth_major + 12
 Seventh_major_octaveUP = Seventh_major + 12
 
 
-def Set_Tonic_Scale(chord): #This set the chords according to the scales choosed by the user 
-
+def Set_Tonic_Scale(chord): #Used for setting the scale of the song
     global Tonic_Scale
     Tonic_Scale = chord
 
-def update_chords():
+def update_chords(): #This sets the chords according to the scale chose by the user 
 
     global Second, Third_major, Fourth, Fifth, Sixth_major, Seventh_major
     global Tonic_octaveDOWN, Second_octaveDOWN, Third_major_octaveDOWN, Fourth_octaveDOWN, Fifth_octaveDOWN, \
@@ -252,7 +251,7 @@ def Tonic_Fifth(output_chord):
 
 def Send_Chord(output_chord):
 
-    # Mapping a dictionary
+    # Mapping a dictionary: this function call the chord equivalent to the corresponding tone pressed by the user
 
     note2send = output_chord.copy()
     note2send = note2send.note
