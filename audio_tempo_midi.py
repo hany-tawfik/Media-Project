@@ -1,4 +1,3 @@
-
 from madmom.models import BEATS_LSTM
 import madmom as mm
 import midi_chords as miChords
@@ -77,7 +76,7 @@ def tempo_detection_thread():
 
 def send_tempo_thread():
 
-    global t
+    # global t
     outport.send(tempoMessage)
 
     if stop_key == False:
@@ -127,7 +126,7 @@ if __name__ == "__main__":
 
     '''THREADING DEFINITIONS'''
     midi_thread = threading.Thread(target=midi_msg_handler_thread)
-    t = threading.Timer(clock_interval, send_tempo_thread)
+    # t = threading.Timer(clock_interval, send_tempo_thread)
 
     '''OBJECT DEFINITIONS'''
     RNNbeat = mm.features.beats.RNNBeatProcessor(online=True, nn_files=[BEATS_LSTM[0]])
@@ -172,7 +171,7 @@ if __name__ == "__main__":
     miChords.update_chords()
 
     '''START OF THREADS'''
-    t.start()
+    # t.start()
     stream.start_stream()
     midi_thread.start()
 
