@@ -71,7 +71,7 @@ def tempo_detection_thread():
     # t1 = time.clock()
 
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
-    print "tempo: ", tempo[0, 0]
+    print "tempo: ", tempo[0:1, 0]
 
 
 def send_tempo_thread():
@@ -99,8 +99,8 @@ def midi_msg_handler_thread():
             inport.close()
             inport2.close()
             outport.close()
-            t.cancel()
-            t.finished
+            # t.cancel()
+            # t.finished
             print "closing midi_msg_handler thread"
             break
         else:
@@ -122,7 +122,8 @@ if __name__ == "__main__":
     OFFSET = 2
     PPQ = 24  # Pulse per quarter note
     clock_interval = 60. / ((BPM + OFFSET) * PPQ)
-    tempoMessage = mido.Message('clock')  # , time=clock_interval)
+    clock_interval = np.float16(clock_interval)
+    tempoMessage = mido.Message('clock', time=clock_interval)
 
     '''THREADING DEFINITIONS'''
     midi_thread = threading.Thread(target=midi_msg_handler_thread)
