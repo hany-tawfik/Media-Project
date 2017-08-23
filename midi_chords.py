@@ -5,21 +5,26 @@ import time
 
 inputs = mido.get_input_names()
 outputs = mido.get_output_names()
-#inport = mido.open_input('MIDISTART MUSIC 25:MIDISTART MUSIC 25 MIDI 1 24:0')
-#inport2 = mido.open_input('CH345:CH345 MIDI 1 20:0')
-#outport = mido.open_output('CH345:CH345 MIDI 1 20:0')
 
-korg = inputs[0].encode('ascii')
+'''
+We used to set names manually but that caused problems
+so we starting calling it and giving names korg and midi start25
+inport = mido.open_input('MIDISTART MUSIC 25:MIDISTART MUSIC 25 MIDI 1 24:0')
+inport2 = mido.open_input('CH345:CH345 MIDI 1 20:0')
+outport = mido.open_output('CH345:CH345 MIDI 1 20:0') 
+'''
+
+korg = inputs[0].encode('ascii') # The asci part it to get just the name without the unicode
 midi_start25 = inputs[1].encode('ascii')
  
 inport = mido.open_input(midi_start25)
-inport2 = mido.open_input(korg)
+inport2 = mido.open_input(korg) # input port must be opened even for output devices
 outport = mido.open_output(korg)
 
 
 '''SETTING NOTES/CHORDS'''
 
-Tonic_Scale = 0
+Tonic_Scale = 0 #initializing the tonic note value
 Temp_scale = 0
 Play_Chord = 0
 
@@ -64,7 +69,7 @@ Sixth_major_octaveUP = Sixth_major + 12
 Seventh_major_octaveUP = Seventh_major + 12
 
 
-def Set_Tonic_Scale(chord):
+def Set_Tonic_Scale(chord): #This set the chords according to the scales choosed by the user 
 
     global Tonic_Scale
     Tonic_Scale = chord
