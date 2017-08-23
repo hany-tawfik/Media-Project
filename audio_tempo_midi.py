@@ -31,8 +31,8 @@ def callback_audio(in_data, frame_count, time_info, status):
     # stream_queue.put(in_data)
     # tempo_detection = threading.Thread(target=tempo_detection_thread)
     # tempo_detection.start()
-    global rawData
-    stream_queue.put(in_data)
+    # global rawData
+    # stream_queue.put(in_data)
     rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
     frames.append(in_data)
     t0 = time.clock()
@@ -122,7 +122,7 @@ if __name__ == "__main__":
     stream_queue = Queue.Queue()
 
     '''AUDIO VARIABLES DEFINITION'''
-    SECONDS = 2.5
+    SECONDS = 4
     RATE = 44100
     CHUNK = np.uint32(RATE*SECONDS)
     FORMAT = pyaudio.paInt16
@@ -137,8 +137,8 @@ if __name__ == "__main__":
 
     WAVE_OUTPUT_FILENAME = "frames_recorded.wav"
     frames = []
-    rawData = 0
-    RNNbeat(np.zeros((100, )))
+    # rawData = 0
+    # RNNbeat(np.zeros((100, )))
 
     '''MIDI DATA SETUP'''
     stop_key = False
