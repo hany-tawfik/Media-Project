@@ -36,7 +36,7 @@ def callback_audio(in_data, frame_count, time_info, status):
 
         rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
         frames.append(in_data)
-        tempo_detection = threading.Thread(target=tempo_detection_thread)
+        # tempo_detection = threading.Thread(target=tempo_detection_thread)
         tempo_detection.start()
 
         # rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
@@ -128,12 +128,13 @@ if __name__ == "__main__":
     '''THREADING DEFINITIONS'''
     midi_thread = threading.Thread(target=midi_msg_handler_thread)
     t = threading.Timer(clock_interval, send_tempo_thread)
+    tempo_detection = threading.Thread(target=tempo_detection_thread)
 
     '''OBJECT DEFINITIONS'''
     RNNbeat = mm.features.beats.RNNBeatProcessor(online=True, nn_files=[BEATS_LSTM[0]])
     tempoEstimation = mm.features.tempo.TempoEstimationProcessor(min_bpm=40, max_bpm=180, fps=100)
     p = pyaudio.PyAudio()
-    stream_queue = Queue.Queue()
+    # stream_queue = Queue.Queue()
 
     '''AUDIO VARIABLES DEFINITION'''
     SECONDS = 4
@@ -174,7 +175,7 @@ if __name__ == "__main__":
     '''START OF THREADS'''
     # t.start()
     stream.start_stream()
-    # midi_thread.start()
+    midi_thread.start()
 
     while True:
         outport.send(tempoMessage)
