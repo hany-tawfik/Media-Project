@@ -266,12 +266,19 @@ def Send_Chord(output_chord):
         Sixth_major: Minor_Chord,
         Seventh_major: Dim_Chord,
         Tonic_octaveUP: Sus4_Chord,
+        Tonic_octaveDOWN:Sus4_Chord,
         Fifth_octaveUP: Sus4_Chord,
+        Fifth_octaveDOWN: Sus4_Chord,
         Fourth_octaveUP: Minor_6th,
+        Fourth_octaveDOWN: Minor_6th,
         Second_octaveUP: Major_Dominant_7th_Chord,
+        Second_octaveDOWN: Major_Dominant_7th_Chord,
         Third_major_octaveUP: Major_Dominant_7th_Chord,
+        Third_major_octaveDOWN: Major_Dominant_7th_Chord,
         Sixth_major_octaveUP: Major_Dominant_7th_Chord,
+        Sixth_major_octaveDOWN: Major_Dominant_7th_Chord,
         Seventh_major_octaveUP: Major_Dominant_7th_Chord,
+        Seventh_major_octaveDOWN: Major_Dominant_7th_Chord,
     }
 
     # Get the function from switcher dictionary
