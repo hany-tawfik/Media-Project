@@ -33,16 +33,33 @@ def callback_audio(in_data, frame_count, time_info, status):
     # tempo_detection.start()
     # global rawData
     # stream_queue.put(in_data)
-    rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
-    frames.append(in_data)
-    t0 = time.clock()
-    beats = RNNbeat(rawData)
-    tempo = tempoEstimation.process(beats)
-    t1 = time.clock()
+    
+    if stop_key == False:
+        
+        rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
+        frames.append(in_data)
+        t0 = time.clock()
+        beats = RNNbeat(rawData)
+        tempo = tempoEstimation.process(beats)
+        t1 = time.clock()
+    
+        print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
+        print "tempo: \n", tempo[:, 0]
+        
+    else:
 
-    print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
-    print "tempo: \n", tempo[:, 0]
-
+        stream.stop_stream()
+        stream.close()
+        p.terminate()
+        wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+        wf.setnchannels(CHANNELS)
+        wf.setsampwidth(p.get_sample_size(FORMAT))
+        wf.setframerate(RATE)
+        wf.writeframes(b''.join(frames))
+        wf.close()
+    
+        print "Closed audio channels and created wav file"
+        
     return in_data, pyaudio.paContinue
 
 
@@ -79,7 +96,7 @@ def midi_msg_handler_thread():
 
     for msg in inport:
 
-        print "msg.note inside of thread: ", msg.note
+        # print "msg.note inside of thread: ", msg.note
 
         if msg.note == Stop_loop.note:  # Note C6 (72) closes the code.
             stop_all_threads()
@@ -158,25 +175,25 @@ if __name__ == "__main__":
     miChords.update_chords()
 
     '''START OF THREADS'''
-    # t.start()
-    midi_thread.start()
+    t.start()
     stream.start_stream()
+    midi_thread.start()
 
-    while True:
-        outport.send(tempoMessage)
-        time.sleep(clock_interval)
-        if stop_key:
-            break
-
-    '''Closing Audio threads and creating wav file'''
-    stream.stop_stream()
-    stream.close()
-    p.terminate()
-    wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
-    wf.setnchannels(CHANNELS)
-    wf.setsampwidth(p.get_sample_size(FORMAT))
-    wf.setframerate(RATE)
-    wf.writeframes(b''.join(frames))
-    wf.close()
-
-    print "Closed audio channels and created wav file"
+    # while True:
+    #     outport.send(tempoMessage)
+    #     time.sleep(clock_interval)
+    #     if stop_key:
+    #         break
+    # 
+    # '''Closing Audio threads and creating wav file'''
+    # stream.stop_stream()
+    # stream.close()
+    # p.terminate()
+    # wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+    # wf.setnchannels(CHANNELS)
+    # wf.setsampwidth(p.get_sample_size(FORMAT))
+    # wf.setframerate(RATE)
+    # wf.writeframes(b''.join(frames))
+    # wf.close()
+    # 
+    # print "Closed audio channels and created wav file"
