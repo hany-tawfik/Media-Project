@@ -8,13 +8,8 @@ import pyaudio
 import Queue
 import struct
 import threading
-
-
-def callback_audio(in_data, frame_count, time_info, status):
-
-    stream_queue.put(in_data)
-
-    return (in_data, pyaudio.paContinue)
+import time
+import wave
 
 
 def setup_chords(note_set):
@@ -25,27 +20,50 @@ def setup_chords(note_set):
         return False
 
 
-def send_tempo():
-
-    global t
-    outport.send(tempoMessage)
-
-    if stop_key == False:
-
-        t = threading.Timer(clock_interval, send_tempo)
-        t.start()
-
-    else:
-        print "stop timer thread"
-
-
 def stop_all_threads():
 
     global stop_key
     stop_key = True
 
 
-def midi_msg_handler():
+def callback_audio(in_data, frame_count, time_info, status):
+
+    stream_queue.put(in_data)
+    frames.append(in_data)
+    tempo_detection = threading.Thread(target=tempo_detection_thread)
+    tempo_detection.start()
+
+    return in_data, pyaudio.paContinue
+
+
+def tempo_detection_thread():
+
+    samples = stream_queue.get()
+    rawData = np.int16(struct.unpack('h' * CHUNK, samples))
+    t0 = time.clock()
+    beats = RNNbeat(rawData)
+    tempo = tempoEstimation.process(beats)
+    t1 = time.clock()
+
+    print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
+    print "tempo: \n", tempo[:, 0]
+
+
+def send_tempo_thread():
+
+    global t
+    outport.send(tempoMessage)
+
+    if stop_key == False:
+
+        t = threading.Timer(clock_interval, send_tempo_thread)
+        t.start()
+
+    else:
+        print "stop timer thread"
+
+
+def midi_msg_handler_thread():
 
     for msg in inport:
 
@@ -82,8 +100,8 @@ if __name__ == "__main__":
     tempoMessage = mido.Message('clock')  # , time=clock_interval)
 
     '''THREADING DEFINITIONS'''
-    midi_thread = threading.Thread(target=midi_msg_handler)
-    t = threading.Timer(clock_interval, send_tempo)
+    midi_thread = threading.Thread(target=midi_msg_handler_thread)
+    t = threading.Timer(clock_interval, send_tempo_thread)
 
     '''OBJECT DEFINITIONS'''
     RNNbeat = mm.features.beats.RNNBeatProcessor(online=True, nn_files=[BEATS_LSTM[0]])
@@ -105,13 +123,18 @@ if __name__ == "__main__":
                            frames_per_buffer=CHUNK,
                            stream_callback=callback_audio)
 
+    WAVE_OUTPUT_FILENAME = "frames_recorded.wav"
+    frames = []
+
+    RNNbeat(np.zeros((100, )))
+
     '''MIDI DATA SETUP'''
     stop_key = False
     Stop_loop = mido.Message('note_on', note=72)
     note = inport.receive()
     Tonic = note.copy()
 
-    print "Please press a key for choosing a scale"
+    print "Please press a key for choosing a music scale"
 
     while True:
         if setup_chords(Tonic.note):
@@ -122,27 +145,25 @@ if __name__ == "__main__":
     miChords.Set_Tonic_Scale(Tonic.note)
     miChords.update_chords()
 
-    '''START OF THREADING(s)'''
-    midi_thread.start()
+    '''START OF THREADS'''
     t.start()
+    midi_thread.start()
     stream.start_stream()
 
     while True:
-
-        samples = stream_queue.get()
-
-        rawData = np.int16(struct.unpack('h' * CHUNK, samples))
-
-        beats = RNNbeat(rawData)
-
-        tempo_estimated = tempoEstimation.process(beats)
-
-        print "tempo estimation first option: \n", tempo_estimated[0, 0]
-
+        # time.sleep(1)
         if stop_key:
             break
 
+    '''Closing Audio threads and creating wav file'''
     stream.stop_stream()
     stream.close()
     p.terminate()
+    wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
+    wf.setnchannels(CHANNELS)
+    wf.setsampwidth(p.get_sample_size(FORMAT))
+    wf.setframerate(RATE)
+    wf.writeframes(b''.join(frames))
+    wf.close()
 
+    print "Closed audio channels and created wav file"
