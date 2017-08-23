@@ -157,7 +157,7 @@ def Minor_Chord(output_chord):
     mido.Message('note_off', note=output_chord.note)
     '''
     # Minor Seventh
-    output_chord.note += 6
+    output_chord.note += 7
     time.sleep(1e-3)
     outport.send(output_chord)
     time.sleep(1e-3)
@@ -274,7 +274,7 @@ def Send_Chord(output_chord):
 
         Tonic_Scale: Major_Chord,
         Fourth: Major_Chord,
-        Fifth: Major_Chord,
+        Fifth: Major_Dominant_7th_Chord,
         Second: Minor_Chord,
         Third_major: Minor_Chord,
         Sixth_major: Minor_Chord,
