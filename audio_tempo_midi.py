@@ -39,7 +39,7 @@ def callback_audio(in_data, frame_count, time_info, status):
     global rawData, clock_interval, tempoMessage
 
     if stop_key == False:
-        print "new audio chunk"
+#         print "new audio chunk"
         # rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
         rawData = np.fromstring(in_data, dtype=np.int16)
         beats = RNNbeat(rawData)
@@ -47,7 +47,7 @@ def callback_audio(in_data, frame_count, time_info, status):
         tempo_integer = map(np.int16, tempo[:, 0])
         clock_interval = update_tempo(tempo_integer[0])
         tempoMessage = mido.Message('clock', time=clock_interval)
-        print "new tempo: ", tempo_integer[0]
+#         print "new tempo: ", tempo_integer[0]
         # tempo_detection = threading.Thread(target=tempo_detection_thread)
         # tempo_detection.start()
         frames.append(in_data)
