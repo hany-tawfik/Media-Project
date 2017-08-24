@@ -7,6 +7,7 @@ print ave_saved_tempo
 
 
 for i in tempo:
+    print i
     if  ave_saved_tempo -2 <= tempo[i] <= ave_saved_tempo +2:  
         saved_tempo.append(tempo[i])
         doubtful_tempo = [tempo[i]]
@@ -21,3 +22,11 @@ for i in tempo:
             saved_tempo = [doubtful_tempo[1]]
             doubtful_tempo = [0]
 
+
+            
+ if tempo1 > tempo2:
+    if prob1 - prob2 >= 2:
+        new_tempo = tempo1
+ else:
+    if prob1
+    
