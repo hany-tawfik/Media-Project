@@ -75,7 +75,7 @@ def tempo_detection_thread():
     # t0 = time.clock()
     beats = RNNbeat(rawData)
     tempo = tempoEstimation.process(beats)
-    tempo_integer = map(int, tempo[:, 0])
+    tempo_integer = map(np.float16, tempo[:, 0])
     clock_interval = update_tempo(tempo_integer[0])
     #print "new tempo: ", tempo_integer[0]
     print "new tempo: ", tempo_integer
