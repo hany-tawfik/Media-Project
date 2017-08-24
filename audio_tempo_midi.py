@@ -193,6 +193,7 @@ if __name__ == "__main__":
     midi_thread.start()
 
     while True:
+        print tempoMessage
         outport.send(tempoMessage)
         time.sleep(clock_interval)
         if stop_key:
