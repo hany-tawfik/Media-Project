@@ -36,29 +36,21 @@ def callback_audio(in_data, frame_count, time_info, status):
 
     # stream_queue.put(in_data)
 
-    global rawData, clock_interval
+    global rawData, clock_interval, tempoMessage
 
     if stop_key == False:
         print "new audio chunk"
         # rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
         rawData = np.fromstring(in_data, dtype=np.int16)
         beats = RNNbeat(rawData)
-#         tempo = tempoEstimation.process(beats)
-#         tempo_integer = map(np.int16, tempo[:, 0])
-        # clock_interval = update_tempo(tempo_integer[0])
-        clock_interval = update_tempo(120)
-#         print "new tempo: ", tempo_integer[0]
+        tempo = tempoEstimation.process(beats)
+        tempo_integer = map(np.int16, tempo[:, 0])
+        clock_interval = update_tempo(tempo_integer[0])
+        tempoMessage = mido.Message('clock', time=clock_interval)
+        print "new tempo: ", tempo_integer[0]
         # tempo_detection = threading.Thread(target=tempo_detection_thread)
         # tempo_detection.start()
         frames.append(in_data)
-
-
-        # rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
-        # frames.append(in_data)
-        # beats = RNNbeat(rawData)
-        # tempo = tempoEstimation.process(beats)
-        #
-        # print "tempo: ", tempo[0, 0]
 
     # else:
     #
@@ -156,7 +148,7 @@ if __name__ == "__main__":
     SECONDS = 4
     RATE = 44100
     CHUNK = np.uint32(RATE*SECONDS)
-#     CHUNK = 2048
+    # CHUNK = 512
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
 
@@ -195,7 +187,6 @@ if __name__ == "__main__":
     midi_thread.start()
 
     while True:
-        print tempoMessage
         outport.send(tempoMessage)
         time.sleep(clock_interval)
         if stop_key:
