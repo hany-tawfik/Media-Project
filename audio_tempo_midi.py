@@ -78,7 +78,7 @@ def tempo_detection_thread():
     tempo_integer = map(int, tempo[:, 0])
     clock_interval = update_tempo(tempo_integer[0])
     #print "new tempo: ", tempo_integer[0]
-    print "new tempo: \n ", tempo_integer[0]
+    print "new tempo: \n ", tempo_integer
     # t1 = time.clock()
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
 
