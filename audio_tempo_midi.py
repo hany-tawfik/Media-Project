@@ -43,11 +43,11 @@ def callback_audio(in_data, frame_count, time_info, status):
         # rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
         rawData = np.fromstring(in_data, dtype=np.int16)
         beats = RNNbeat(rawData)
-        tempo = tempoEstimation.process(beats)
-        tempo_integer = map(np.int16, tempo[:, 0])
+#         tempo = tempoEstimation.process(beats)
+#         tempo_integer = map(np.int16, tempo[:, 0])
         # clock_interval = update_tempo(tempo_integer[0])
         clock_interval = update_tempo(120)
-        print "new tempo: ", tempo_integer[0]
+#         print "new tempo: ", tempo_integer[0]
         # tempo_detection = threading.Thread(target=tempo_detection_thread)
         # tempo_detection.start()
         frames.append(in_data)
