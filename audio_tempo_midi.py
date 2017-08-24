@@ -39,7 +39,7 @@ def callback_audio(in_data, frame_count, time_info, status):
     global rawData
 
     if stop_key == False:
-
+        print "new audio chunk"
         rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
         frames.append(in_data)
         tempo_detection = threading.Thread(target=tempo_detection_thread)
