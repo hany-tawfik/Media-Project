@@ -164,12 +164,11 @@ if __name__ == "__main__":
     # RNNbeat(np.zeros((100, )))
 
     '''MIDI DATA SETUP'''
+    print "Please press a key for choosing a music scale"
     stop_key = False
     Stop_loop = mido.Message('note_on', note=72)
     note = inport.receive()
     Tonic = note.copy()
-
-    print "Please press a key for choosing a music scale"
 
     while True:
         if setup_chords(Tonic.note):
