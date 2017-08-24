@@ -40,9 +40,10 @@ def callback_audio(in_data, frame_count, time_info, status):
 
     if stop_key == False:
         print "new audio chunk"
+        # rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
+        rawData = np.fromstring(in_data, dtype=np.int16)
         tempo_detection = threading.Thread(target=tempo_detection_thread)
         tempo_detection.start()
-        rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
         frames.append(in_data)
 
 
@@ -72,6 +73,7 @@ def callback_audio(in_data, frame_count, time_info, status):
 
 def tempo_detection_thread():
 
+    print "tempo_detection_thread"
     global rawData, clock_interval
     # t0 = time.clock()
     beats = RNNbeat(rawData)
