@@ -45,8 +45,9 @@ def callback_audio(in_data, frame_count, time_info, status):
         beats = RNNbeat(rawData)
         tempo = tempoEstimation.process(beats)
         tempo_integer = map(np.int16, tempo[:, 0])
-        clock_interval = update_tempo(tempo_integer[0])
-        print "new tempo: ", tempo_integer
+        # clock_interval = update_tempo(tempo_integer[0])
+        clock_interval = update_tempo(120)
+        print "new tempo: ", tempo_integer[0]
         # tempo_detection = threading.Thread(target=tempo_detection_thread)
         # tempo_detection.start()
         frames.append(in_data)
@@ -83,10 +84,9 @@ def tempo_detection_thread():
     # t0 = time.clock()
     beats = RNNbeat(rawData)
     tempo = tempoEstimation.process(beats)
-    tempo_integer = map(np.uint8, tempo[:, 0])
+    tempo_integer = map(int, tempo[:, 0])
     clock_interval = update_tempo(tempo_integer[0])
-    #print "new tempo: ", tempo_integer[0]
-    print "new tempo: ", tempo_integer
+    print "new tempo: ", tempo_integer[0]
     # t1 = time.clock()
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
 
@@ -155,7 +155,8 @@ if __name__ == "__main__":
     '''AUDIO VARIABLES DEFINITION'''
     SECONDS = 4
     RATE = 44100
-    CHUNK = np.uint32(RATE*SECONDS)
+    # CHUNK = np.uint32(RATE*SECONDS)
+    CHUNK = 512
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
 
@@ -172,11 +173,12 @@ if __name__ == "__main__":
     # RNNbeat(np.zeros((100, )))
 
     '''MIDI DATA SETUP'''
-    print "Please press a key for choosing a music scale"
     stop_key = False
     Stop_loop = mido.Message('note_on', note=72)
     note = inport.receive()
     Tonic = note.copy()
+
+    print "Please press a key for choosing a music scale"
 
     while True:
         if setup_chords(Tonic.note):
