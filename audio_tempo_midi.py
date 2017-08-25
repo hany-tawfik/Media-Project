@@ -39,7 +39,7 @@ def callback_audio(in_data, frame_count, time_info, status):
     global rawData, clock_interval, tempoMessage
 
     if stop_key == False:
-        print "new audio chunk"
+        # print "new audio chunk"
         # rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
         rawData = np.fromstring(in_data, dtype=np.int16)
         beats = RNNbeat(rawData)
@@ -145,7 +145,7 @@ if __name__ == "__main__":
     # stream_queue = Queue.Queue()
 
     '''AUDIO VARIABLES DEFINITION'''
-    SECONDS = 4
+    SECONDS = 2.5
     RATE = 44100
     CHUNK = np.uint32(RATE*SECONDS)
     # CHUNK = 512
