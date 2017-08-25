@@ -88,7 +88,7 @@ def callback_audio(in_data, frame_count, time_info, status):
 def tempo_detection_thread():
 
     print "tempo_detection_thread"
-    global rawData, clock_interval, callback_current_samples
+    global rawData, clock_interval, callback_current_samples, tempoMessage
     # rawData = np.int16(struct.unpack('h' * len(callback_current_samples), callback_current_samples))
     # callback_current_samples = ' '.join(callback_current_samples)
     rawData = np.fromstring(''.join(callback_current_samples), dtype=np.int16)
@@ -98,6 +98,7 @@ def tempo_detection_thread():
     tempo_integer = map(np.uint8, tempo[:, 0])
     # clock_interval = update_tempo(tempo_integer[0])
     clock_interval = update_tempo(157)
+    tempoMessage = mido.Message('clock', time=clock_interval)
     print "new tempo: ", tempo_integer
     # t1 = time.clock()
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
