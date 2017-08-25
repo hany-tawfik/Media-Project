@@ -39,7 +39,7 @@ def callback_audio(in_data, frame_count, time_info, status):
     global rawData, clock_interval, tempoMessage
 
     if stop_key == False:
-        # print "new audio chunk"
+        print "new audio chunk"
         # rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
         rawData = np.fromstring(in_data, dtype=np.int16)
         beats = RNNbeat(rawData)
@@ -165,12 +165,11 @@ if __name__ == "__main__":
     # RNNbeat(np.zeros((100, )))
 
     '''MIDI DATA SETUP'''
+    print "Please press a key for choosing a music scale"
     stop_key = False
     Stop_loop = mido.Message('note_on', note=72)
     note = inport.receive()
-    Tonic = note.copy()
-
-    print "Please press a key for choosing a music scale"
+    Tonic = note.copy()    
 
     while True:
         if setup_chords(Tonic.note):
