@@ -145,7 +145,7 @@ if __name__ == "__main__":
     # stream_queue = Queue.Queue()
 
     '''AUDIO VARIABLES DEFINITION'''
-    SECONDS = 2.5
+    SECONDS = 4
     RATE = 22050
     CHUNK = np.uint32(RATE*SECONDS)
     # CHUNK = 512
