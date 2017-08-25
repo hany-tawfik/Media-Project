@@ -47,7 +47,7 @@ def callback_audio(in_data, frame_count, time_info, status):
         callback_counter += 1
 
         # 512 chunksize * 455 (or 216) = 4sec chunk size (for 2.5 sec)
-        if callback_counter >= 2756:
+        if callback_counter >= 1378:
 
             print "4sec audio chunk completed", callback_counter
             callback_current_samples = callback_frame
@@ -168,7 +168,7 @@ if __name__ == "__main__":
     SECONDS = 4
     RATE = 44100
     # CHUNK = np.uint32(RATE*SECONDS)
-    CHUNK = 64
+    CHUNK = 128
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
 
