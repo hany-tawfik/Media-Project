@@ -47,7 +47,7 @@ def callback_audio(in_data, frame_count, time_info, status):
         callback_counter += 1
 
         # 512 chunksize * 455 = 4sec chunk size
-        if callback_counter >= 455:
+        if callback_counter >= 216:
 
             print "4sec audio chunk completed", callback_counter
             callback_current_samples = callback_frame
@@ -96,7 +96,8 @@ def tempo_detection_thread():
     beats = RNNbeat(rawData)
     tempo = tempoEstimation.process(beats)
     tempo_integer = map(np.uint8, tempo[:, 0])
-    clock_interval = update_tempo(tempo_integer[0])
+    # clock_interval = update_tempo(tempo_integer[0])
+    clock_interval = update_tempo(120)
     print "new tempo: ", tempo_integer
     # t1 = time.clock()
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
