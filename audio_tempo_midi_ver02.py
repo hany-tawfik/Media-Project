@@ -46,8 +46,8 @@ def callback_audio(in_data, frame_count, time_info, status):
         frames.append(in_data)
         callback_counter += 1
 
-        # 512 chunksize * 455 = 4sec chunk size
-        if callback_counter >= 216:
+        # 512 chunksize * 455 (or 216) = 4sec chunk size (for 2.5 sec)
+        if callback_counter >= 689:
 
             print "4sec audio chunk completed", callback_counter
             callback_current_samples = callback_frame
@@ -97,7 +97,7 @@ def tempo_detection_thread():
     tempo = tempoEstimation.process(beats)
     tempo_integer = map(np.uint8, tempo[:, 0])
     # clock_interval = update_tempo(tempo_integer[0])
-    clock_interval = update_tempo(120)
+    clock_interval = update_tempo(157)
     print "new tempo: ", tempo_integer
     # t1 = time.clock()
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
@@ -168,7 +168,7 @@ if __name__ == "__main__":
     SECONDS = 4
     RATE = 44100
     # CHUNK = np.uint32(RATE*SECONDS)
-    CHUNK = 512
+    CHUNK = 256
     FORMAT = pyaudio.paInt16
     CHANNELS = 1
 
