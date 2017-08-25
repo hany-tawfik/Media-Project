@@ -89,7 +89,7 @@ def tempo_detection_thread():
 
     print "tempo_detection_thread"
     global rawData, clock_interval, callback_current_samples
-    rawData = np.int16(struct.unpack('h' * CHUNK, callback_current_samples))
+    rawData = np.int16(struct.unpack('h' * len(callback_current_samples), callback_current_samples))
     # rawData = np.fromstring(''.join(callback_current_samples), dtype=np.int16)
     # t0 = time.clock()
     beats = RNNbeat(rawData)
