@@ -182,7 +182,7 @@ if __name__ == '__main__':
 
     print "Tempo estimation data for Spectral Flux: \n", tempo_frame_SpecFlux
     print "Tempo estimation data for Super Flux: \n", tempo_frame_SuperFlux
-    print "Tempo estimation data for RNN: \n", tempo_frame_SpecFlux
+    print "Tempo estimation data for RNN: \n", tempo_frame_RNN
 
     wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
     wf.setnchannels(CHANNELS)
