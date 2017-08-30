@@ -142,7 +142,7 @@ if __name__ == '__main__':
 
         print "tempo_SpecFlux: \n", tempo_SpecFlux[0, 0]
         print "tempo_SuperFlux: \n", tempo_SuperFlux[0, 0]
-        print "tempo_RNN: \n", tempo_RNN
+        print "tempo_RNN: \n", tempo_RNN[0, 0]
 
         tempo_integer_SpecFlux = map(np.int16, tempo_SpecFlux[:, 0])
         tempo_integer_SuperFlux = map(np.int16, tempo_SuperFlux[:, 0])
@@ -183,7 +183,7 @@ if __name__ == '__main__':
     print "Tempo estimation data for Spectral Flux: \n", tempo_frame_SpecFlux
     print "Tempo estimation data for Super Flux: \n", tempo_frame_SuperFlux
     print "Tempo estimation data for RNN: \n", tempo_frame_SpecFlux
-        
+
     wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
     wf.setnchannels(CHANNELS)
     wf.setsampwidth(p.get_sample_size(FORMAT))
