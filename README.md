@@ -54,3 +54,7 @@ This code might help us with midi CC
 https://stackoverflow.com/questions/4011498/how-do-i-send-midi-control-change-messages-ccs-using-pyportmidi-or-pygame
 
 Google "coding midi"
+
+__________________________
+How to push to github 
+https://help.github.com/articles/adding-a-file-to-a-repository-using-the-command-line/#platform-linux
