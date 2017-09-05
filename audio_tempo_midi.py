@@ -118,7 +118,6 @@ if __name__ == "__main__":
 
     '''THREADING DEFINITIONS'''
     midi_thread = threading.Thread(target=midi_msg_handler_thread)
-    midi_thread.start()
     # t = threading.Timer(clock_interval, send_tempo_thread)
 
     '''OBJECT DEFINITIONS'''
@@ -162,9 +161,9 @@ if __name__ == "__main__":
     miChords.update_chords()
 
     '''START OF THREADS'''
-    # t.start()
-    stream.start_stream()
+    # t.start()    
     midi_thread.start()
+    stream.start_stream()
 
     while True:
         outport.send(tempoMessage)
