@@ -45,12 +45,12 @@ def callback_audio(in_data, frame_count, time_info, status):
         frames.append(in_data)
         
         #Tempo detection thread
-        #tempo_detection = threading.Thread(target=tempo_detection_thread)
-        #tempo_detection.start()
-        
-        tempo_detection = multiprocessing.Process(target=tempo_detection_thread)
+        tempo_detection = threading.Thread(target=tempo_detection_thread)
         tempo_detection.start()
-        tempo_detection.join()
+        
+        #tempo_detection = multiprocessing.Process(target=tempo_detection_thread)
+        #tempo_detection.start()
+        #tempo_detection.join()
         
 
         # rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
