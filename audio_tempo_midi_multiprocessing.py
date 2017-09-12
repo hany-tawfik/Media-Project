@@ -197,6 +197,7 @@ if __name__ == "__main__":
     
     Send_clock = multiprocessing.Process(target=send_tempo_thread)
     Send_clock.start()
+    Send_clock.join()
     """
     while True:
         outport.send(tempoMessage)
