@@ -193,18 +193,19 @@ if __name__ == "__main__":
     stream.start_stream()
     midi_thread.start()
     
-    # Sending clock message is in the main thread
     
+    """
     Send_clock = multiprocessing.Process(target=send_tempo_thread)
     Send_clock.start()
     Send_clock.join()
     """
+    # Sending clock message is in the main thread
     while True:
         outport.send(tempoMessage)
         time.sleep(clock_interval)
         if stop_key:
             break
-    """
+    
     
     '''Closing Audio threads and creating wav file'''
     stream.stop_stream()
