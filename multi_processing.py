@@ -1,5 +1,5 @@
-#from madmom.models import BEATS_LSTM
-#import madmom as mm
+from madmom.models import BEATS_LSTM
+import madmom as mm
 import midi_chords as miChords
 import mido
 import numpy as np
@@ -11,6 +11,13 @@ import time
 import wave
 import multiprocessing
 
+def setup_chords(note_set):
+
+    if Stop_loop.note != note_set:
+        return True
+    else:
+        return False
+    
 def midi_msg_handler_thread():
 
     for msg in inport:
