@@ -11,6 +11,25 @@ import time
 import wave
 import multiprocessing
 
+def midi_msg_handler_thread():
+
+    for msg in inport:
+
+        # print "msg.note inside of thread: ", msg.note
+
+        if msg.note == Stop_loop.note:  # Note C6 (72) closes the code.
+            stop_all_threads()
+            inport.close()
+            inport2.close()
+            outport.close()
+            # t.cancel()
+            # t.finished
+            print "closing midi_msg_handler thread"
+            break
+        else:
+            miChords.Send_Chord(msg)
+            
+            
 if __name__ == "__main__":
 
     '''MIDI I/O PORTS SETUP'''
@@ -31,3 +50,23 @@ if __name__ == "__main__":
     
     '''MULTIPROCESSING DEFINITIONS'''
     midi_thread = multiprocessing.Process(target=midi_msg_handler_thread)
+    
+    '''MIDI DATA SETUP'''
+    print "Please press a key for choosing a music scale"
+    stop_key = False
+    Stop_loop = mido.Message('note_on', note=72)
+    note = inport.receive()
+    Tonic = note.copy()
+    
+    while True:
+        if setup_chords(Tonic.note):
+            break
+        note = inport.receive()
+        Tonic = note.copy()
+
+    miChords.Set_Tonic_Scale(Tonic.note)
+    miChords.update_chords()
+
+    '''START OF MULTIPROCESSES'''   
+    midi_thread.start()
+    midi_thread.join()
