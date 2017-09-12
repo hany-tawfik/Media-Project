@@ -74,7 +74,7 @@ if __name__ == "__main__":
             note = inport.receive()
             Tonic = note.copy()
             
-            if stop_key:
+            if if msg.note == Stop_loop.note:  # Note C6 (72) closes the code.
             break
 
         miChords.Set_Tonic_Scale(Tonic.note)
