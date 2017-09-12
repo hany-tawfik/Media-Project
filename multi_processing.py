@@ -56,7 +56,8 @@ if __name__ == "__main__":
     tempoMessage = mido.Message('clock', time=clock_interval)
     
     '''MULTIPROCESSING DEFINITIONS'''
-    midi_thread = multiprocessing.Process(target=midi_msg_handler_thread)
+    #midi_thread = multiprocessing.Process(target=midi_msg_handler_thread)
+    midi_thread = threading.Thread(target=midi_msg_handler_thread)
     
     '''MIDI DATA SETUP'''
     print "Please press a key for choosing a music scale"
