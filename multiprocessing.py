@@ -1,5 +1,5 @@
 #from madmom.models import BEATS_LSTM
-import madmom as mm
+#import madmom as mm
 import midi_chords as miChords
 import mido
 import numpy as np
