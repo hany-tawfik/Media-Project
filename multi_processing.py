@@ -75,7 +75,7 @@ if __name__ == "__main__":
             Tonic = note.copy()
             
             if msg.note == Stop_loop.note:  # Note C6 (72) closes the code.
-            break
+                break
 
         miChords.Set_Tonic_Scale(Tonic.note)
         miChords.update_chords()
