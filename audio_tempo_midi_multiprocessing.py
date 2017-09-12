@@ -45,8 +45,13 @@ def callback_audio(in_data, frame_count, time_info, status):
         frames.append(in_data)
         
         #Tempo detection thread
-        tempo_detection = threading.Thread(target=tempo_detection_thread)
+        #tempo_detection = threading.Thread(target=tempo_detection_thread)
+        #tempo_detection.start()
+        
+        tempo_detection = multiprocessing.Process(target=tempo_detection_thread)
         tempo_detection.start()
+        tempo_detection.join()
+        
 
         # rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
         # frames.append(in_data)
@@ -79,7 +84,8 @@ def tempo_detection_thread():
     beats = RNNbeat(rawData)
     tempo = tempoEstimation.process(beats)
     tempo_integer = map(int, tempo[:, 0])
-    clock_interval = update_tempo(tempo_integer[0])
+    #clock_interval = update_tempo(tempo_integer[0])
+    clock_interval = update_tempo(127)
     print "new tempo: ", tempo_integer[0]
     # t1 = time.clock()
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
