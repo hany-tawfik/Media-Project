@@ -36,6 +36,10 @@ def midi_msg_handler_thread():
         else:
             miChords.Send_Chord(msg)
             
+def stop_all_threads():
+
+    global stop_key
+    stop_key = True            
             
 if __name__ == "__main__":
 
