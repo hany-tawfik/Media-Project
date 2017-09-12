@@ -68,21 +68,9 @@ if __name__ == "__main__":
     stop_key = False
     Stop_loop = mido.Message('note_on', note=72)
     
-    while True:
-        note = inport.receive()
-        Tonic = note.copy()
     
-        while True:
-            if setup_chords(Tonic.note):
-                break
-            note = inport.receive()
-            Tonic = note.copy()
-            
-            if msg.note == Stop_loop.note:  # Note C6 (72) closes the code.
-                break
 
-        miChords.Set_Tonic_Scale(Tonic.note)
-        miChords.update_chords()
+        
 
         '''START OF MULTIPROCESSES'''   
         midi_thread.start()
