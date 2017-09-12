@@ -63,18 +63,23 @@ if __name__ == "__main__":
     print "Please press a key for choosing a music scale"
     stop_key = False
     Stop_loop = mido.Message('note_on', note=72)
-    note = inport.receive()
-    Tonic = note.copy()
     
     while True:
-        if setup_chords(Tonic.note):
-            break
         note = inport.receive()
         Tonic = note.copy()
+    
+        while True:
+            if setup_chords(Tonic.note):
+                break
+            note = inport.receive()
+            Tonic = note.copy()
+            
+            if stop_key:
+            break
 
-    miChords.Set_Tonic_Scale(Tonic.note)
-    miChords.update_chords()
+        miChords.Set_Tonic_Scale(Tonic.note)
+        miChords.update_chords()
 
-    '''START OF MULTIPROCESSES'''   
-    midi_thread.start()
-    midi_thread.join()
+        '''START OF MULTIPROCESSES'''   
+        midi_thread.start()
+        midi_thread.join()
