@@ -31,6 +31,7 @@ def stop_all_threads():
 
     global stop_key
     stop_key = True
+    stop_key_flag.value = 1
 
 def callback_audio(in_data, frame_count, time_info, status):
 
@@ -57,8 +58,7 @@ def send_clock_process(clock_interval, stop_key_flag, clock_value):
             interval = clock_value.get()
         outport.send(tempoMessage)
         time.sleep(interval)
-        if stop_key_flag.get() is True:
-            print stop_key_flag.get()
+        if stop_key_flag.value == 1:
             break
 
 
@@ -141,9 +141,9 @@ if __name__ == "__main__":
     
     '''MULTIPROCESS SHARED MEMORIES'''
     clock_value = multiprocessing.Queue()
-    stop_key_flag = multiprocessing.Queue()
+    #stop_key_flag = multiprocessing.Queue()
+    stop_key_flag = multiprocessing.Value('i', 0)
     
-    #clock_value.put(clock_interval)
     
     '''START OF THREADS'''    
     midi_thread.start()
