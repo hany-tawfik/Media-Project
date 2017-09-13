@@ -185,7 +185,7 @@ if __name__ == "__main__":
     midi_thread.start()
     stream.start_stream()
     
-    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_value, Stop_key_flag)
+    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_value, Stop_key_flag))
     ext_clock.start()
     ext_clock.join()
     '''
