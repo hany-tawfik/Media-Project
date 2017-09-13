@@ -36,38 +36,19 @@ def stop_all_threads():
 
 def callback_audio(in_data, frame_count, time_info, status):
 
-    # stream_queue.put(in_data)
-
     global rawData, clock_interval, tempoMessage
 
     if stop_key == False:
-        # print "new audio chunk"
         rawData = np.fromstring(in_data, dtype=np.int16)
         beats = RNNbeat(rawData)
         tempo = tempoEstimation.process(beats)
         tempo_integer = map(np.int16, tempo[:, 0])
         clock_interval = update_tempo(tempo_integer[0])
         clock_value.put(clock_interval)
-        #clock_interval = update_tempo(127)
         tempoMessage = mido.Message('clock', time=clock_interval)
         print("new tempo: ", tempo_integer[0])
         
     return in_data, pyaudio.paContinue
-
-'''
-def tempo_detection_thread():
-
-    print "tempo_detection_thread"
-    global rawData, clock_interval
-    # t0 = time.clock()
-    beats = RNNbeat(rawData)
-    tempo = tempoEstimation.process(beats)
-    tempo_integer = map(int, tempo[:, 0])
-    clock_interval = update_tempo(tempo_integer[0])
-    print "new tempo: ", tempo_integer[0]
-    # t1 = time.clock()
-    # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
-'''
 
 def send_clock_process(clock_interval, clock_value): #, Stop_key_flag
     
@@ -82,33 +63,16 @@ def send_clock_process(clock_interval, clock_value): #, Stop_key_flag
            # print Stop_key_flag.get()
           #  break
 
-def send_tempo_thread():
-
-    # global t
-    outport.send(tempoMessage)
-
-    if stop_key == False:
-
-        t = threading.Timer(clock_interval, send_tempo_thread)
-        t.start()
-
-    else:
-        print "stop timer thread"
-
 
 def midi_msg_handler_thread():
 
     for msg in inport:
-
-        # print "msg.note inside of thread: ", msg.note
 
         if msg.note == Stop_loop.note:  # Note C6 (72) closes the code.
             stop_all_threads()
             inport.close()
             inport2.close()
             outport.close()
-            # t.cancel()
-            # t.finished
             print "closing midi_msg_handler thread"
             break
         else:
@@ -152,13 +116,11 @@ if __name__ == "__main__":
     
     '''THREADING DEFINITIONS'''
     midi_thread = threading.Thread(target=midi_msg_handler_thread)
-    # t = threading.Timer(clock_interval, send_tempo_thread)
-
+    
     '''OBJECT DEFINITIONS'''
     RNNbeat = mm.features.beats.RNNBeatProcessor(online=True, nn_files=[BEATS_LSTM[0]])
     tempoEstimation = mm.features.tempo.TempoEstimationProcessor(min_bpm=40, max_bpm=180, fps=100)
     p = pyaudio.PyAudio()
-    # stream_queue = Queue.Queue()
 
     '''AUDIO VARIABLES DEFINITION'''
     SECONDS = 4
@@ -184,8 +146,7 @@ if __name__ == "__main__":
     #Stop_key_flag.put(False)
     #clock_value.put(clock_interval)
     
-    '''START OF THREADS'''
-    # t.start()    
+    '''START OF THREADS'''    
     midi_thread.start()
     stream.start_stream()
     
