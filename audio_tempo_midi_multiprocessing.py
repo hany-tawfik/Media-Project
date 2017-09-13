@@ -9,6 +9,7 @@ import struct
 import threading
 import time
 import wave
+import multiprocessing
 
 
 def setup_chords(note_set):
@@ -50,7 +51,7 @@ def callback_audio(in_data, frame_count, time_info, status):
         
     return in_data, pyaudio.paContinue
 
-
+'''
 def tempo_detection_thread():
 
     print "tempo_detection_thread"
@@ -63,7 +64,14 @@ def tempo_detection_thread():
     print "new tempo: ", tempo_integer[0]
     # t1 = time.clock()
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
+'''
 
+def send_clock_process():
+    while True:
+        outport.send(tempoMessage)
+        time.sleep(clock_interval)
+        if stop_key:
+            break
 
 def send_tempo_thread():
 
@@ -164,12 +172,17 @@ if __name__ == "__main__":
     # t.start()    
     midi_thread.start()
     stream.start_stream()
-
+    
+    ext_clock = multiprocessing.Process(target=send_clock_process)
+    ext_clock.start()
+    ext_clock.join()
+    '''
     while True:
         outport.send(tempoMessage)
         time.sleep(clock_interval)
         if stop_key:
             break
+    '''
 
     '''Closing Audio threads and creating wav file'''
     stream.stop_stream()
