@@ -141,7 +141,10 @@ if __name__ == "__main__":
     Stop_loop = mido.Message('note_on', note=72)
     note = inport.receive()
     Tonic = note.copy()  
-        
+    
+    ext_clock.start() #Start of the child process
+    ext_clock.join()
+    
     while True:
         if setup_chords(Tonic.note):
             break
@@ -151,8 +154,7 @@ if __name__ == "__main__":
     miChords.Set_Tonic_Scale(Tonic.note)
     miChords.update_chords()
     
-    ext_clock.start() #Start of the child process
-    ext_clock.join()   
+       
     
     '''RUNNING TIME'''
 
