@@ -127,7 +127,7 @@ if __name__ == "__main__":
     midi_thread.start()
     stream.start_stream()  
     
-     '''MIDI DATA SETUP'''
+    '''MIDI DATA SETUP'''
     print "Please press a key for choosing a music scale"
     stop_key = False
     Stop_loop = mido.Message('note_on', note=72)
