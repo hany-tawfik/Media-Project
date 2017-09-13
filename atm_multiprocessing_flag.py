@@ -127,6 +127,16 @@ if __name__ == "__main__":
     midi_thread.start()
     stream.start_stream()  
     
+    
+    '''MULTIPROCESS SHARED MEMORIES'''
+    clock_value = multiprocessing.Queue()
+    stop_key_flag = multiprocessing.Value('i', 0)
+    
+    '''CHILD PROCESS'''
+    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, stop_key_flag, clock_value)) 
+    ext_clock.start() #Start of the child process
+    ext_clock.join()    
+    
     '''MIDI DATA SETUP'''
     print "Please press a key for choosing a music scale"
     stop_key = False
@@ -144,15 +154,6 @@ if __name__ == "__main__":
     miChords.Set_Tonic_Scale(Tonic.note)
     miChords.update_chords()
     
-    '''MULTIPROCESS SHARED MEMORIES'''
-    clock_value = multiprocessing.Queue()
-    stop_key_flag = multiprocessing.Value('i', 0)
-    
-    '''CHILD PROCESS'''
-    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, stop_key_flag, clock_value)) 
-    ext_clock.start() #Start of the child process
-    ext_clock.join()    
-        
     '''RUNNING TIME'''
 
     '''Closing Audio threads and creating wav file'''
