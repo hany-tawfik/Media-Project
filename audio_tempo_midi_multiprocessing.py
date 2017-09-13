@@ -77,7 +77,7 @@ def send_clock_process(clock_value, Stop_key_flag):
             interval = clock_value.get()
         outport.send(tempoMessage)
         time.sleep(interval)
-        if stop_key:
+        if stop_key_flag.get() is True:
             break
 
 def send_tempo_thread():
