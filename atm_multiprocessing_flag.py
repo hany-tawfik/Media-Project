@@ -98,7 +98,7 @@ if __name__ == "__main__":
     clock_interval = 60. / ((DEFAULT_BPM + OFFSET) * PPQ)
     clock_interval = np.float16(clock_interval)
     tempoMessage = mido.Message('clock', time=clock_interval)
-    startMessage = mido.Message('continue')   
+    startMessage = mido.Message('reset')   
    
     
     '''THREADING DEFINITIONS'''
