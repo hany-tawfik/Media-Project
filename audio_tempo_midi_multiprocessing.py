@@ -29,7 +29,7 @@ def update_tempo(new_tempo):
 
 def stop_all_threads():
 
-    global stop_key
+    global stop_key, stop_key_flag
     stop_key = True
     stop_key_flag.put(stop_key)
 
