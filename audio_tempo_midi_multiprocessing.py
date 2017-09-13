@@ -31,7 +31,7 @@ def stop_all_threads():
 
     global stop_key
     stop_key = True
-    stop_key_flag.put(stop_key)
+    #stop_key_flag.put(stop_key)
 
 
 def callback_audio(in_data, frame_count, time_info, status):
@@ -69,7 +69,7 @@ def tempo_detection_thread():
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
 '''
 
-def send_clock_process(clock_interval, clock_value, Stop_key_flag):
+def send_clock_process(clock_interval, clock_value):
     
     interval = clock_interval
     while True:
@@ -78,8 +78,8 @@ def send_clock_process(clock_interval, clock_value, Stop_key_flag):
             interval = clock_value.get()
         outport.send(tempoMessage)
         time.sleep(interval)
-        if stop_key_flag.get() is True:
-            break
+        #if stop_key_flag.get() is True:
+            #break
 
 def send_tempo_thread():
 
