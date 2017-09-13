@@ -67,6 +67,8 @@ def midi_msg_handler_thread():
     for msg in inport:
 
         if msg.note == Stop_loop.note:  # Note C6 (72) closes the code.
+            outport.send(stopMessage)
+            time.sleep(1e-3)
             stop_all_threads()
             inport.close()
             inport2.close()
@@ -74,7 +76,7 @@ def midi_msg_handler_thread():
             print "closing midi_msg_handler thread"
             break
         elif msg.note == Start_msg.note:
-            outport.send(startMessage)
+            #outport.send(startMessage)
             #time.sleep(1e-3)
             outport.send(stopMessage)
             #time.sleep(1e-3)
