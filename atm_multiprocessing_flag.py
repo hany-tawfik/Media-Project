@@ -134,17 +134,14 @@ if __name__ == "__main__":
     
     '''CHILD PROCESS'''
     ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, stop_key_flag, clock_value)) 
-    ext_clock.start() #Start of the child process
-    ext_clock.join()    
-    
+     
     '''MIDI DATA SETUP'''
     print "Please press a key for choosing a music scale"
     stop_key = False
     Stop_loop = mido.Message('note_on', note=72)
     note = inport.receive()
     Tonic = note.copy()  
-    
-    
+        
     while True:
         if setup_chords(Tonic.note):
             break
@@ -153,6 +150,9 @@ if __name__ == "__main__":
 
     miChords.Set_Tonic_Scale(Tonic.note)
     miChords.update_chords()
+    
+    ext_clock.start() #Start of the child process
+    ext_clock.join()   
     
     '''RUNNING TIME'''
 
