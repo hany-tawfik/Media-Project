@@ -76,6 +76,11 @@ def midi_msg_handler_thread():
         elif msg.note == Start_msg.note:
             outport.send(startMessage)
             time.sleep(1e-3)
+            outport.send(stopMessage)
+            time.sleep(1e-3)
+            outport.send(startMessage)
+            time.sleep(1e-3)
+            
             print Start_msg.note
         else:
             miChords.Send_Chord(msg)
@@ -98,7 +103,8 @@ if __name__ == "__main__":
     clock_interval = 60. / ((DEFAULT_BPM + OFFSET) * PPQ)
     clock_interval = np.float16(clock_interval)
     tempoMessage = mido.Message('clock', time=clock_interval)
-    startMessage = mido.Message('reset')   
+    startMessage = mido.Message('start') 
+    stopMessage = mido.Message('stop')
    
     
     '''THREADING DEFINITIONS'''
