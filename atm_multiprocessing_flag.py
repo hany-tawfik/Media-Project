@@ -81,8 +81,6 @@ def midi_msg_handler_thread():
             
         elif msg.note == Start_msg.note:
             
-            print Start_msg.note
-            
             if start_stop_flag == False:
                 outport.send(stopMessage)
                 time.sleep(1e-3)
