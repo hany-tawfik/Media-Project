@@ -69,8 +69,9 @@ def tempo_detection_thread():
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
 '''
 
-def send_clock_process(clock_value, Stop_key_flag):
-    interval = clock_value.get()
+def send_clock_process(clock_interval, clock_value, Stop_key_flag):
+    
+    interval = clock_interval
     while True:
        
         if clock_value.empty() is False:
@@ -169,7 +170,7 @@ if __name__ == "__main__":
     '''MULTIPROCESS SHARED MEMORIES'''
     clock_value = multiprocessing.Queue()
     Stop_key_flag = multiprocessing.Queue()
-    clock_value.put(clock_interval)
+    #clock_value.put(clock_interval)
     
     while True:
         if setup_chords(Tonic.note):
@@ -185,7 +186,7 @@ if __name__ == "__main__":
     midi_thread.start()
     stream.start_stream()
     
-    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_value, Stop_key_flag))
+    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, clock_value, Stop_key_flag))
     ext_clock.start()
     ext_clock.join()
     '''
