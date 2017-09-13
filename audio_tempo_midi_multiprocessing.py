@@ -48,7 +48,6 @@ def callback_audio(in_data, frame_count, time_info, status):
         tempo_integer = map(np.int16, tempo[:, 0])
         clock_interval = update_tempo(tempo_integer[0])
         clock_value.put(clock_interval)
-    Stop_key_flag.put(True)
         #clock_interval = update_tempo(127)
         tempoMessage = mido.Message('clock', time=clock_interval)
         print("new tempo: ", tempo_integer[0])
