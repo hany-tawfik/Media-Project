@@ -31,7 +31,7 @@ def stop_all_threads():
 
     global stop_key
     stop_key = True
-    #Stop_key_flag.put(stop_key)
+    stop_key_flag.put(stop_key)
 
 
 def callback_audio(in_data, frame_count, time_info, status):
@@ -50,7 +50,7 @@ def callback_audio(in_data, frame_count, time_info, status):
         
     return in_data, pyaudio.paContinue
 
-def send_clock_process(clock_interval, clock_value): #, Stop_key_flag
+def send_clock_process(clock_interval, clock_value, stop_key_flag): 
     
     interval = clock_interval
     while True:
@@ -59,9 +59,9 @@ def send_clock_process(clock_interval, clock_value): #, Stop_key_flag
             interval = clock_value.get()
         outport.send(tempoMessage)
         time.sleep(interval)
-        #if Stop_key_flag.get() is True:
-           # print Stop_key_flag.get()
-          #  break
+        if stop_key_flag.get() is True:
+            print stop_key_flag.get()
+            break
 
 
 def midi_msg_handler_thread():
@@ -142,15 +142,15 @@ if __name__ == "__main__":
     
     '''MULTIPROCESS SHARED MEMORIES'''
     clock_value = multiprocessing.Queue()
-    #Stop_key_flag = multiprocessing.Queue()
-    #Stop_key_flag.put(False)
+    stop_key_flag = multiprocessing.Queue()
+    
     #clock_value.put(clock_interval)
     
     '''START OF THREADS'''    
     midi_thread.start()
     stream.start_stream()
     
-    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, clock_value)) #, Stop_key_flag
+    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, clock_value, stop_key_flag)) 
     ext_clock.start()
     ext_clock.join()
     '''
