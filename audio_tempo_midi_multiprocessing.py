@@ -169,7 +169,7 @@ if __name__ == "__main__":
     
     '''MULTIPROCESS SHARED MEMORIES'''
     clock_value = multiprocessing.Queue()
-    Stop_key_flag = multiprocessing.Queue()
+    #Stop_key_flag = multiprocessing.Queue()
     #clock_value.put(clock_interval)
     
     while True:
@@ -186,7 +186,7 @@ if __name__ == "__main__":
     midi_thread.start()
     stream.start_stream()
     
-    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, clock_value, Stop_key_flag))
+    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, clock_value))
     ext_clock.start()
     ext_clock.join()
     '''
