@@ -31,8 +31,6 @@ def stop_all_threads():
 
     global stop_key
     stop_key = True
-    stop_key_flag.put(stop_key)
-
 
 def callback_audio(in_data, frame_count, time_info, status):
 
@@ -70,6 +68,7 @@ def midi_msg_handler_thread():
 
         if msg.note == Stop_loop.note:  # Note C6 (72) closes the code.
             stop_all_threads()
+            stop_key_flag.put(True)
             inport.close()
             inport2.close()
             outport.close()
