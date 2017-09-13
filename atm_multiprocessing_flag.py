@@ -73,6 +73,9 @@ def midi_msg_handler_thread():
             outport.close()
             print "closing midi_msg_handler thread"
             break
+        elif msg.note == Stop_loop.note:
+            
+            
         else:
             miChords.Send_Chord(msg)
 
