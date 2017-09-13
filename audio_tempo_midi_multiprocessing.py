@@ -9,7 +9,6 @@ import struct
 import threading
 import time
 import wave
-import multiprocessing
 
 
 def setup_chords(note_set):
@@ -37,55 +36,30 @@ def callback_audio(in_data, frame_count, time_info, status):
 
     # stream_queue.put(in_data)
 
-    global rawData
+    global rawData, clock_interval, tempoMessage
 
     if stop_key == False:
-
-        rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
-        frames.append(in_data)
+        # print "new audio chunk"
+        rawData = np.fromstring(in_data, dtype=np.int16)
+        beats = RNNbeat(rawData)
+        tempo = tempoEstimation.process(beats)
+        tempo_integer = map(np.int16, tempo[:, 0])
+        clock_interval = update_tempo(tempo_integer[0])
+        tempoMessage = mido.Message('clock', time=clock_interval)
+        print "new tempo: ", tempo_integer[0]
         
-        #Tempo detection thread
-        tempo_detection = threading.Thread(target=tempo_detection_thread)
-        tempo_detection.start()
-        
-        #tempo_detection = multiprocessing.Process(target=tempo_detection_thread)
-        #tempo_detection.start()
-        #tempo_detection.join()
-        
-
-        # rawData = np.int16(struct.unpack('h' * CHUNK, in_data))
-        # frames.append(in_data)
-        # beats = RNNbeat(rawData)
-        # tempo = tempoEstimation.process(beats)
-        #
-        # print "tempo: ", tempo[0, 0]
-
-    # else:
-    #
-    #     stream.stop_stream()
-    #     stream.close()
-    #     p.terminate()
-    #     wf = wave.open(WAVE_OUTPUT_FILENAME, 'wb')
-    #     wf.setnchannels(CHANNELS)
-    #     wf.setsampwidth(p.get_sample_size(FORMAT))
-    #     wf.setframerate(RATE)
-    #     wf.writeframes(b''.join(frames))
-    #     wf.close()
-    #
-    #     print "Closed audio channels and created wav file"
-
     return in_data, pyaudio.paContinue
 
 
 def tempo_detection_thread():
 
+    print "tempo_detection_thread"
     global rawData, clock_interval
     # t0 = time.clock()
     beats = RNNbeat(rawData)
     tempo = tempoEstimation.process(beats)
     tempo_integer = map(int, tempo[:, 0])
-    #clock_interval = update_tempo(tempo_integer[0])
-    clock_interval = update_tempo(127)
+    clock_interval = update_tempo(tempo_integer[0])
     print "new tempo: ", tempo_integer[0]
     # t1 = time.clock()
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
@@ -169,18 +143,16 @@ if __name__ == "__main__":
     WAVE_OUTPUT_FILENAME = "frames_recorded.wav"
     frames = []
     rawData = 0
-    # RNNbeat(np.zeros((100, )))
 
     '''MIDI DATA SETUP'''
+    print "Please press a key for choosing a music scale"
     stop_key = False
     Stop_loop = mido.Message('note_on', note=72)
     note = inport.receive()
-    Tonic = note.copy()
+    Tonic = note.copy()    
 
-    print "Please press a key for choosing a music scale"
-
-    while True: #Why is here a while loop? is it to wait for an input note?
-        if setup_chords(Tonic.note): 
+    while True:
+        if setup_chords(Tonic.note):
             break
         note = inport.receive()
         Tonic = note.copy()
@@ -189,24 +161,16 @@ if __name__ == "__main__":
     miChords.update_chords()
 
     '''START OF THREADS'''
-    # t.start()
-    stream.start_stream()
+    # t.start()    
     midi_thread.start()
-    
-    
-    """
-    Send_clock = multiprocessing.Process(target=send_tempo_thread)
-    Send_clock.start()
-    Send_clock.join()
-    """
-    # Sending clock message is in the main thread
+    stream.start_stream()
+
     while True:
         outport.send(tempoMessage)
         time.sleep(clock_interval)
         if stop_key:
             break
-    
-    
+
     '''Closing Audio threads and creating wav file'''
     stream.stop_stream()
     stream.close()
