@@ -171,7 +171,7 @@ if __name__ == "__main__":
     '''MULTIPROCESS SHARED MEMORIES'''
     clock_value = multiprocessing.Queue()
     Stop_key_flag = multiprocessing.Queue()
-    Stop_key_flag.put(False)
+    #Stop_key_flag.put(False)
     #clock_value.put(clock_interval)
     
     while True:
