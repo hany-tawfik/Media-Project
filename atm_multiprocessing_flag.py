@@ -73,8 +73,9 @@ def midi_msg_handler_thread():
             outport.close()
             print "closing midi_msg_handler thread"
             break
-        elif msg.note == Stop_loop.note:
+        elif msg.note == Start_msg.note:
             
+            outport.send(startMessage)
             
         else:
             miChords.Send_Chord(msg)
@@ -97,7 +98,7 @@ if __name__ == "__main__":
     clock_interval = 60. / ((DEFAULT_BPM + OFFSET) * PPQ)
     clock_interval = np.float16(clock_interval)
     tempoMessage = mido.Message('clock', time=clock_interval)
-    
+    startMessage = mido.Message('start')   
    
     
     '''THREADING DEFINITIONS'''
@@ -142,6 +143,7 @@ if __name__ == "__main__":
     print "Please press a key for choosing a music scale"
     stop_key = False
     Stop_loop = mido.Message('note_on', note=72)
+    Start_msg = mido.Message('note_on', note=71)
     note = inport.receive()
     Tonic = note.copy()  
     
