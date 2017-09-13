@@ -76,12 +76,14 @@ def midi_msg_handler_thread():
             print "closing midi_msg_handler thread"
             break
         elif msg.note == Start_msg.note:
-            #outport.send(startMessage)
-            #time.sleep(1e-3)
-            outport.send(stopMessage)
-            time.sleep(1e-3)
-            outport.send(startMessage)
-            time.sleep(1e-3)
+            if start_stop_flag == False:
+                outport.send(stopMessage)
+                time.sleep(1e-3)
+                outport.send(startMessage)
+                time.sleep(1e-3)
+                start_stop_flag = True
+            else:
+                start_stop_flag = False
             
             print Start_msg.note
         else:
@@ -150,6 +152,7 @@ if __name__ == "__main__":
     '''MIDI DATA SETUP'''
     print "Please press a key for choosing a music scale"
     stop_key = False
+    start_stop_flag = False
     Stop_loop = mido.Message('note_on', note=72)
     Start_msg = mido.Message('note_on', note=71)
     note = inport.receive()
