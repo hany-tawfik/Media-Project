@@ -46,7 +46,7 @@ def callback_audio(in_data, frame_count, time_info, status):
         tempo = tempoEstimation.process(beats)
         tempo_integer = map(np.int16, tempo[:, 0])
         clock_interval = update_tempo(tempo_integer[0])
-        clock_interval = update_tempo(127)
+        #clock_interval = update_tempo(127)
         tempoMessage = mido.Message('clock', time=clock_interval)
         print("new tempo: ", tempo_integer[0])
         
@@ -118,7 +118,7 @@ if __name__ == "__main__":
     outport = mido.open_output(korg)
 
     '''MIDI EXTERNAL CLOCK CALCULATION'''
-    DEFAULT_BPM = 120
+    DEFAULT_BPM = 100
     OFFSET = 2
     PPQ = 24  # Pulse per quarter note
     clock_interval = 60. / ((DEFAULT_BPM + OFFSET) * PPQ)
