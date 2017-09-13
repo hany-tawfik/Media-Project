@@ -46,8 +46,9 @@ def callback_audio(in_data, frame_count, time_info, status):
         tempo = tempoEstimation.process(beats)
         tempo_integer = map(np.int16, tempo[:, 0])
         clock_interval = update_tempo(tempo_integer[0])
+        clock_interval = update_tempo(127)
         tempoMessage = mido.Message('clock', time=clock_interval)
-        print "new tempo: ", tempo_integer[0]
+        print("new tempo: ", tempo_integer[0])
         
     return in_data, pyaudio.paContinue
 
