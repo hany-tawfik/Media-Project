@@ -63,10 +63,13 @@ def send_clock_process(clock_interval, stop_key_flag, clock_value):
 
 
 def midi_msg_handler_thread():
+    
+    global start_stop_flag
 
     for msg in inport:
 
         if msg.note == Stop_loop.note:  # Note C6 (72) closes the code.
+            
             outport.send(stopMessage)
             time.sleep(1e-3)
             stop_all_threads()
@@ -75,7 +78,11 @@ def midi_msg_handler_thread():
             outport.close()
             print "closing midi_msg_handler thread"
             break
+            
         elif msg.note == Start_msg.note:
+            
+            print Start_msg.note
+            
             if start_stop_flag == False:
                 outport.send(stopMessage)
                 time.sleep(1e-3)
@@ -83,9 +90,7 @@ def midi_msg_handler_thread():
                 time.sleep(1e-3)
                 start_stop_flag = True
             else:
-                start_stop_flag = False
-            
-            print Start_msg.note
+                start_stop_flag = False   
         else:
             miChords.Send_Chord(msg)
 
