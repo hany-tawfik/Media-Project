@@ -140,24 +140,17 @@ if __name__ == "__main__":
     
     '''MULTIPROCESS SHARED MEMORIES'''
     clock_value = multiprocessing.Queue()
-    #stop_key_flag = multiprocessing.Queue()
     stop_key_flag = multiprocessing.Value('i', 0)
     
+    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, stop_key_flag, clock_value)) 
+    ext_clock.start() #Start of the child process
+    ext_clock.join()    
     
     '''START OF THREADS'''    
     midi_thread.start()
-    stream.start_stream()
+    stream.start_stream()  
     
-    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, stop_key_flag, clock_value)) 
-    ext_clock.start()
-    ext_clock.join()
-    '''
-    while True:
-        outport.send(tempoMessage)
-        time.sleep(clock_interval)
-        if stop_key:
-            break
-    '''
+    '''Running time'''
 
     '''Closing Audio threads and creating wav file'''
     stream.stop_stream()
