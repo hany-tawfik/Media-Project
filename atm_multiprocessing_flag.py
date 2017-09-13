@@ -138,19 +138,20 @@ if __name__ == "__main__":
     frames = []
     rawData = 0
     
-    '''MULTIPROCESS SHARED MEMORIES'''
-    clock_value = multiprocessing.Queue()
-    stop_key_flag = multiprocessing.Value('i', 0)
-    
-    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, stop_key_flag, clock_value)) 
-    ext_clock.start() #Start of the child process
-    ext_clock.join()    
-    
     '''START OF THREADS'''    
     midi_thread.start()
     stream.start_stream()  
     
-    '''Running time'''
+    '''MULTIPROCESS SHARED MEMORIES'''
+    clock_value = multiprocessing.Queue()
+    stop_key_flag = multiprocessing.Value('i', 0)
+    
+    '''CHILD PROCESS'''
+    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, stop_key_flag, clock_value)) 
+    ext_clock.start() #Start of the child process
+    ext_clock.join()    
+        
+    '''RUNNING TIME'''
 
     '''Closing Audio threads and creating wav file'''
     stream.stop_stream()
