@@ -31,6 +31,7 @@ def stop_all_threads():
 
     global stop_key
     stop_key = True
+    stop_key_flag.put(stop_key)
 
 
 def callback_audio(in_data, frame_count, time_info, status):
@@ -46,6 +47,8 @@ def callback_audio(in_data, frame_count, time_info, status):
         tempo = tempoEstimation.process(beats)
         tempo_integer = map(np.int16, tempo[:, 0])
         clock_interval = update_tempo(tempo_integer[0])
+        clock_value.put(clock_interval)
+    Stop_key_flag.put(True)
         #clock_interval = update_tempo(127)
         tempoMessage = mido.Message('clock', time=clock_interval)
         print("new tempo: ", tempo_integer[0])
@@ -67,10 +70,10 @@ def tempo_detection_thread():
     # print "Time needed for Onset and PeakPeaking Calculation:", t1 - t0
 '''
 
-def send_clock_process():
+def send_clock_process(clock_value, Stop_key_flag):
     while True:
         outport.send(tempoMessage)
-        time.sleep(clock_interval)
+        time.sleep(clock_value.get())
         if stop_key:
             break
 
@@ -158,8 +161,13 @@ if __name__ == "__main__":
     stop_key = False
     Stop_loop = mido.Message('note_on', note=72)
     note = inport.receive()
-    Tonic = note.copy()    
-
+    Tonic = note.copy()  
+    
+    '''MULTIPROCESS SHARED MEMORIES'''
+    clock_value = multiprocessing.Queue()
+    Stop_key_flag = multiprocessing.Queue()
+    
+    
     while True:
         if setup_chords(Tonic.note):
             break
@@ -174,7 +182,7 @@ if __name__ == "__main__":
     midi_thread.start()
     stream.start_stream()
     
-    ext_clock = multiprocessing.Process(target=send_clock_process)
+    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_value, Stop_key_flag)
     ext_clock.start()
     ext_clock.join()
     '''
