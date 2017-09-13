@@ -48,7 +48,7 @@ def callback_audio(in_data, frame_count, time_info, status):
         
     return in_data, pyaudio.paContinue
 
-def send_clock_process(clock_interval, clock_value, stop_key_flag): 
+def send_clock_process(clock_interval, stop_key_flag, clock_value): 
     
     interval = clock_interval
     while True:
@@ -149,7 +149,7 @@ if __name__ == "__main__":
     midi_thread.start()
     stream.start_stream()
     
-    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, clock_value, stop_key_flag)) 
+    ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, stop_key_flag, clock_value)) 
     ext_clock.start()
     ext_clock.join()
     '''
