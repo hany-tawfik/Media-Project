@@ -74,9 +74,9 @@ def midi_msg_handler_thread():
             print "closing midi_msg_handler thread"
             break
         elif msg.note == Start_msg.note:
-            
             outport.send(startMessage)
-            
+            time.sleep(1e-3)
+            print Start_msg.note
         else:
             miChords.Send_Chord(msg)
 
