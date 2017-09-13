@@ -70,9 +70,13 @@ def tempo_detection_thread():
 '''
 
 def send_clock_process(clock_value, Stop_key_flag):
+    interval = clock_value.get()
     while True:
+       
+        if clock_value.empty() is False:
+            interval = clock_value.get()
         outport.send(tempoMessage)
-        time.sleep(clock_value.get())
+        time.sleep(interval)
         if stop_key:
             break
 
@@ -165,7 +169,7 @@ if __name__ == "__main__":
     '''MULTIPROCESS SHARED MEMORIES'''
     clock_value = multiprocessing.Queue()
     Stop_key_flag = multiprocessing.Queue()
-    
+    clock_value.put(clock_interval)
     
     while True:
         if setup_chords(Tonic.note):
