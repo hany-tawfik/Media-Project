@@ -75,11 +75,11 @@ def midi_msg_handler_thread():
             break
         elif msg.note == Start_msg.note:
             outport.send(startMessage)
-            time.sleep(1e-3)
+            #time.sleep(1e-3)
             outport.send(stopMessage)
-            time.sleep(1e-3)
+            #time.sleep(1e-3)
             outport.send(startMessage)
-            time.sleep(1e-3)
+            #time.sleep(1e-3)
             
             print Start_msg.note
         else:
