@@ -95,22 +95,7 @@ if __name__ == "__main__":
     clock_interval = np.float16(clock_interval)
     tempoMessage = mido.Message('clock', time=clock_interval)
     
-    '''MIDI DATA SETUP'''
-    print "Please press a key for choosing a music scale"
-    stop_key = False
-    Stop_loop = mido.Message('note_on', note=72)
-    note = inport.receive()
-    Tonic = note.copy()  
-    
-    
-    while True:
-        if setup_chords(Tonic.note):
-            break
-        note = inport.receive()
-        Tonic = note.copy()
-
-    miChords.Set_Tonic_Scale(Tonic.note)
-    miChords.update_chords()
+   
     
     '''THREADING DEFINITIONS'''
     midi_thread = threading.Thread(target=midi_msg_handler_thread)
@@ -141,6 +126,23 @@ if __name__ == "__main__":
     '''START OF THREADS'''    
     midi_thread.start()
     stream.start_stream()  
+    
+     '''MIDI DATA SETUP'''
+    print "Please press a key for choosing a music scale"
+    stop_key = False
+    Stop_loop = mido.Message('note_on', note=72)
+    note = inport.receive()
+    Tonic = note.copy()  
+    
+    
+    while True:
+        if setup_chords(Tonic.note):
+            break
+        note = inport.receive()
+        Tonic = note.copy()
+
+    miChords.Set_Tonic_Scale(Tonic.note)
+    miChords.update_chords()
     
     '''MULTIPROCESS SHARED MEMORIES'''
     clock_value = multiprocessing.Queue()
