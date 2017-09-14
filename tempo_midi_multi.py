@@ -2,12 +2,12 @@ from madmom.models import BEATS_LSTM
 import madmom as mm
 import midi_chords as miChords
 import mido
+import multiprocessing
 import numpy as np
 import pyaudio
 import threading
 import time
 import wave
-import multiprocessing
 
 
 def setup_chords(note_set):
@@ -15,7 +15,7 @@ def setup_chords(note_set):
         return True
     else:
         return False
-
+    
 
 def update_tempo(new_tempo):
     new_clock = 60. / ((new_tempo + OFFSET) * PPQ)
@@ -30,11 +30,12 @@ def stop_all_threads():
 
 
 def callback_audio(in_data, frame_count, time_info, status):
-    global rawData, clock_interval, tempoMessage
+
+    global clock_interval, tempoMessage
 
     if stop_key is False:
-        rawData = np.fromstring(in_data, dtype=np.int16)
-        beats = RNNbeat(rawData)
+        raw_data = np.fromstring(in_data, dtype=np.int16)
+        beats = RNNBeat(raw_data)
         tempo = tempoEstimation.process(beats)
         tempo_integer = map(np.int16, tempo[:, 0])
         clock_interval = update_tempo(tempo_integer[0])
@@ -114,7 +115,7 @@ if __name__ == "__main__":
     midi_thread = threading.Thread(target=midi_msg_handler_thread)
 
     '''OBJECT DEFINITIONS'''
-    RNNbeat = mm.features.beats.RNNBeatProcessor(online=True, nn_files=[BEATS_LSTM[0]])
+    RNNBeat = mm.features.beats.RNNBeatProcessor(online=True, nn_files=[BEATS_LSTM[0]])
     tempoEstimation = mm.features.tempo.TempoEstimationProcessor(min_bpm=40, max_bpm=180, fps=100)
     p = pyaudio.PyAudio()
 
@@ -134,7 +135,6 @@ if __name__ == "__main__":
 
     WAVE_OUTPUT_FILENAME = "frames_recorded.wav"
     frames = []
-    rawData = 0
 
     '''START OF THREADS'''
     midi_thread.start()
@@ -148,13 +148,14 @@ if __name__ == "__main__":
     ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, stop_key_flag, clock_value))
 
     '''MIDI DATA SETUP'''
-    print ("Please press a key for choosing a music scale")
     stop_key = False
     start_stop_flag = False
     Stop_loop = mido.Message('note_on', note=72)
     Start_msg = mido.Message('note_on', note=71)
     note = inport.receive()
     Tonic = note.copy()
+
+    print ("Please press a key for choosing a music scale")
 
     while True:
         if setup_chords(Tonic.note):
