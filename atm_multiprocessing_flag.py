@@ -35,13 +35,14 @@ def stop_all_threads():
 
 def callback_audio(in_data, frame_count, time_info, status):
 
-    global rawData, clock_interval, tempoMessage
+    global rawData, clock_interval, tempoMessage, to_tempo_fix
 
     if stop_key == False:
         rawData = np.fromstring(in_data, dtype=np.int16)
         beats = RNNbeat(rawData)
         tempo = tempoEstimation.process(beats)
         tempo_integer = map(np.int16, tempo[:, 0])
+        to_tempo_fix = [tempo_integer[0]]
         clock_interval = update_tempo(tempo_integer[0])
         clock_value.put(clock_interval)
         tempoMessage = mido.Message('clock', time=clock_interval)
@@ -92,6 +93,50 @@ def midi_msg_handler_thread():
         else:
             miChords.Send_Chord(msg)
 
+            
+
+def tempo_fix(madmom_tempo):
+    global saved_tempo, to_tempo_fix, first_current_tempo, mean_saved_tempo, doubtful_tempo
+    current_tempo = madmom_tempo     
+    
+    if first_current_tempo is True:        
+        saved_tempo.append(current_tempo)
+        first_current_tempo = False
+        #mean_saved_tempo = sum(saved_tempo) / len(saved_tempo)
+        print 'Tempo sent:', mean_saved_tempo, " \n"
+    else:      
+        
+        if  mean_saved_tempo -3 <= current_tempo <= mean_saved_tempo +3:  
+            saved_tempo.append(current_tempo)
+            #mean_saved_tempo = sum(saved_tempo) / len(saved_tempo)
+            doubtful_tempo=[0]
+            
+            if len(saved_tempo) >= 6:
+                del saved_tempo[0]
+            #clock_interval = update_tempo(ave_saved_tempo)
+            #print 'Tempo detected:', tempo[i]
+            print 'Tempo sent:', mean_saved_tempo, " \n"
+            #print 'saved_tempo:' , saved_tempo, 
+            #print 'sum of saved tempo:' , sum(saved_tempo), " \n"
+            
+        else:
+                doubtful_tempo.append(current_tempo)
+                print "doubtful_tempo:", doubtful_tempo          
+                #doubtful_tempo_flag = False 
+            
+                if doubtful_tempo[len(doubtful_tempo)-2] -3 <= doubtful_tempo[len(doubtful_tempo)-1] <= doubtful_tempo[len(doubtful_tempo)-2] +3:
+                    print " there is a tempo change to", doubtful_tempo[len(doubtful_tempo)-1]
+                    # send it,reset saved_tempo and copy doubtful_tempo[1] to it , 
+                    # reset doubtful_tempo and save it to saved_tempo
+        
+                    #clock_interval = update_tempo(len(doubtful_tempo)-1)
+                    saved_tempo = [doubtful_tempo[len(doubtful_tempo)-1]]
+                    #mean_saved_tempo = sum(saved_tempo) / len(saved_tempo)
+                    print 'saved_tempo', saved_tempo, "\n"
+    
+    mean_saved_tempo = np.uint8(np.mean(saved_tempo))
+    return mean_saved_tempo
+
 
 if __name__ == "__main__":
 
@@ -112,6 +157,12 @@ if __name__ == "__main__":
     tempoMessage = mido.Message('clock', time=clock_interval)
     startMessage = mido.Message('start') 
     stopMessage = mido.Message('stop')
+    
+    '''TEMPO STABILIZATION PARAMETERS'''
+    saved_tempo = []
+    first_current_tempo = True
+    doubtful_tempo = [0]
+    mean_saved_tempo = np.uint8
    
     
     '''THREADING DEFINITIONS'''
