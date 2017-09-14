@@ -56,7 +56,7 @@ def send_clock_process(clock_interval, stop_key_flag, clock_value):
         if clock_value.empty() is False:
             interval = clock_value.get()
         if stop_key_flag.value == 1:
-            print ("closing child process")
+            print ("Closing child process")
             break
         outport.send(tempoMessage)
         time.sleep(interval)
