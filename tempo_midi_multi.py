@@ -1,4 +1,3 @@
-from termcolor import colored
 from madmom.models import BEATS_LSTM
 import madmom as mm
 import midi_chords as miChords
@@ -43,7 +42,7 @@ def callback_audio(in_data, frame_count, time_info, status):
         tempo_integer = map(np.int16, tempo[:, 0])
         print("new tempo estimated: ", tempo_integer[0])
         final_tempo = tempo_fix(tempo_integer[0])
-        print colored("sent tempo: ", final_tempo, 'red')
+        print ("sent tempo: ", final_tempo)
         clock_interval = update_tempo(final_tempo)
         clock_value.put(clock_interval)
         tempoMessage = mido.Message('clock', time=clock_interval)
