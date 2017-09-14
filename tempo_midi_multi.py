@@ -78,12 +78,16 @@ def midi_msg_handler_thread():
             print ("Closing midi_msg_handler thread")
             break
 
-        elif msg == Start_msg:
+        elif msg.note == Start_msg.note:
 
-            outport.send(stopMessage)
-            time.sleep(1e-3)
-            outport.send(startMessage)
-            time.sleep(1e-3)
+            if start_stop_flag is False:
+                outport.send(stopMessage)
+                time.sleep(1e-3)
+                outport.send(startMessage)
+                time.sleep(1e-3)
+                start_stop_flag = True
+            else:
+                start_stop_flag = False
         else:
             miChords.Send_Chord(msg)
 
@@ -145,13 +149,14 @@ if __name__ == "__main__":
     ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, stop_key_flag, clock_value))
 
     '''MIDI DATA SETUP'''
-    print ("Please press a key for choosing a music scale")
     stop_key = False
     start_stop_flag = False
     Stop_loop = mido.Message('note_on', note=72)
     Start_msg = mido.Message('note_on', note=71)
     note = inport.receive()
     Tonic = note.copy()
+
+    print ("Please press a key for choosing a music scale")
 
     while True:
         if setup_chords(Tonic.note):
