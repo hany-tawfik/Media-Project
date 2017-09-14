@@ -15,7 +15,7 @@ def setup_chords(note_set):
         return True
     else:
         return False
-    
+
 
 def update_tempo(new_tempo):
     new_clock = 60. / ((new_tempo + OFFSET) * PPQ)
@@ -34,7 +34,8 @@ def callback_audio(in_data, frame_count, time_info, status):
     global clock_interval, tempoMessage
 
     if stop_key is False:
-        raw_data = np.fromstring(in_data, dtype=np.int16)
+        frames.append(in_data)
+        raw_data = np.fromstring(in_data, dtype=np.int16)        
         beats = RNNBeat(raw_data)
         tempo = tempoEstimation.process(beats)
         tempo_integer = map(np.int16, tempo[:, 0])
