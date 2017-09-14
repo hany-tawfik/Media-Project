@@ -11,7 +11,8 @@ import wave
 
 
 def setup_chords(note_set):
-    if Stop_loop.note != note_set:
+    global Stop_loop
+    if note_set != Stop_loop.note:
         return True
     else:
         return False
@@ -63,7 +64,7 @@ def send_clock_process(clock_interval, stop_key_flag, clock_value):
 
 def midi_msg_handler_thread():
 
-    global start_stop_flag
+    global start_stop_flag, Stop_loop, Start_msg
 
     for msg in inport:
 
@@ -108,9 +109,6 @@ if __name__ == "__main__":
     PPQ = 24  # Pulse per quarter note
     clock_interval = 60. / ((DEFAULT_BPM + OFFSET) * PPQ)
     clock_interval = np.float16(clock_interval)
-    tempoMessage = mido.Message('clock', time=clock_interval)
-    startMessage = mido.Message('start')
-    stopMessage = mido.Message('stop')
 
     '''THREADING DEFINITIONS'''
     midi_thread = threading.Thread(target=midi_msg_handler_thread)
@@ -152,11 +150,14 @@ if __name__ == "__main__":
     print ("Please press a key for choosing a music scale")
     stop_key = False
     start_stop_flag = False
+    tempoMessage = mido.Message('clock', time=clock_interval)
+    startMessage = mido.Message('start')
+    stopMessage = mido.Message('stop')
     Stop_loop = mido.Message('note_on', note=72)
     Start_msg = mido.Message('note_on', note=71)
     note = inport.receive()
     Tonic = note.copy()
-    
+
     while True:
         if setup_chords(Tonic.note):
             break
