@@ -149,15 +149,14 @@ if __name__ == "__main__":
     ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, stop_key_flag, clock_value))
 
     '''MIDI DATA SETUP'''
+    print ("Please press a key for choosing a music scale")
     stop_key = False
     start_stop_flag = False
     Stop_loop = mido.Message('note_on', note=72)
     Start_msg = mido.Message('note_on', note=71)
     note = inport.receive()
     Tonic = note.copy()
-
-    print ("Please press a key for choosing a music scale")
-
+    
     while True:
         if setup_chords(Tonic.note):
             break
