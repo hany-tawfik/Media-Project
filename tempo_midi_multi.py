@@ -26,7 +26,7 @@ def update_tempo(new_tempo):
 def stop_all_threads():
     global stop_key
     stop_key = True
-    stop_key_flag.value = True
+    stop_key_flag.value = 1
 
 
 def callback_audio(in_data, frame_count, time_info, status):
@@ -35,7 +35,7 @@ def callback_audio(in_data, frame_count, time_info, status):
 
     if stop_key is False:
         frames.append(in_data)
-        raw_data = np.fromstring(in_data, dtype=np.int16)        
+        raw_data = np.fromstring(in_data, dtype=np.int16)
         beats = RNNBeat(raw_data)
         tempo = tempoEstimation.process(beats)
         tempo_integer = map(np.int16, tempo[:, 0])
@@ -54,7 +54,7 @@ def send_clock_process(clock_interval, stop_key_flag, clock_value):
     while True:
         if clock_value.empty() is False:
             interval = clock_value.get()
-        if stop_key_flag.value is True:
+        if stop_key_flag.value == 1:
             print ("closing child process")
             break
         outport.send(tempoMessage)
@@ -143,7 +143,7 @@ if __name__ == "__main__":
 
     '''MULTIPROCESS SHARED MEMORIES'''
     clock_value = multiprocessing.Queue()
-    stop_key_flag = multiprocessing.Value('b', False)
+    stop_key_flag = multiprocessing.Value('i', 0)
 
     '''CHILD PROCESS'''
     ext_clock = multiprocessing.Process(target=send_clock_process, args=(clock_interval, stop_key_flag, clock_value))
