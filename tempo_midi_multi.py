@@ -40,10 +40,12 @@ def callback_audio(in_data, frame_count, time_info, status):
         beats = RNNBeat(raw_data)
         tempo = tempoEstimation.process(beats)
         tempo_integer = map(np.int16, tempo[:, 0])
-        clock_interval = update_tempo(tempo_integer[0])
+        print("new tempo estimated: ", tempo_integer[0])
+        final_tempo = tempo_fix(tempo_integer[0])
+        print("sent tempo: ", final_tempo)
+        clock_interval = update_tempo(final_tempo)
         clock_value.put(clock_interval)
         tempoMessage = mido.Message('clock', time=clock_interval)
-        print("new tempo: ", tempo_integer[0])
 
     return in_data, pyaudio.paContinue
 
@@ -93,6 +95,39 @@ def midi_msg_handler_thread():
             miChords.Send_Chord(msg)
 
 
+def tempo_fix(estimated_tempo):
+
+    global saved_tempo, first_current_tempo, doubtful_tempo, mean_saved_tempo
+    current_tempo = estimated_tempo
+
+    if first_current_tempo is True:
+
+        saved_tempo.append(current_tempo)
+        first_current_tempo = False
+    else:
+
+        if mean_saved_tempo - THRESHOLD < current_tempo < mean_saved_tempo + THRESHOLD:
+
+            saved_tempo.append(current_tempo)
+            doubtful_tempo = [0]
+
+            if len(saved_tempo) >= MAX_LENGTH:
+                del saved_tempo[0]
+
+        else:
+
+            doubtful_tempo.append(current_tempo)
+
+            if doubtful_tempo[len(doubtful_tempo) - PREVIOUS_DOUBTFUL_TEMPO] - THRESHOLD \
+                    < doubtful_tempo[len(doubtful_tempo) - CURRENT_DOUBTFUL_TEMPO] \
+                    < doubtful_tempo[len(doubtful_tempo) - PREVIOUS_DOUBTFUL_TEMPO] + THRESHOLD:
+
+                saved_tempo = [doubtful_tempo[len(doubtful_tempo) - CURRENT_DOUBTFUL_TEMPO]]
+
+    mean_saved_tempo = np.uint8(np.mean(saved_tempo))
+
+    return mean_saved_tempo
+
 if __name__ == "__main__":
 
     '''MIDI I/O PORTS SETUP'''
@@ -109,6 +144,16 @@ if __name__ == "__main__":
     PPQ = 24  # Pulse per quarter note
     clock_interval = 60. / ((DEFAULT_BPM + OFFSET) * PPQ)
     clock_interval = np.float16(clock_interval)
+
+    '''TEMPO STABILIZATION PARAMETERS'''
+    CURRENT_DOUBTFUL_TEMPO = 1
+    PREVIOUS_DOUBTFUL_TEMPO = 2
+    THRESHOLD = 3
+    MAX_LENGTH = 6
+    saved_tempo = []
+    first_current_tempo = True
+    doubtful_tempo = [0]
+    mean_saved_tempo = np.uint8
 
     '''THREADING DEFINITIONS'''
     midi_thread = threading.Thread(target=midi_msg_handler_thread)
