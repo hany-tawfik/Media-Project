@@ -46,8 +46,7 @@ def callback_audio(in_data, frame_count, time_info, status):
         clock_interval = update_tempo(final_tempo)
         clock_value.put(clock_interval)
         tempoMessage = mido.Message('clock', time=clock_interval)
-    else:
-        print ("Closing audio channels")
+
     return in_data, pyaudio.paContinue
 
 
@@ -141,7 +140,7 @@ if __name__ == "__main__":
 
     '''MIDI EXTERNAL CLOCK CALCULATION'''
     DEFAULT_BPM = 100
-    OFFSET = 2
+    OFFSET = 1
     PPQ = 24  # Pulse per quarter note
     clock_interval = 60. / ((DEFAULT_BPM + OFFSET) * PPQ)
     clock_interval = np.float16(clock_interval)
