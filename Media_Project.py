@@ -47,7 +47,7 @@ def callback_audio(in_data, frame_count, time_info, status):
         clock_value.put(clock_interval)
         tempoMessage = mido.Message('clock', time=clock_interval)
     else:
-        print ("Closing audio channels)
+        print ("Closing audio channels")
     return in_data, pyaudio.paContinue
 
 
