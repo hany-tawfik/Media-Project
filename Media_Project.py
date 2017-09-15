@@ -40,7 +40,7 @@ def callback_audio(in_data, frame_count, time_info, status):
         beats = RNNBeat(raw_data)
         tempo = tempoEstimation.process(beats)
         tempo_integer = map(np.int16, tempo[:, 0])
-        print("new tempo estimated: ", tempo_integer[0])
+        print("new tempo estimated: ", tempo_integer)
         final_tempo = tempo_fix(tempo_integer[0])
         print ("sent tempo: ", final_tempo)
         clock_interval = update_tempo(final_tempo)
