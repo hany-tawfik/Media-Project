@@ -101,11 +101,23 @@ def tempo_fix(estimated_tempo):
     current_tempo = estimated_tempo
 
     if first_current_tempo is True:
-
+        
+        if current_tempo > 160:
+            print "The played tempo is over the valid range"
+            current_tempo = current_tempo/2
+        elif current_tempo < 80:
+            print "The played tempo is below the valid range"
+            
         saved_tempo.append(current_tempo)
         first_current_tempo = False
     else:
-
+        
+        if current_tempo > 160:
+            print "The played tempo is over the valid range"
+            current_tempo = current_tempo/2
+        elif current_tempo < 80:
+            print "The played tempo is below the valid range"
+            
         if mean_saved_tempo - THRESHOLD < current_tempo < mean_saved_tempo + THRESHOLD:
 
             saved_tempo.append(current_tempo)
@@ -127,6 +139,8 @@ def tempo_fix(estimated_tempo):
     mean_saved_tempo = np.uint8(np.mean(saved_tempo))
 
     return mean_saved_tempo
+
+
 
 if __name__ == "__main__":
 
