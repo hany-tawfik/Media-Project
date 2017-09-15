@@ -182,7 +182,7 @@ if __name__ == "__main__":
     midi_thread = threading.Thread(target=midi_msg_handler_thread)
 
     '''OBJECT DEFINITIONS'''
-    RNNBeat = mm.features.beats.RNNBeatProcessor(online=False, nn_files=[BEATS_LSTM[0]])
+    RNNBeat = mm.features.beats.RNNBeatProcessor()
     tempoEstimation = mm.features.tempo.TempoEstimationProcessor(min_bpm=40, max_bpm=180, fps=100)
     p = pyaudio.PyAudio()
 
