@@ -154,7 +154,7 @@ if __name__ == "__main__":
 
     '''MIDI EXTERNAL CLOCK CALCULATION'''
     DEFAULT_BPM = 100
-    OFFSET = 1
+    OFFSET = 0
     PPQ = 24  # Pulse per quarter note
     clock_interval = 60. / ((DEFAULT_BPM + OFFSET) * PPQ)
     clock_interval = np.float16(clock_interval)
