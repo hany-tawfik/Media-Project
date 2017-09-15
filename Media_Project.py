@@ -165,7 +165,7 @@ if __name__ == "__main__":
     p = pyaudio.PyAudio()
 
     '''AUDIO VARIABLES DEFINITION'''
-    SECONDS = 4
+    SECONDS = 8
     RATE = 44100
     CHUNK = np.uint32(RATE * SECONDS)
     FORMAT = pyaudio.paInt16
