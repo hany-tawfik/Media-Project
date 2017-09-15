@@ -21,14 +21,14 @@ def setup_chords(note_set):
 def update_tempo(new_tempo):
     offset = get_offset_tempo(new_tempo)
     new_clock = 60. / ((new_tempo + offset) * PPQ)
-    new_clock = np.float16(new_clock)
+    # new_clock = np.float16(new_clock)
     return new_clock
 
 
 def get_offset_tempo(new_tempo):
     if 100 >= new_tempo:
         offset = 1
-    elif 101 <= new_tempo < 130:
+    elif 101 <= new_tempo <= 130:
         offset = 2
     else:
         offset = 3
