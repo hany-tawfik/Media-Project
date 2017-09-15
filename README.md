@@ -58,3 +58,6 @@ Google "coding midi"
 __________________________
 How to push to github 
 https://help.github.com/articles/adding-a-file-to-a-repository-using-the-command-line/#platform-linux
+
+________________
+Kill thread: pkill -9 python  
