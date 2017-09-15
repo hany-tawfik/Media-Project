@@ -100,6 +100,9 @@ def midi_msg_handler_thread():
                 start_stop_flag = True
             else:
                 start_stop_flag = False
+        elif msg.note == Stop_msg.note:
+            outport.send(stopMessage)
+            time.sleep(1e-3)
         else:
             miChords.Send_Chord(msg)
 
@@ -179,7 +182,7 @@ if __name__ == "__main__":
     midi_thread = threading.Thread(target=midi_msg_handler_thread)
 
     '''OBJECT DEFINITIONS'''
-    RNNBeat = mm.features.beats.RNNBeatProcessor(online=True, nn_files=[BEATS_LSTM[0]])
+    RNNBeat = mm.features.beats.RNNBeatProcessor(online=False, nn_files=[BEATS_LSTM[0]])
     tempoEstimation = mm.features.tempo.TempoEstimationProcessor(min_bpm=40, max_bpm=180, fps=100)
     p = pyaudio.PyAudio()
 
@@ -219,7 +222,8 @@ if __name__ == "__main__":
     startMessage = mido.Message('start')
     stopMessage = mido.Message('stop')
     Stop_loop = mido.Message('note_on', note=72)
-    Start_msg = mido.Message('note_on', note=71)
+    Start_msg = mido.Message('note_on', note=70)
+    Stop_msg = mido.Message('note_on', note=68)
     note = inport.receive()
     Tonic = note.copy()
 
