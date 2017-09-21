@@ -1,1 +1,2 @@
-import Media_Project
+import os 
+os.system('Media_Project.py') 
