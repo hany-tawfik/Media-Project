@@ -61,3 +61,5 @@ https://help.github.com/articles/adding-a-file-to-a-repository-using-the-command
 
 ________________
 Kill thread: pkill -9 python  
+___________
+How to run code on start up https://www.youtube.com/watch?v=JXnnhTvvVZk
