@@ -1,2 +1,4 @@
-import os 
-os.system('cano.py') 
+#import os 
+#os.system('cano.py')
+
+execfile("cano.py")
