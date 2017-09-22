@@ -7,4 +7,4 @@ import time
   #execfile("printing.py")
   print " That was open on startup file"
   time.sleep(5)
-  print "You choose a new scale"
+  print "You will choose a new scale"
