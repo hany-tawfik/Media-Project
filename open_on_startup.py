@@ -52,3 +52,4 @@ print "Shutting down"
 #time.sleep(5)
 #shutdown()
 inport.close()
+midi_thread.join()
