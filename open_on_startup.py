@@ -9,7 +9,7 @@ def shutdownbutton():
             inport.close()
             print "Shutting down in 5 seconds"
             time.sleep(5)
-            shutdown()
+            #shutdown()
     return
 
 
@@ -38,5 +38,5 @@ for i in range(3):
     print "You will be prompted to choose a new scale"
 
 print "Shutting down in 5 seconds"
-time.sleep(5)
-shutdown()
+#time.sleep(5)
+#shutdown()
