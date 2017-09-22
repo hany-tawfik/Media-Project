@@ -2,4 +2,4 @@
 #os.system('printing.py')
 
 execfile("Media_Project.py")
-#print " ana Hany"
+#print " That was open on startup file"
