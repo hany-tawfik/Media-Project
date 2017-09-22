@@ -5,6 +5,7 @@ import threading
 def shutdownbutton():
     
     for msg in inport:
+        print msg
         if msg.note == Stop_loop.note:
             inport.close()
             print "Shutting down in 5 seconds"
