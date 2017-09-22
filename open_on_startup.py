@@ -41,3 +41,4 @@ print "Shutting down"
 #time.sleep(5)
 #shutdown()
 inport.close()
+threading.exit()
