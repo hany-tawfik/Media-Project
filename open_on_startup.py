@@ -13,7 +13,8 @@ def shutdownbutton():
             inport.close()
             print "Shutting down in 5 seconds"
             time.sleep(5)
-            #shutdown()
+            break
+    #shutdown()
     return
 
 
