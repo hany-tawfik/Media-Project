@@ -18,7 +18,7 @@ def shutdownbutton():
             #time.sleep(3)
             stop_flag = False
             break
-        break
+        
         else:
             print msg
     return
