@@ -3,7 +3,7 @@ import mido
 import threading
 
 def shutdownbutton():
-    """THis function waits for C#4 to be pressed to shutdown the Pi"""
+    """This function waits for C#4 to be pressed to shutdown the Pi"""
     global stop_flag
     
     for msg in inport:
