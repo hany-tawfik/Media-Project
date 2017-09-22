@@ -32,6 +32,9 @@ def setup_chords(note_set):
         return True
     else:
         return False
+    
+    
+    
 '''MIDI INPUT PORTS SETUP'''
 inputs = mido.get_input_names()
 midi_start25 = inputs[0].encode('ascii')
@@ -44,7 +47,7 @@ midi_thread.start()
     
 """MAIN SCRIPT"""
 #while True:
-for i in range(3):
+for i in range(1):
     
     #execfile("Media_Project.py")
     execfile("printing.py")
@@ -52,7 +55,7 @@ for i in range(3):
     time.sleep(5)
     print "You will be prompted to choose a new scale"
 
-print "Shutting down"
+#print "Shutting down"
 #time.sleep(5)
 #shutdown()
 inport.close()
