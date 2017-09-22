@@ -4,6 +4,7 @@ import threading
 
 def shutdownbutton():
     """THis function waits for C#4 to be pressed to shutdown the Pi"""
+    global stop_flag
     for msg in inport:
         print msg
         if setup_chords(msg.note):
@@ -12,7 +13,8 @@ def shutdownbutton():
         if msg.note == Stop_loop.note:
             inport.close()
             print "Shutting down in 5 seconds"
-            time.sleep(5)
+            time.sleep(3)
+            stop_flag = False
             break
     #shutdown()
     return
@@ -40,14 +42,15 @@ inputs = mido.get_input_names()
 midi_start25 = inputs[0].encode('ascii')
 inport = mido.open_input(midi_start25)
 Stop_loop = mido.Message('note_on', note=49)
+stop_flag = True
 
 """ MIDI THREAD"""
 midi_thread = threading.Thread(target=shutdownbutton)
 midi_thread.start()
     
 """MAIN SCRIPT"""
-#while True:
-for i in range(1):
+while stop_flag:
+#for i in range(1):
     
     #execfile("Media_Project.py")
     execfile("printing.py")
@@ -55,8 +58,7 @@ for i in range(1):
     time.sleep(5)
     print "You will be prompted to choose a new scale"
 
-#print "Shutting down"
-#time.sleep(5)
+print "Shutting doooooooooooooooooown"
+time.sleep(5)
 #shutdown()
-inport.close()
-#midi_thread.join()
+
