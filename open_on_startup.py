@@ -21,7 +21,7 @@ inport = mido.open_input(midi_start25)
 Stop_loop = mido.Message('note_on', note=49)
 
 midi_thread = threading.Thread(target=shutdownbutton)
-#midi_thread.start()
+midi_thread.start()
     
 #while True:
 for i in range(3):
