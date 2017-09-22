@@ -3,7 +3,7 @@ import mido
 import threading
 
 def shutdownbutton():
-    
+    """THis function waits for C#4 to be pressed to shutdown the Pi"""
     for msg in inport:
         print msg
         if setup_chords(msg.note):
@@ -25,20 +25,23 @@ def shutdown():
     print output
     
 def setup_chords(note_set):
+    """this bypass the last saved midi value """
     global Stop_loop
     if note_set != Stop_loop.note:
         return True
     else:
         return False
- 
+'''MIDI INPUT PORTS SETUP'''
 inputs = mido.get_input_names()
 midi_start25 = inputs[0].encode('ascii')
 inport = mido.open_input(midi_start25)
 Stop_loop = mido.Message('note_on', note=49)
 
+""" MIDI THREAD"""
 midi_thread = threading.Thread(target=shutdownbutton)
 midi_thread.start()
     
+"""MAIN SCRIPT"""
 #while True:
 for i in range(3):
     
@@ -52,4 +55,4 @@ print "Shutting down"
 #time.sleep(5)
 #shutdown()
 inport.close()
-midi_thread.join()
+#midi_thread.join()
