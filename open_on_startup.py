@@ -7,4 +7,4 @@ while True:
   #execfile("printing.py")
   print " That was open on startup file"
   time.sleep(5)
-  Print "You choose a new scale"
+  print "You choose a new scale"
