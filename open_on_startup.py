@@ -2,7 +2,7 @@
 #os.system('printing.py')
 import time
 
-while True:
+#while True:
   execfile("Media_Project.py")
   #execfile("printing.py")
   print " That was open on startup file"
