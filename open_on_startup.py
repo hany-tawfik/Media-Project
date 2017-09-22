@@ -7,8 +7,7 @@ def shutdownbutton():
     global stop_flag
     
     for msg in inport:
-        #msg = inport.receive()
-        print msg
+       
         if setup_chords(msg.note):
             print "Fixing the wrong note works"
             break
@@ -19,6 +18,8 @@ def shutdownbutton():
             time.sleep(3)
             stop_flag = False
             break
+        else:
+            print msg
     return
 
 
