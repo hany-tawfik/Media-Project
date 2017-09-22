@@ -7,7 +7,7 @@ def shutdownbutton():
     global stop_flag
     
     for msg in inport:
-        msg = inport.receive()
+        #msg = inport.receive()
         print msg
         if setup_chords(msg.note):
             print "Fixing the wrong note works"
@@ -45,7 +45,7 @@ midi_start25 = inputs[0].encode('ascii')
 inport = mido.open_input(midi_start25)
 Stop_loop = mido.Message('note_on', note=49)
 stop_flag = True
-msg = inport.receive()
+#msg = inport.receive()
 
 """ MIDI THREAD"""
 midi_thread = threading.Thread(target=shutdownbutton)
