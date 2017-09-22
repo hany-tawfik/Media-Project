@@ -18,6 +18,7 @@ def shutdownbutton():
             #time.sleep(3)
             stop_flag = False
             break
+        break
         else:
             print msg
     return
@@ -58,9 +59,9 @@ while stop_flag:
     
     #execfile("Media_Project.py")
     execfile("printing.py")
-    print " That was open on startup file"
+    #print " That was open on startup file"
     #time.sleep(5)
-    print "You will be prompted to choose a new scale"
+    #print "You will be prompted to choose a new scale"
 
 print "Shutting doooooooooooooooooown"
 time.sleep(5)
