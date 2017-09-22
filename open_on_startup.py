@@ -37,7 +37,7 @@ for i in range(3):
     time.sleep(5)
     print "You will be prompted to choose a new scale"
 
-print "Shutting down in 5 seconds"
+print "Shutting down"
 #time.sleep(5)
 #shutdown()
 inport.close()
