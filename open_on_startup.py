@@ -10,11 +10,9 @@ def shutdown():
     output = process.communicate()[0]
     print output
  
-print "Pi will shutdown, you have 5 seconds to  ctrl+c"
-time.sleep(5)
-#shutdown()
     
 #while True:
+for i in range(3):
     execfile("Media_Project.py")
     #execfile("printing.py")
     print " That was open on startup file"
