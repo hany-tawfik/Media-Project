@@ -7,6 +7,7 @@ def shutdownbutton():
     global stop_flag
     
     for msg in inport:
+        msg = inport.receive()
         print msg
         if setup_chords(msg.note):
             print "Fixing the wrong note works"
