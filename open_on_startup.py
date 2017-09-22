@@ -40,3 +40,4 @@ for i in range(3):
 print "Shutting down in 5 seconds"
 #time.sleep(5)
 #shutdown()
+inport.close()
