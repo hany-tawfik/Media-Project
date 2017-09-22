@@ -20,7 +20,7 @@ def shutdown():
     print output
  
 inputs = mido.get_input_names()
-midi_start25 = inputs[1].encode('ascii')
+midi_start25 = inputs[0].encode('ascii')
 inport = mido.open_input(midi_start25)
 Stop_loop = mido.Message('note_on', note=49)
 
