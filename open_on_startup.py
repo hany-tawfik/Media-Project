@@ -6,6 +6,9 @@ def shutdownbutton():
     
     for msg in inport:
         print msg
+        if setup_chords(msg.note):
+            break
+        msg = inport.receive()
         if msg.note == Stop_loop.note:
             inport.close()
             print "Shutting down in 5 seconds"
@@ -20,6 +23,13 @@ def shutdown():
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
     output = process.communicate()[0]
     print output
+    
+def setup_chords(note_set):
+    global Stop_loop
+    if note_set != Stop_loop.note:
+        return True
+    else:
+        return False
  
 inputs = mido.get_input_names()
 midi_start25 = inputs[0].encode('ascii')
