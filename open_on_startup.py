@@ -1,5 +1,5 @@
 #import os 
-#os.system('cano.py')
+#os.system('printing.py')
 
 execfile("Media_Project.py")
 print " ana Hany"
