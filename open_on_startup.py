@@ -12,7 +12,7 @@ def shutdownbutton():
         if setup_chords(msg.note):
             print "Fixing the wrong note works"
             break
-        msg = inport.receive()
+        
         if msg.note == Stop_loop.note:
             inport.close()
             print "Shutting down in 5 seconds"
