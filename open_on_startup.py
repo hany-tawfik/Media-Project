@@ -3,7 +3,9 @@ import mido
 import threading
 
 def shutdownbutton():
+    
     for msg in inport:
+        print "thread started"
         print msg
         if msg.note == Stop_loop.note:
             inport.close()
