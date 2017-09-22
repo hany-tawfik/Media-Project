@@ -15,7 +15,7 @@ def shutdownbutton():
         if msg.note == Stop_loop.note:
             inport.close()
             print "Shutting down in 5 seconds"
-            time.sleep(3)
+            #time.sleep(3)
             stop_flag = False
             break
         else:
@@ -59,7 +59,7 @@ while stop_flag:
     #execfile("Media_Project.py")
     execfile("printing.py")
     print " That was open on startup file"
-    time.sleep(5)
+    #time.sleep(5)
     print "You will be prompted to choose a new scale"
 
 print "Shutting doooooooooooooooooown"
