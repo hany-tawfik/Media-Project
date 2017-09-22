@@ -1,3 +1,4 @@
+"""
 import mido 
 
 '''MIDI INPUT PORTS SETUP'''
@@ -8,7 +9,7 @@ Stop_loop = mido.Message('note_on', note=49)
 stop_flag = True
 #msg = inport.receive()
 
-"""
+
 for msg in inport:
   print msg
 """
