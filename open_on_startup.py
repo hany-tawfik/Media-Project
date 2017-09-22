@@ -26,8 +26,8 @@ midi_thread = threading.Thread(target=shutdownbutton)
 #while True:
 for i in range(3):
     
-    execfile("Media_Project.py")
-    #execfile("printing.py")
+    #execfile("Media_Project.py")
+    execfile("printing.py")
     print " That was open on startup file"
     time.sleep(5)
     print "You will be prompted to choose a new scale"
