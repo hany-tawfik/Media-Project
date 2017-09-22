@@ -1,6 +1,10 @@
 #import os 
 #os.system('printing.py')
+import time
 
-execfile("Media_Project.py")
-#execfile("printing.py")
-print " That was open on startup file"
+while True
+  execfile("Media_Project.py")
+  #execfile("printing.py")
+  print " That was open on startup file"
+  time.sleep(5)
+  Print "You choose a new scale"
