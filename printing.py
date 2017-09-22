@@ -12,6 +12,7 @@ stop_flag = True
 
 for msg in inport:
   print msg
+  
 """
   
 print "Hi there"
