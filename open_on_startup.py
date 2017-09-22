@@ -1,6 +1,6 @@
 import time
 import mido
-
+import threading
 
 def shutdownbutton():
     for msg in inport:
