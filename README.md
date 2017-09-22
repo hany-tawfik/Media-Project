@@ -63,3 +63,4 @@ ________________
 Kill thread: pkill -9 python  
 ___________
 How to run code on start up https://www.youtube.com/watch?v=JXnnhTvvVZk
+How to kill code running on start up https://raspberrypi.stackexchange.com/questions/8489/how-to-stop-program-running-on-startup
