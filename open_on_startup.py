@@ -59,7 +59,7 @@ midi_thread.start()
 """MAIN SCRIPT"""
 while stop_flag:
 #for i in range(1):
-    
+    x = 1
     #execfile("Media_Project.py")
     #execfile("printing.py")
     #print " That was open on startup file"
