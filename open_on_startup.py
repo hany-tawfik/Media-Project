@@ -8,11 +8,11 @@ def shutdownbutton():
     
     for msg in inport:
        
-        """if not setup_chords(msg.note):
+        if not setup_chords(msg.note):
             print "Fixing the wrong note works"
             note = inport.receive()
             msg = note.copy()
-            THIS PART NEEDS TO BE FIXED"""
+            
             
         
         if msg.note == Stop_loop.note:
@@ -34,10 +34,10 @@ def shutdown():
     output = process.communicate()[0]
     print output
     
-def setup_chords(note_set):
+def setup_chords(note):
     """this bypass the last saved midi value """
     global Stop_loop
-    if note_set != Stop_loop.note:
+    if note != Stop_loop.note:
         return True
     else:
         return False
