@@ -70,5 +70,5 @@ while stop_flag:
 
 print "Shutting doooooooooooooooooown"
 time.sleep(5)
-#shutdown()
+shutdown()
 
