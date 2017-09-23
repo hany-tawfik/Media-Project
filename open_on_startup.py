@@ -8,10 +8,10 @@ def shutdownbutton():
     
     for msg in inport:
        
-        if not setup_chords(msg.note):
+        """if not setup_chords(msg.note):
             print "Fixing the wrong note works"
             note = inport.receive()
-            msg = note.copy()
+            msg = note.copy()"""
             
             
         
