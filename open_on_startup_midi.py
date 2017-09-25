@@ -48,7 +48,7 @@ while True:
             print "inside if inside while"
             break
         #msg = inport.receive()
-        #print 'msg in while : ' ,msg
+        print 'msg in while : '
 
 """ MIDI THREAD"""
 
