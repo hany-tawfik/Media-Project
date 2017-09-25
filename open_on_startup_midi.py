@@ -29,7 +29,7 @@ def setup_chords(note):
         return False
     
 def shutdown():
-    command = "/usr/bin/sudo /sbin/shutdown -h now"
+    command = "/usr/bin/sudo /sbin/shutdown -r now"
     import subprocess
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
     output = process.communicate()[0]
@@ -74,4 +74,4 @@ while stop_flag:
     
 print "shutting down"
 time.sleep(3)
-shutdown()
+#shutdown()
