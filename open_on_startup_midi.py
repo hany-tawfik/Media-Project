@@ -24,7 +24,7 @@ def setup_chords_startup(note):
         return False
     
 def shutdown():
-    command = "/usr/bin/sudo /sbin/shutdown -r now"
+    command = "/usr/bin/sudo /sbin/shutdown -h now"
     import subprocess
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
     output = process.communicate()[0]
