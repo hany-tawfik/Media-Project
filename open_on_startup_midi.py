@@ -81,4 +81,4 @@ while stop_flag_startup:
     
 print "shutting down"
 time.sleep(3)
-#shutdown()
+shutdown()
