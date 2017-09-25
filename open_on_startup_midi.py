@@ -71,6 +71,7 @@ while stop_flag:
     #execfile("printing.py")
     execfile("Media_Project.py")
     print stop_flag
+    time.sleep(4)
     
 
     
