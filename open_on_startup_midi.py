@@ -3,7 +3,7 @@ import mido
 import threading
 
 def shutdownbutton():
-    global stop_flag
+    global stop_flag_midi
     print "thread started"
     for msg in inport:
         #print msg
@@ -14,7 +14,7 @@ def shutdownbutton():
             print "Shutting down in 5 seconds"
             print msg
             #time.sleep(3)
-            stop_flag = False
+            stop_flag_midi = False
             break
         
         else:
@@ -42,7 +42,7 @@ midi_start25 = inputs[1].encode('ascii')
 inport = mido.open_input(midi_start25)
 Stop_loop = mido.Message('note_on', note=49)
 random_note = mido.Message('note_on', note=51)
-stop_flag = True
+stop_flag_midi = True
 note = inport.receive()
 Tonic = note.copy()
 print "note: ", note
@@ -66,11 +66,11 @@ midi_thread = threading.Thread(target=shutdownbutton)
 midi_thread.start()
 
 
-while stop_flag:
+while stop_flag_midi:
     x=1
     #execfile("printing.py")
     execfile("Media_Project.py")
-    print stop_flag
+    print stop_flag_midi
     time.sleep(4)
     
 
