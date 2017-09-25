@@ -57,6 +57,7 @@ while True:
             break
         else:
             msg = inport.receive()
+            stop_flag_startup = True
             print 'msg in while : ' , msg
             break
 
