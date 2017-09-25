@@ -70,7 +70,21 @@ while True:
 
 
 while stop_flag_startup:
-    x=1
+    
+    
+    
+    if msg.note == Stop_loop_startup.note:
+            #msg.note = random_note.note
+            inport.close()
+            print "Shutting down in 5 seconds"
+            print msg
+            #time.sleep(3)
+            stop_flag_startup = False
+            break
+            
+            
+            
+    
     #execfile("printing.py")
     execfile("Media_Project.py")
     print "stop_flag_startup: ", stop_flag_startup
