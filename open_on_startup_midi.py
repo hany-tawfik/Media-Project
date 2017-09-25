@@ -63,6 +63,7 @@ midi_thread.start()
 
 while stop_flag:
     x=1
+    execfile("printing.py")
 
     
 print "shuting down"
