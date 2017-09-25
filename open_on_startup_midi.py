@@ -6,10 +6,10 @@ def shutdownbutton():
     global stop_flag
     
     for msg in inport:
-        print msg
+        #print msg
         
         if msg.note == Stop_loop.note:
-            msg = random_note
+            #msg = random_note
             inport.close()
             print "Shutting down in 5 seconds"
             print msg
@@ -32,14 +32,12 @@ stop_flag = True
 
 """ MIDI THREAD"""
 
-#midi_thread = threading.Thread(target=shutdownbutton)
-#midi_thread.start()
+midi_thread = threading.Thread(target=shutdownbutton)
+midi_thread.start()
 
-for msg in inport:
-    print msg
 
-"""while stop_flag:
+while stop_flag:
     x=1
-"""
+
     
 print "shuting down"
