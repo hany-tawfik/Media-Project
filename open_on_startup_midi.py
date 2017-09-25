@@ -45,6 +45,7 @@ print "note: ", note
 
 while True:
         if setup_chords(Tonic.note):
+            print "inside if inside while"
             break
         msg = inport.receive()
 
