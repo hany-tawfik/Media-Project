@@ -6,7 +6,7 @@ def shutdownbutton():
     global stop_flag
     
     for msg in inport:
-        
+        print msg
         
         if msg.note == Stop_loop.note:
             msg = random_note
