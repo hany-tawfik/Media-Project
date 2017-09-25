@@ -8,12 +8,12 @@ def shutdownbutton():
     
     for msg in inport:
         print msg
-        """
+        
         if not setup_chords(msg.note):
             print "Fixing the wrong note works"
             note = inport.receive()
             msg = note.copy()
-        """
+        
             
             
         
@@ -59,9 +59,10 @@ midi_thread = threading.Thread(target=shutdownbutton)
 midi_thread.start()
     
 """MAIN SCRIPT"""
+Print "starting while loop"
 while stop_flag:
 #for i in range(1):
-    
+    x = 1
     #execfile("Media_Project.py")
     execfile("printing.py")
     #print " That was open on startup file"
