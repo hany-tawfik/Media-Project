@@ -43,9 +43,9 @@ inport = mido.open_input(midi_start25)
 Stop_loop_startup = mido.Message('note_on', note=49)
 random_note = mido.Message('note_on', note=51)
 stop_flag_startup = True
-note = inport.receive()
-Tonic_startup = note.copy()
-print "note: ", note
+note_startup = inport.receive()
+Tonic_startup = note_startup.copy()
+print "note: ", note_startup
 #print "tonic: " , Tonic
 
 
