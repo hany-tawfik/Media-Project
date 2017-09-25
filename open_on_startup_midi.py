@@ -29,6 +29,15 @@ inport = mido.open_input(midi_start25)
 Stop_loop = mido.Message('note_on', note=49)
 random_note = mido.Message('note_on', note=51)
 stop_flag = True
+note = inport.receive()
+Tonic = note.copy()
+print "note: ", note
+#print "tonic: " , Tonic
+
+while True:
+        if setup_chords(Tonic.note):
+            break
+        msg = inport.receive()
 
 """ MIDI THREAD"""
 
