@@ -57,9 +57,11 @@ while True:
             break
         else:
             msg = inport.receive()
-            stop_flag_startup = True
+            
             print 'msg in while : ' , msg
             break
+            
+stop_flag_startup = True
 
 """ MIDI THREAD"""
 
@@ -71,7 +73,7 @@ while stop_flag_startup:
     x=1
     #execfile("printing.py")
     execfile("Media_Project.py")
-    print stop_flag_startup
+    print "stop_flag_startup: ", stop_flag_startup
     time.sleep(4)
     
 
