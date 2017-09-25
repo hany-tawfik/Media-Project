@@ -5,6 +5,7 @@ import threading
 def shutdownbutton():
     """This function waits for C#4 to be pressed to shutdown the Pi"""
     global stop_flag
+    print " before the for loop"
     
     for msg in inport:
         print msg
