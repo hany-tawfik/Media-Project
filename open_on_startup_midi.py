@@ -65,8 +65,8 @@ while True:
 
 """ MIDI THREAD"""
 
-midi_thread = threading.Thread(target=shutdownbutton)
-midi_thread.start()
+#midi_thread = threading.Thread(target=shutdownbutton)
+#midi_thread.start()
 
 
 while stop_flag_startup:
