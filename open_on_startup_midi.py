@@ -32,11 +32,14 @@ stop_flag = True
 
 """ MIDI THREAD"""
 
-midi_thread = threading.Thread(target=shutdownbutton)
-midi_thread.start()
+#midi_thread = threading.Thread(target=shutdownbutton)
+#midi_thread.start()
 
+for msg in inport:
+    print msg
 
-while stop_flag:
+"""while stop_flag:
     x=1
+"""
     
 print "shuting down"
