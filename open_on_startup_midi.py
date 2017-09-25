@@ -9,7 +9,7 @@ def shutdownbutton():
         #print msg
         
         if msg.note == Stop_loop.note:
-            msg = random_note
+            msg.note = random_note.note
             inport.close()
             print "Shutting down in 5 seconds"
             print msg
