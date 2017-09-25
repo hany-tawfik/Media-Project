@@ -59,7 +59,7 @@ midi_thread = threading.Thread(target=shutdownbutton)
 midi_thread.start()
     
 """MAIN SCRIPT"""
-Print "starting while loop"
+print "starting while loop"
 while stop_flag:
 #for i in range(1):
     x = 1
