@@ -70,6 +70,8 @@ while stop_flag:
     x=1
     #execfile("printing.py")
     execfile("Media_Project.py")
+    print stop_flag
+    
 
     
 print "shutting down"
