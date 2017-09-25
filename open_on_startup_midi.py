@@ -28,7 +28,12 @@ def setup_chords(note):
     else:
         return False
     
-        
+def shutdown():
+    command = "/usr/bin/sudo /sbin/shutdown -h now"
+    import subprocess
+    process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
+    output = process.communicate()[0]
+    print output
         
 
 '''MIDI INPUT PORTS SETUP'''
@@ -63,7 +68,10 @@ midi_thread.start()
 
 while stop_flag:
     x=1
-    execfile("printing.py")
+    #execfile("printing.py")
+    execfile("Media_Project.py")
 
     
-print "shuting down"
+print "shutting down"
+time.sleep(3)
+shutdown()
