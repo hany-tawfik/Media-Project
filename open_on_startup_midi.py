@@ -8,7 +8,7 @@ def shutdownbutton():
     for msg in inport:
         #print msg
         
-        if msg.note == Stop_loop.note:
+        if msg.note == Stop_loop_startup.note:
             #msg.note = random_note.note
             inport.close()
             print "Shutting down in 5 seconds"
@@ -40,7 +40,7 @@ def shutdown():
 inputs = mido.get_input_names()
 midi_start25 = inputs[1].encode('ascii')
 inport = mido.open_input(midi_start25)
-Stop_loop = mido.Message('note_on', note=49)
+Stop_loop_startup = mido.Message('note_on', note=49)
 random_note = mido.Message('note_on', note=51)
 stop_flag_startup = True
 note = inport.receive()
@@ -61,7 +61,7 @@ while True:
             print 'msg in while : ' , msg
             break
             
-stop_flag_startup = True
+#stop_flag_startup = True
 
 """ MIDI THREAD"""
 
