@@ -54,7 +54,8 @@ midi_thread.start()
 
 
 while stop_flag_startup: 
-    execfile("Media_Project.py")
+    #execfile("Media_Project.py")
+    execfile("printing.py")
     print "stop_flag_startup: ", stop_flag_startup
     time.sleep(3)
     
