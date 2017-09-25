@@ -43,12 +43,17 @@ Tonic = note.copy()
 print "note: ", note
 #print "tonic: " , Tonic
 
+
+
+
 while True:
         if setup_chords(Tonic.note):
             print "inside if inside while"
             break
-        #msg = inport.receive()
-        print 'msg in while : '
+        else:
+            msg = inport.receive()
+            print 'msg in while : ' , msg
+            break
 
 """ MIDI THREAD"""
 
