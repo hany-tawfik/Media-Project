@@ -12,13 +12,13 @@ def shutdownbutton():
             msg = random_note
             inport.close()
             print "Shutting down in 5 seconds"
-            #print msg
+            print msg
             time.sleep(3)
             stop_flag = False
             break
         
-        #else:
-            #print msg
+        else:
+            print msg
         
         
 
