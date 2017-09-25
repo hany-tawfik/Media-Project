@@ -231,6 +231,7 @@ if __name__ == "__main__":
         if setup_chords(Tonic.note):
             break
         note = inport.receive()
+        print note
         Tonic = note.copy()
 
     miChords.Set_Tonic_Scale(Tonic.note)
