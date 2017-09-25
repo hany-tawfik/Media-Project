@@ -47,8 +47,8 @@ while True:
         if setup_chords(Tonic.note):
             print "inside if inside while"
             break
-        msg = inport.receive()
-        print 'msg in while : ' ,msg
+        #msg = inport.receive()
+        #print 'msg in while : ' ,msg
 
 """ MIDI THREAD"""
 
