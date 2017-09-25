@@ -1,7 +1,7 @@
 
 
 import time
-
+stop_flag = True
 
 """MAIN SCRIPT"""
 while stop_flag:
@@ -9,10 +9,10 @@ while stop_flag:
     
     execfile("Media_Project.py")
     #execfile("printing.py")
-    #print " That was open on startup file"
+    print " That was open on startup file"
     time.sleep(5)
     #print "You will be prompted to choose a new scale"
 
 print "Shutting doooooooooooooooooown"
 time.sleep(5)
-shutdown()
+#shutdown()
