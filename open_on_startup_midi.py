@@ -6,19 +6,16 @@ def shutdownbutton():
     global stop_flag_startup
     print "thread started"
     for msg in inport:
-        #print msg
         
-        if msg.note == Stop_loop_startup.note:
-            #msg.note = random_note.note
+        if msg.note == Stop_loop_startup.note:            
             inport.close()
             print "Shutting down in 5 seconds"
             print msg
             #time.sleep(3)
             stop_flag_startup = False
-            break
-        
-        else:
-            print msg
+            break      
+        #else:
+            #print msg
             
 def setup_chords_startup(note):
     """this bypass the last saved midi value """
@@ -41,28 +38,18 @@ inputs = mido.get_input_names()
 midi_start25 = inputs[1].encode('ascii')
 inport = mido.open_input(midi_start25)
 Stop_loop_startup = mido.Message('note_on', note=49)
-random_note = mido.Message('note_on', note=51)
+#random_note = mido.Message('note_on', note=51)
 stop_flag_startup = True
 note_startup = inport.receive()
 Tonic_startup = note_startup.copy()
-print "note: ", note_startup
-#print "tonic: " , Tonic
-
-
-
 
 while True:
         if setup_chords_startup(Tonic_startup.note):
-            print "inside if inside while"
             break
         else:
             msg = inport.receive()
-            
-            print 'msg in while : ' , msg
             break
             
-#stop_flag_startup = True
-
 """ MIDI THREAD"""
 
 midi_thread = threading.Thread(target=shutdownbutton)
@@ -70,15 +57,12 @@ midi_thread.start()
 
 
 while stop_flag_startup: 
-    
-
-    #execfile("printing.py")
     execfile("Media_Project.py")
     print "stop_flag_startup: ", stop_flag_startup
-    time.sleep(4)
+    time.sleep(3)
     
 
     
 print "shutting down"
-time.sleep(3)
+time.sleep(2)
 shutdown()
