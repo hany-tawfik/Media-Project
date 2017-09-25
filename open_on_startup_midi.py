@@ -22,8 +22,8 @@ def shutdownbutton():
             
 def setup_chords_startup(note):
     """this bypass the last saved midi value """
-    global Stop_loop
-    if note != Stop_loop.note:
+    global Stop_loop_startup
+    if note != Stop_loop_startup.note:
         return True
     else:
         return False
