@@ -72,7 +72,7 @@ while True:
 while stop_flag_startup:
     
     
-    
+    msg = inport.receive()
     if msg.note == Stop_loop_startup.note:
             #msg.note = random_note.note
             inport.close()
