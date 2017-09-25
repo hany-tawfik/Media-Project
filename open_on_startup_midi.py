@@ -13,7 +13,7 @@ def shutdownbutton():
             inport.close()
             print "Shutting down in 5 seconds"
             print msg
-            time.sleep(3)
+            #time.sleep(3)
             stop_flag = False
             break
         
