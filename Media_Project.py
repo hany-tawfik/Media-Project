@@ -147,7 +147,7 @@ def tempo_fix(estimated_tempo):
                     < doubtful_tempo[len(doubtful_tempo) - PREVIOUS_DOUBTFUL_TEMPO] + THRESHOLD:
                 saved_tempo = [doubtful_tempo[len(doubtful_tempo) - CURRENT_DOUBTFUL_TEMPO]]
 
-    mean_saved_tempo = np.uint8(np.mean(saved_tempo))
+    mean_saved_tempo = np.float16(np.mean(saved_tempo))
 
     return mean_saved_tempo
 
