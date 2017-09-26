@@ -21,7 +21,8 @@ def setup_chords(note_set):
 def update_tempo(new_tempo):
     offset = get_offset_tempo(new_tempo)
     new_clock = 60. / ((new_tempo + offset) * PPQ)
-    new_clock = np.float16(new_clock)
+    new_clock = np.round(new_clock, 4)
+    # new_clock = np.float16(new_clock)
     return new_clock
 
 
@@ -166,7 +167,8 @@ if __name__ == "__main__":
     DEFAULT_OFFSET = 2
     PPQ = 24  # Pulse per quarter note
     clock_interval = 60. / ((DEFAULT_BPM + DEFAULT_OFFSET) * PPQ)
-    clock_interval = np.float16(clock_interval)
+#     clock_interval = np.float16(clock_interval)
+    clock_interval = np.round(clock_interval, 4)
 
     '''TEMPO STABILIZATION PARAMETERS'''
     CURRENT_DOUBTFUL_TEMPO = 1
