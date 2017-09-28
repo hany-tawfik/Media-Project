@@ -228,6 +228,8 @@ if __name__ == "__main__":
     note = inport.receive()
     Tonic = note.copy()
 
+    # Because the system receives an close message when booting, it can be avoided to a second message to be recived
+    # and also used for fixing the music scale.
     while True:
         if setup_chords(Tonic.note):
             break
