@@ -236,7 +236,7 @@ if __name__ == '__main__':
 
     FONT_SIZE = 16
     string_folder = "image_test_folder"
-    os.chdir('C:\Users\Efren\Documents\Medientechnologie_TUIlmenau\Semester 3\Media Project\python_exercises')
+    os.chdir('/home/pi/Desktop/Plots')
     os.mkdir(string_folder)
 
     plt.figure()
