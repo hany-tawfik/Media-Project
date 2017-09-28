@@ -235,7 +235,7 @@ if __name__ == '__main__':
     cv2.destroyAllWindows()
 
     FONT_SIZE = 16
-    string_folder = "04_st_elmos_fire_111"
+    string_folder = "05_magnificent_seven_116"
     os.chdir('/home/pi/Desktop/Plots')
     os.mkdir(string_folder)
 
