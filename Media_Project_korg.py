@@ -78,9 +78,9 @@ def send_clock_process(clock_interval, stop_key_flag, clock_value):
 def midi_msg_handler_thread():
     global start_stop_flag, Stop_loop, Start_msg
 
-    for msg in inport:
+    for msg in inport2:
 
-        if msg.note == Stop_loop.note:  # Note C6 (72) closes the code.
+        if msg.note == Stop_loop.note:  # Note C7 (108) closes the code.
 
             outport.send(stopMessage)
             time.sleep(1e-3)
@@ -104,8 +104,9 @@ def midi_msg_handler_thread():
         elif msg.note == Stop_msg.note:
             outport.send(stopMessage)
             time.sleep(1e-3)
-        else:
-            miChords.Send_Chord(msg)
+        
+        #else:
+        #miChords.Send_Chord(msg)
 
 
 def tempo_fix(estimated_tempo):
@@ -157,8 +158,8 @@ if __name__ == "__main__":
     '''MIDI I/O PORTS SETUP'''
     inputs = mido.get_input_names()
     korg = inputs[0].encode('ascii')
-    midi_start25 = inputs[1].encode('ascii')
-    inport = mido.open_input(midi_start25)
+    #midi_start25 = inputs[1].encode('ascii')
+    #inport = mido.open_input(midi_start25)
     inport2 = mido.open_input(korg)
     outport = mido.open_output(korg)
 
@@ -222,10 +223,10 @@ if __name__ == "__main__":
     tempoMessage = mido.Message('clock', time=clock_interval)
     startMessage = mido.Message('start')
     stopMessage = mido.Message('stop')
-    Stop_loop = mido.Message('note_on', note=72)
-    Start_msg = mido.Message('note_on', note=70)
-    Stop_msg = mido.Message('note_on', note=68)
-    note = inport.receive()
+    Stop_loop = mido.Message('note_on', note=108)
+    Start_msg = mido.Message('note_on', note=106)
+    Stop_msg = mido.Message('note_on', note=104)
+    note = inport2.receive()
     Tonic = note.copy()
 
     # Because the system receives an close message when booting, it can be avoided to a second message to be recived
