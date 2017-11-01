@@ -29,38 +29,40 @@ def shutdown():
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
     output = process.communicate()[0]
     print output
-        
+ 
 
-'''MIDI INPUT PORTS SETUP'''
-inputs = mido.get_input_names()
-midi_start25 = inputs[1].encode('ascii')
-inport = mido.open_input(midi_start25)
-Stop_loop_startup = mido.Message('note_on', note=84) #C6
-stop_flag_startup = True
-note_startup = inport.receive()
-Tonic_startup = note_startup.copy()
+if __name__ == "__main__":
 
-while True:
-        if setup_chords_startup(Tonic_startup.note):
-            break
-        else:
-            msg = inport.receive()
-            break
-            
-""" MIDI THREAD"""
+    '''MIDI INPUT PORTS SETUP'''
+    inputs = mido.get_input_names()
+    midi_start25 = inputs[1].encode('ascii')
+    inport = mido.open_input(midi_start25)
+    Stop_loop_startup = mido.Message('note_on', note=84) #C6
+    stop_flag_startup = True
+    note_startup = inport.receive()
+    Tonic_startup = note_startup.copy()
 
-midi_thread = threading.Thread(target=shutdownbutton)
-midi_thread.start()
+    while True:
+            if setup_chords_startup(Tonic_startup.note):
+                break
+            else:
+                msg = inport.receive()
+                break
+
+    """ MIDI THREAD"""
+
+    midi_thread = threading.Thread(target=shutdownbutton)
+    midi_thread.start()
 
 
-while stop_flag_startup: 
-    execfile("Media_Project.py")
-    #execfile("printing.py")
-    print "stop_flag_startup: ", stop_flag_startup
-    time.sleep(3)
-    
+    while stop_flag_startup: 
+        execfile("Media_Project.py")
+        #execfile("printing.py")
+        print "stop_flag_startup: ", stop_flag_startup
+        time.sleep(3)
 
-    
-print "shutting down"
-time.sleep(2)
-shutdown()
+
+
+    print "shutting down"
+    time.sleep(2)
+    shutdown()
