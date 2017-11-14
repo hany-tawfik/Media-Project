@@ -53,7 +53,7 @@ def callback_audio(in_data, frame_count, time_info, status):
         tempo = tempoEstimation.process(beats)
         tempo_float16 = map(np.float16, tempo[:, 0])
         print("RNNBeatProcessor tempo: ", tempo_float16[0])
-        final_tempo = np.float16(tempo_float16)
+        final_tempo = np.float16(tempo_float16[0])
 #         final_tempo = tempo_fix(tempo_float16[0])
 #         print ("Filtered RNN tempo: ", final_tempo)
         clock_interval = update_tempo(final_tempo)
