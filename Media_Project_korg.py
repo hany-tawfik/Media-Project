@@ -79,7 +79,7 @@ def midi_msg_handler_thread():
     global start_stop_flag, Stop_loop, Start_msg
 
     for msg in inport2:
-
+        print(msg)
         if msg.note == Stop_loop.note:  # Note C7 (108) closes the code.
 
             outport.send(stopMessage)
