@@ -79,6 +79,7 @@ def midi_msg_handler_thread():
     global start_stop_flag, Stop_loop, Start_msg
 
     for msg in inport2:
+        print(msg)
         print(msg.note)
         if msg.note == Stop_loop.note:  # Note C7 (108) closes the code.
 
@@ -228,7 +229,6 @@ if __name__ == "__main__":
     startMessage = mido.Message('start')
     stopMessage = mido.Message('stop')
     Stop_loop = mido.Message('note_on', note=108)
-    print(Stop_loop.note)
     Start_msg = mido.Message('note_on', note=106)
     Stop_msg = mido.Message('note_on', note=104)
     note = inport2.receive()
