@@ -238,8 +238,8 @@ if __name__ == "__main__":
         note = inport.receive()
         Tonic = note.copy()
 
-    miChords.Set_Tonic_Scale(Tonic.note)
-    miChords.update_chords()
+    #miChords.Set_Tonic_Scale(Tonic.note)
+    #miChords.update_chords()
 
     '''START OF CHILD PROCESS'''
     ext_clock.start()
