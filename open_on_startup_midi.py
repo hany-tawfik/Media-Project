@@ -65,4 +65,4 @@ if __name__ == "__main__":
 
     print "shutting down"
     time.sleep(2)
-    shutdown()
+    #shutdown()
