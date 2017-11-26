@@ -106,7 +106,9 @@ def midi_msg_handler_thread():
             time.sleep(1e-3)
         '''
         
-        #else:
+    else:
+        print ("waiting for close button")
+            
         #miChords.Send_Chord(msg)
 
 
