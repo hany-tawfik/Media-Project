@@ -184,6 +184,7 @@ if __name__ == "__main__":
     mean_saved_tempo = np.uint8
 
     '''THREADING DEFINITIONS'''
+    Stop_loop = mido.Message('note_on', note=108) #delete it
     midi_thread = threading.Thread(target=midi_msg_handler_thread)
 
     '''OBJECT DEFINITIONS'''
