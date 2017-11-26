@@ -85,13 +85,13 @@ def midi_msg_handler_thread():
             outport.send(stopMessage)
             time.sleep(1e-3)
             stop_all_threads()
-            inport.close()
+            #inport.close()
             inport2.close()
             outport.close()
             print ("Closing midi_msg_handler thread")
             break
 
-        elif msg.note == Start_msg.note:
+        '''elif msg.note == Start_msg.note:
 
             if start_stop_flag is False:
                 outport.send(stopMessage)
@@ -104,6 +104,7 @@ def midi_msg_handler_thread():
         elif msg.note == Stop_msg.note:
             outport.send(stopMessage)
             time.sleep(1e-3)
+        '''
         
         #else:
         #miChords.Send_Chord(msg)
