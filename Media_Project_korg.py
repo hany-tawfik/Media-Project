@@ -227,6 +227,7 @@ if __name__ == "__main__":
     startMessage = mido.Message('start')
     stopMessage = mido.Message('stop')
     Stop_loop = mido.Message('note_on', note=108)
+    print(Stop_loop.note)
     Start_msg = mido.Message('note_on', note=106)
     Stop_msg = mido.Message('note_on', note=104)
     note = inport2.receive()
