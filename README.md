@@ -11,4 +11,4 @@ Run the run_me.py file on your Pi then choose the preferred scale by pressing th
 
 ### Built With
 
-This [video](https://photos.app.goo.gl/2r6bahSFW8lDBydK2) explains and tests the project. This [one](https://photos.app.goo.gl/JfKqiHgg0CiIBAF03) uses the system with real song.
+This [video](https://youtu.be/HAwYwX0XcBM) explains and tests the project. This [one](https://youtu.be/T3JZ5B0rbEk) uses the system with real song.
