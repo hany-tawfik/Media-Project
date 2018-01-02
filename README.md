@@ -8,3 +8,7 @@ You will need a Raspberry Pi (model B was used in development), MIDI controller,
 ### Run
 
 Run the run_me.py file on your Pi then choose the preferred scale by pressing the equivalent major tone key on the connected MIDI keyboard.
+
+### Built With
+
+This [video](https://photos.app.goo.gl/2r6bahSFW8lDBydK2) explains and tests the project. This [one](https://photos.app.goo.gl/JfKqiHgg0CiIBAF03) uses the system with real song.
